@@ -1,8 +1,8 @@
-# Laravel Nova - CkEditor 5 Field
+# CkEditor 5 Field for Laravel Nova
 
-![Packagist Downloads](https://img.shields.io/packagist/dt/mostafaznv/nova-ckeditor?style=flat-square)
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mostafaznv/nova-ckeditor.svg?style=flat-square)](https://packagist.org/packages/mostafaznv/nova-ckeditor)
 [![GitHub license](https://img.shields.io/github/license/mostafaznv/nova-ckeditor?style=flat-square)](https://github.com/mostafaznv/nova-ckeditor/blob/master/LICENSE)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/mostafaznv/nova-ckeditor?style=flat-square)](https://packagist.org/packages/mostafaznv/nova-ckeditor)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mostafaznv/nova-ckeditor.svg?style=flat-square)](https://packagist.org/packages/mostafaznv/nova-ckeditor)
 
 CkEditor 5 for Laravel Nova.
 
@@ -12,7 +12,7 @@ Includes custom written plugins for media (video and image), snippet and publish
 - CkEditor v5
 - Image Picker
 - Video Picker
-- Drag & Drop Uploading
+- Drag & Drop Uploading in Media Picker
 - Optimize Images
 - Generate Cover for Videos
 - Localization
@@ -79,6 +79,8 @@ This package uses [nova-video](https://github.com/mostafaznv/nova-video) to hand
 > **- With Larupload**: In `App\Models\Video` (disk function of `Attachment` class) <br>
 > **- Without Larupload**: In `App\Nova\Resources\Model` (third argument of make function in `VideoUpload` field) 
 
+
+>**Note**: Larupload uses **FFMPEG** to generate cover from original video file, and it will try to find the FFMPEG binary path from your system's environment. but you can define it by yourself by publishing larupload config file. <br> `php artisan vendor:publish --provider="Mostafaznv\Larupload\LaruploadServiceProvider"` 
 
 2. Prepare migration and model:
    1. In the case you chose larupload, there is nothing to do with migration and model. you can find more configuration options in [nova-video](https://github.com/mostafaznv/nova-video) and [larupload](https://github.com/mostafaznv/larupload) documentations.
