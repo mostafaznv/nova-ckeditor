@@ -235,6 +235,7 @@ export default {
 
                 if (this.isImagePicker) {
                     data.file = file
+                    data.name = file.name.split('.').slice(0, -1).join('.')
                 }
                 else {
                     if (this.hasLaruploadTrait) {

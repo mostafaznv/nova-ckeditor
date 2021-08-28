@@ -96,7 +96,7 @@ class ImageStorage
 
         return [
             'file'   => $fileName,
-            'name'   => $hash,
+            //'name'   => '$hash',
             'disk'   => $this->disk,
             'mime'   => $image->mime(),
             'width'  => $image->width(),
