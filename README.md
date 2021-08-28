@@ -1,8 +1,8 @@
 # Laravel Nova - CkEditor 5 Field
 
-![Downloads](https://img.shields.io/packagist/dt/mostafaznv/nova-ckeditor.svg)
-![Version](https://img.shields.io/github/v/release/mostafaznv/nova-field-ckeditor.svg)
-![MIT](https://img.shields.io/badge/License-MIT-success.svg)
+![Packagist Downloads](https://img.shields.io/packagist/dt/mostafaznv/nova-ckeditor?style=flat-square)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mostafaznv/nova-ckeditor.svg?style=flat-square)](https://packagist.org/packages/mostafaznv/nova-ckeditor)
+[![GitHub license](https://img.shields.io/github/license/mostafaznv/nova-ckeditor?style=flat-square)](https://github.com/mostafaznv/nova-ckeditor/blob/master/LICENSE)
 
 CkEditor 5 for Laravel Nova.
 
