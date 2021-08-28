@@ -1,0 +1,9 @@
+vendor
+node_modules
+npm-debug.log
+yarn-error.log
+public/hot
+composer.lock
+package-lock.json
+/webpack.mix.js
+.idea
