@@ -52,11 +52,12 @@ import VideoBrowser from './plugins/VideoBrowser'
 import SnippetBrowser from './plugins/SnippetBrowser'
 
 // Video
-import Video from "./plugins/video/video";
+import Video from "./plugins/video/video"
 
 
 // Other
-import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
+import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting'
+import ElementAddAttributes from './plugins/element-attribute/src/add-attribute-to-element'
 
 // Extend the Base Class
 export default class CkEditor extends ClassicEditorBase {
@@ -114,7 +115,8 @@ export default class CkEditor extends ClassicEditorBase {
             HtmlEmbed,
             SourceEditing,
             Indent,
-            IndentBlock
+            IndentBlock,
+            ElementAddAttributes
         ]
     }
 }

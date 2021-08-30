@@ -7,7 +7,7 @@ export default {
             types: ['gif', 'png', 'jpg', 'jpeg', 'webp']
         },
         toolbar: [
-            'mediaBrowser',
+            'imageBrowser',
             'imageStyle:full',
             'imageStyle:alignLeft',
             'imageStyle:alignCenter',

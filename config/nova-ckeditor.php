@@ -80,6 +80,7 @@ return [
             'bold',
             'italic',
             'alignment',
+            'elementIdAttributes',
             'horizontalLine',
             'subscript',
             'superscript',
