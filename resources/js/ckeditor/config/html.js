@@ -1,9 +1,11 @@
 export default {
     htmlEmbed: {
         showPreviews: true,
-        sanitizeHtml: (inputHtml) => ({
-            html: inputHtml,
-            hasChanged: true
-        })
+        sanitizeHtml(rawHtml) {
+            return {
+                html: rawHtml,
+                hasChanged: false
+            }
+        }
     }
 }
