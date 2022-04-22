@@ -15,10 +15,10 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0.2",
         "intervention/image": "^2.5",
-        "mostafaznv/nova-video": "^1.0",
-        "laravel/framework": "^8.40.0",
+        "mostafaznv/nova-video": "^2.0",
+        "laravel/framework": "^8.40.0|^9.0",
         "spatie/laravel-image-optimizer": "^1.6"
     },
     "autoload": {
