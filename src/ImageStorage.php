@@ -109,7 +109,7 @@ class ImageStorage
      * Generate hash from file content
      *
      * @param UploadedFile $file
-     * @return false|string
+     * @return string
      */
     protected function hashFileContents(UploadedFile $file): string
     {
