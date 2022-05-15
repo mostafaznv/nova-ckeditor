@@ -32,6 +32,13 @@ class CkEditor extends Field
     public int $height;
 
     /**
+     * Specifies character limitation on index table
+     *
+     * @var int $indexLimit
+     */
+    public int $indexLimit = 85;
+
+    /**
      * Content Language
      *
      * @var string
@@ -102,6 +109,19 @@ class CkEditor extends Field
     }
 
     /**
+     * Set character limit on index
+     *
+     * @param int $limit
+     * @return $this
+     */
+    public function limitOnIndex(int $limit): self
+    {
+        $this->indexLimit = $limit;
+
+        return $this;
+    }
+
+    /**
      * Set Content Language
      *
      * @param string $lang
@@ -167,6 +187,7 @@ class CkEditor extends Field
             'toolbar'                => $this->toolbar,
             'toolbarOptions'         => config('nova-ckeditor.toolbar.options'),
             'height'                 => $this->height,
+            'indexLimit'             => $this->indexLimit,
             'contentLanguage'        => $this->contentLanguage,
             'shouldShow'             => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait' => $this->hasLaruploadTrait('App\Models\Video'),
