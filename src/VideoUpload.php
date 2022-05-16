@@ -5,11 +5,12 @@ namespace Mostafaznv\NovaCkEditor;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Mostafaznv\Larupload\Traits\Larupload;
 use Mostafaznv\NovaVideo\Video;
-use App\Models\Video as VideoModel;
 use Exception;
 
 class VideoUpload extends Video
 {
+    protected string $videoModel = 'App\Models\Video';
+
     /**
      * Create VideoUpload Field
      *
@@ -37,6 +38,11 @@ class VideoUpload extends Video
         });
     }
 
+    public function withVideoModel(string $videoModel): self
+    {
+        $this->videoModel = $videoModel;
+    }
+
     /**
      * Check if Video Model has Larupload Trait
      *
@@ -44,6 +50,6 @@ class VideoUpload extends Video
      */
     protected function hasLaruploadTrait(): bool
     {
-        return !!in_array(Larupload::class, class_uses(VideoModel::class));
+        return !!in_array(Larupload::class, class_uses(new $this->videoModel));
     }
 }

@@ -82,6 +82,8 @@ This package uses [nova-video](https://github.com/mostafaznv/nova-video) to hand
 
 >**Note**: Larupload uses **FFMPEG** to generate cover from original video file, and it will try to find the FFMPEG binary path from your system's environment. but you can define it by yourself by publishing larupload config file. <br> `php artisan vendor:publish --provider="Mostafaznv\Larupload\LaruploadServiceProvider"` 
 
+>**Note**: Nova-CkEditor uses `App\Models\Video` to discover if your model uses `Larupload` trait or not. if your model is in another path, you can define it with `withVideoModel` method in `VideoUpload` class
+
 2. Prepare migration and model:
    1. In the case you chose larupload, there is nothing to do with migration and model. you can find more configuration options in [nova-video](https://github.com/mostafaznv/nova-video) and [larupload](https://github.com/mostafaznv/larupload) documentations.
    2. But if you chose laravel's file-system, you must make some changes in migration and model. You should remove larupload **trait** and **attachments function** from model and use **string column** instead of **upload column** in migration file.
