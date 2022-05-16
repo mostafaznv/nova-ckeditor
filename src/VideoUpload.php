@@ -17,10 +17,15 @@ class VideoUpload extends Video
      * @param string $label
      * @param string $fieldName
      * @param string $disk
+     * @param string|null $model
      * @throws Exception
      */
-    public function __construct(string $label, string $fieldName, string $disk = 'video')
+    public function __construct(string $label, string $fieldName, string $disk = 'video', ?string $model = null)
     {
+        if ($model) {
+            $this->videoModel = $model;
+        }
+
         if ($this->hasLaruploadTrait()) {
             parent::__construct($label, $fieldName . '_field', $disk);
 
@@ -36,11 +41,6 @@ class VideoUpload extends Video
         $this->readonly(function() {
             return !!$this->resource->id;
         });
-    }
-
-    public function withVideoModel(string $videoModel): self
-    {
-        $this->videoModel = $videoModel;
     }
 
     /**
