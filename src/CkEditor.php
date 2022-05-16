@@ -59,6 +59,13 @@ class CkEditor extends Field
      */
     public array $snippetBrowser = [];
 
+    /**
+     * Specifies the path of your video model
+     *
+     * @var string
+     */
+    public string $videoModel = '';
+
 
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
@@ -72,6 +79,7 @@ class CkEditor extends Field
         $this->videoBrowser = $config['toolbar']['browser']['video'];
         $this->snippetBrowser = $this->prepareSnippets($config['toolbar']['snippets']);
         $this->contentLanguage = $config['toolbar']['content-lang'];
+        $this->videoModel = $config['video-model'];
     }
 
 
@@ -169,19 +177,24 @@ class CkEditor extends Field
             'height'                 => $this->height,
             'contentLanguage'        => $this->contentLanguage,
             'shouldShow'             => $this->shouldBeExpanded(),
-            'videoHasLaruploadTrait' => $this->hasLaruploadTrait('App\Models\Video'),
+            'videoHasLaruploadTrait' => $this->hasLaruploadTrait(),
         ]);
     }
 
     /**
      * Check if class has larupload trait
      *
-     * @param string $class
      * @return bool
      */
-    protected function hasLaruploadTrait(string $class): bool
+    protected function hasLaruploadTrait(): bool
     {
-        return class_exists($class) and in_array(Larupload::class, class_uses($class));
+        if ($this->videoModel) {
+            $class = $this->videoModel;
+
+            return class_exists($class) and in_array(Larupload::class, class_uses($class));
+        }
+
+        return false;
     }
 
     /**
