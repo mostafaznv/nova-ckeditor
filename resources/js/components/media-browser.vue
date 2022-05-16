@@ -60,7 +60,7 @@
                 </div>
 
                 <div v-if="isLoading" class="inline-flex self-center items-center p-2">
-                    <div class="relative" style="height: 24px">
+                    <div class="relative" style="height: 32px">
                         <loading />
                     </div>
                 </div>
