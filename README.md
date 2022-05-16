@@ -80,9 +80,7 @@ This package uses [nova-video](https://github.com/mostafaznv/nova-video) to hand
 > **- Without Larupload**: In `App\Nova\Resources\Model` (third argument of make function in `VideoUpload` field) 
 
 
->**Note**: Larupload uses **FFMPEG** to generate cover from original video file, and it will try to find the FFMPEG binary path from your system's environment. but you can define it by yourself by publishing larupload config file. <br> `php artisan vendor:publish --provider="Mostafaznv\Larupload\LaruploadServiceProvider"` 
-
->**Note**: Nova-CkEditor uses `App\Models\Video` to discover if your model uses `Larupload` trait or not. if your model is in another path, you can define it through 4th parameter of construct method in `VideoUpload` class
+>**Note**: Larupload uses **FFMPEG** to generate cover from original video file, and it will try to find the FFMPEG binary path from your system's environment. but you can define it by yourself by publishing larupload config file. <br> `php artisan vendor:publish --provider="Mostafaznv\Larupload\LaruploadServiceProvider"`
 
 2. Prepare migration and model:
    1. In the case you chose larupload, there is nothing to do with migration and model. you can find more configuration options in [nova-video](https://github.com/mostafaznv/nova-video) and [larupload](https://github.com/mostafaznv/larupload) documentations.
@@ -197,6 +195,11 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 
 ## Configuration
 You can change configuration options in `app/config/nova-ckeditor.php` 
+
+### Video Model
+`string` `default: App\Models\Video`
+
+Path of your video model
 
 ### Memory
 `string` `default: 256M`

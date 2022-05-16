@@ -9,23 +9,16 @@ use Exception;
 
 class VideoUpload extends Video
 {
-    protected string $videoModel = 'App\Models\Video';
-
     /**
      * Create VideoUpload Field
      *
      * @param string $label
      * @param string $fieldName
      * @param string $disk
-     * @param string|null $model
      * @throws Exception
      */
-    public function __construct(string $label, string $fieldName, string $disk = 'video', ?string $model = null)
+    public function __construct(string $label, string $fieldName, string $disk = 'video')
     {
-        if ($model) {
-            $this->videoModel = $model;
-        }
-
         if ($this->hasLaruploadTrait()) {
             parent::__construct($label, $fieldName . '_field', $disk);
 
@@ -50,6 +43,12 @@ class VideoUpload extends Video
      */
     protected function hasLaruploadTrait(): bool
     {
-        return !!in_array(Larupload::class, class_uses(new $this->videoModel));
+        $class = config('nova-ckeditor.video-model');
+
+        if ($class) {
+            return class_exists($class) and in_array(Larupload::class, class_uses($class));
+        }
+
+        return false;
     }
 }
