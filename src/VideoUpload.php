@@ -5,21 +5,27 @@ namespace Mostafaznv\NovaCkEditor;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Mostafaznv\Larupload\Traits\Larupload;
 use Mostafaznv\NovaVideo\Video;
-use App\Models\Video as VideoModel;
 use Exception;
 
 class VideoUpload extends Video
 {
+    protected string $videoModel = 'App\Models\Video';
+
     /**
      * Create VideoUpload Field
      *
      * @param string $label
      * @param string $fieldName
      * @param string $disk
+     * @param string|null $model
      * @throws Exception
      */
-    public function __construct(string $label, string $fieldName, string $disk = 'video')
+    public function __construct(string $label, string $fieldName, string $disk = 'video', ?string $model = null)
     {
+        if ($model) {
+            $this->videoModel = $model;
+        }
+
         if ($this->hasLaruploadTrait()) {
             parent::__construct($label, $fieldName . '_field', $disk);
 
@@ -44,6 +50,6 @@ class VideoUpload extends Video
      */
     protected function hasLaruploadTrait(): bool
     {
-        return !!in_array(Larupload::class, class_uses(VideoModel::class));
+        return !!in_array(Larupload::class, class_uses(new $this->videoModel));
     }
 }
