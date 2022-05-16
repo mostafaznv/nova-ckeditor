@@ -1,6 +1,6 @@
 <template>
     <modal v-model="isVisible" ref="modal" class="image-browser-modal" :title="__(isImagePicker ? 'Image Picker' : 'Video Picker')" fullscreen scroll-lock>
-        <template v-slot:header>
+        <template #header>
             <div class="pl-6 flex -mx-2">
                 <div class="p-2">
                     <input
@@ -13,41 +13,53 @@
                 </div>
 
                 <div class="p-2">
-                    <select v-model="orderBy" @change="fetch(1)" class="form-control form-input form-input-bordered">
-                        <optgroup :label="__('Order By')">
-                            <template v-if="isImagePicker">
-                                <option value="id">{{ __('ID') }}</option>
-                                <option value="name">{{ __('Name') }}</option>
-                                <option value="width">{{ __('Width') }}</option>
-                                <option value="height">{{ __('Height') }}</option>
-                                <option value="size">{{ __('Size') }}</option>
-                            </template>
-
-                            <template>
-                                <option value="id">{{ __('ID') }}</option>
-                                <option value="name">{{ __('Name') }}</option>
-
-                                <template v-if="hasLaruploadTrait">
-                                    <option value="file_file_size">{{ __('Size') }}</option>
-                                    <option value="file_file_width">{{ __('Width') }}</option>
-                                    <option value="file_file_height">{{ __('Height') }}</option>
-                                    <option value="file_file_duration">{{ __('Duration') }}</option>
+                    <div class="flex relative">
+                        <select v-model="orderBy" @change="fetch(1)" class="form-control form-select form-select-bordered">
+                            <optgroup :label="__('Order By')">
+                                <template v-if="isImagePicker">
+                                    <option value="id">{{ __('ID') }}</option>
+                                    <option value="name">{{ __('Name') }}</option>
+                                    <option value="width">{{ __('Width') }}</option>
+                                    <option value="height">{{ __('Height') }}</option>
+                                    <option value="size">{{ __('Size') }}</option>
                                 </template>
-                            </template>
-                        </optgroup>
-                    </select>
+
+                                <template v-else>
+                                    <option value="id">{{ __('ID') }}</option>
+                                    <option value="name">{{ __('Name') }}</option>
+
+                                    <template v-if="hasLaruploadTrait">
+                                        <option value="file_file_size">{{ __('Size') }}</option>
+                                        <option value="file_file_width">{{ __('Width') }}</option>
+                                        <option value="file_file_height">{{ __('Height') }}</option>
+                                        <option value="file_file_duration">{{ __('Duration') }}</option>
+                                    </template>
+                                </template>
+                            </optgroup>
+                        </select>
+
+                        <svg class="flex-shrink-0 pointer-events-none form-select-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
+                            <path class="fill-current" d="M8.292893.292893c.390525-.390524 1.023689-.390524 1.414214 0 .390524.390525.390524 1.023689 0 1.414214l-4 4c-.390525.390524-1.023689.390524-1.414214 0l-4-4c-.390524-.390525-.390524-1.023689 0-1.414214.390525-.390524 1.023689-.390524 1.414214 0L5 3.585786 8.292893.292893z"></path>
+                        </svg>
+                    </div>
                 </div>
 
                 <div class="p-2">
-                    <select v-model="sort" @change="fetch(1)" class="form-control form-input form-input-bordered">
-                        <optgroup :label="__('Sort')">
-                            <option value="asc">{{ __('Asc') }}</option>
-                            <option value="desc">{{ __('Desc') }}</option>
-                        </optgroup>
-                    </select>
+                    <div class="flex relative">
+                        <select v-model="sort" @change="fetch(1)" class="form-control form-input form-input-bordered">
+                            <optgroup :label="__('Sort')">
+                                <option value="asc">{{ __('Asc') }}</option>
+                                <option value="desc">{{ __('Desc') }}</option>
+                            </optgroup>
+                        </select>
+
+                        <svg class="flex-shrink-0 pointer-events-none form-select-arrow" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6">
+                            <path class="fill-current" d="M8.292893.292893c.390525-.390524 1.023689-.390524 1.414214 0 .390524.390525.390524 1.023689 0 1.414214l-4 4c-.390525.390524-1.023689.390524-1.414214 0l-4-4c-.390524-.390525-.390524-1.023689 0-1.414214.390525-.390524 1.023689-.390524 1.414214 0L5 3.585786 8.292893.292893z"></path>
+                        </svg>
+                    </div>
                 </div>
 
-                <div v-if="isLoading" class="self-center p-2">
+                <div v-if="isLoading" class="inline-flex self-center items-center p-2">
                     <div class="relative" style="height: 24px">
                         <loading />
                     </div>
@@ -56,7 +68,7 @@
         </template>
 
         <transition name="image-loading" mode="out-in">
-            <div v-if="isUploading" class="flex flex-col h-full text-white content-center justify-center text-center overflow-hidden">
+            <div v-if="isUploading" class="flex flex-col h-full text-primary-600 content-center justify-center text-center overflow-hidden">
                 <div class="relative" style="height: 64px">
                     <loading />
                 </div>
@@ -80,27 +92,27 @@
                             <source :src="item.urls.video" type="video/mp4">
                         </video>
 
-                        <strong class="media-name">{{ item.name }}</strong>
+                        <strong class="media-name text-primary-600">{{ item.name }}</strong>
                     </div>
                 </div>
             </div>
 
-            <div v-else @drop.prevent="handleUploads" @dragover.prevent="" class="flex flex-col h-full text-white content-center justify-center text-center">
+            <div v-else @drop.prevent="handleUploads" @dragover.prevent="" class="flex flex-col h-full text-primary-600 content-center justify-center text-center">
                 <p>{{ __(isLoading ? 'Loading...' : 'No Results.') }}</p>
             </div>
         </transition>
 
-        <template v-slot:footer>
+        <template #footer>
             <div class="flex p-2">
                 <div>
-                    <button @click.prevent="insert" :disabled="!selected.length" class="btn btn-default btn-primary items-center relative mr-3">
+                    <button @click.prevent="insert" :disabled="!selected.length" class="bg h-9 shadow bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded inline-flex items-center justify-center px-3 shadow relative">
                         <span v-if="selected.length < 2">{{ __(isImagePicker ? 'Choose Image' : 'Choose Video') }}</span>
                         <span v-else-if="isImagePicker">{{ __('Insert :count Images', {count: selected.length}) }}</span>
                         <span v-else>{{ __('Insert :count Videos', {count: selected.length}) }}</span>
                     </button>
                 </div>
 
-                <div class="flex-grow text-white self-center" v-if="selected.length > 1">
+                <div class="inline-flex flex-grow text-primary-600 self-center items-center ml-3" v-if="selected.length > 1">
                     <span>{{ __(':count Items Selected', {count: selected.length}) }}</span>
                 </div>
             </div>
@@ -113,11 +125,14 @@ import modal from './modal'
 import loading from './loading'
 import spinner from './../assets/spinner'
 import interactsWithResources from "./mixins/interactsWithResources"
+import VLazyImage from "v-lazy-image"
 
 export default {
     name: "MediaBrowser",
     mixins: [interactsWithResources],
-    components: {loading, modal},
+    components: {
+        loading, modal, VLazyImage
+    },
     props: {
         fieldKey: {default: () => 'content'},
         multiple: {default: () => true},
@@ -246,11 +261,16 @@ export default {
                     }
                 }
 
-                return this.uploadResource(this.resourceKey, data).then((item) => {
-                    this.$toasted.show(this.__('Complete: :file', item), {type: 'success'})
+                return this.uploadResource(this.resourceKey, data)
+                    .then((item) => {
+                        if (item && item.name) {
+                            Nova.success(this.__('File uploaded: :file', {
+                                file: item.name
+                            }))
 
-                    uploads.push(item)
-                })
+                            uploads.push(item)
+                        }
+                    })
             })
 
             Promise.all(requests)
@@ -369,8 +389,8 @@ export default {
         }
 
         &.image-preview-selected {
-            outline-color: aqua;
-            border: 3px solid aqua !important;
+            outline-color: rgb(var(--colors-green-500));
+            border: 3px solid rgb(var(--colors-green-500)) !important;
         }
 
         &.v-lazy-image {
@@ -394,8 +414,8 @@ export default {
         pointer-events: none;
 
         &.selected {
-            outline-color: aqua;
-            border: 3px solid aqua !important;
+            outline-color: rgb(var(--colors-green-500));
+            border: 3px solid rgb(var(--colors-green-500)) !important;
         }
     }
 
@@ -404,7 +424,6 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         font-size: 12px;
-        color: #FFF;
         display: block;
         margin-top: 8px;
         margin-bottom: 4px;

@@ -68,9 +68,7 @@ export default {
          * @return void
          */
         handleResourceError(error) {
-            this.$toasted.show(this.__(':message', {message: error}), {
-                type: 'error'
-            })
+            Nova.error(this.__(':message', {message: error}))
         }
     }
 }

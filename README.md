@@ -184,6 +184,7 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 |------------------|---------|------------------|-----------------------------------------------------------------------------------------------|
 | toolbar          | Array   | from config file | Set toolbar items                                                                             |
 | height           | Integer | from config file | Set editor's height                                                                           |
+| limitOnIndex     | Integer | 85               | Set character limit on index                                                                  |
 | contentLanguage  | Integer | from config file | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this  |
 | imageBrowser     | Boolean | from config file | Enable/Disable image picker                                                                   |
 | videoBrowser     | Boolean | from config file | Enable/Disable video picker                                                                   |

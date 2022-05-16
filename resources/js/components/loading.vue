@@ -17,7 +17,7 @@ export default {
     props: {
         color: {
             required: false,
-            default: () => 'white'
+            default: () => 'black'
         }
     }
 }

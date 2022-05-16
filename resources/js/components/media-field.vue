@@ -1,6 +1,6 @@
 <template>
     <default-field :field="field" :errors="errors">
-        <template slot="field">
+        <template #field>
             <template v-if="preview">
                 <v-lazy-image
                     class="shadow-md rounded mb-4 block"
@@ -36,11 +36,14 @@ import MediaBrowser from "./media-browser"
 import HasUUID from "./mixins/hasUUID"
 import interactsWithResources from "./mixins/interactsWithResources"
 import {FormField, HandlesValidationErrors} from 'laravel-nova'
+import VLazyImage from "v-lazy-image"
 
 export default {
     mixins: [FormField, HandlesValidationErrors, interactsWithResources, HasUUID],
     props: ['resourceName', 'resourceId', 'field'],
-    components: {MediaBrowser},
+    components: {
+        MediaBrowser, VLazyImage
+    },
     data: () => ({
         preview: null
     }),

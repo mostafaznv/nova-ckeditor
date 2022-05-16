@@ -18,10 +18,14 @@
 <script>
 import spinner from './../assets/spinner'
 import interactsWithResources from "./mixins/interactsWithResources"
+import VLazyImage from "v-lazy-image"
 
 export default {
     mixins: [interactsWithResources],
     props: ['resourceName', 'field'],
+    components: {
+        VLazyImage
+    },
     data: () => ({
         preview: null
     }),
