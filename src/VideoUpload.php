@@ -5,7 +5,6 @@ namespace Mostafaznv\NovaCkEditor;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Mostafaznv\Larupload\Traits\Larupload;
 use Mostafaznv\NovaVideo\Video;
-use App\Models\Video as VideoModel;
 use Exception;
 
 class VideoUpload extends Video
@@ -44,6 +43,12 @@ class VideoUpload extends Video
      */
     protected function hasLaruploadTrait(): bool
     {
-        return !!in_array(Larupload::class, class_uses(VideoModel::class));
+        $class = config('nova-ckeditor.video-model');
+
+        if ($class) {
+            return class_exists($class) and in_array(Larupload::class, class_uses($class));
+        }
+
+        return false;
     }
 }

@@ -197,6 +197,11 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 ## Configuration
 You can change configuration options in `app/config/nova-ckeditor.php` 
 
+### Video Model
+`string` `default: App\Models\Video`
+
+Path of your video model
+
 ### Memory
 `string` `default: 256M`
 
