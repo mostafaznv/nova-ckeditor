@@ -34,7 +34,7 @@
                 <slot name="default" />
             </div>
 
-            <div class="flex-0 w-full bg-logo border-t p-2" v-if="hasSlot('footer')">
+            <div class="flex-0 w-full bg-logo border-t border-gray-300 p-2" v-if="hasSlot('footer')">
                 <slot name="footer" />
             </div>
         </div>
