@@ -1,6 +1,6 @@
 <template>
     <panel-item :field="field">
-        <template slot="value">
+        <template #value>
             <v-lazy-image
                 v-if="preview"
                 class="shadow-md rounded m-2 block"
@@ -19,9 +19,13 @@
 
 <script>
 import IndexView from './media-index'
+import VLazyImage from "v-lazy-image"
 
 export default {
+    extends: IndexView,
     props: ['resource', 'resourceName', 'resourceId', 'field'],
-    extends: IndexView
+    components: {
+        VLazyImage
+    }
 }
 </script>

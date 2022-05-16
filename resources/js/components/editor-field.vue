@@ -1,6 +1,6 @@
 <template>
     <default-field :field="field" :errors="errors" :full-width-content="true">
-        <template slot="field">
+        <template #field>
             <textarea ref="editor" class="hidden" :id="field.attribute" :class="errorClasses" :value="value" />
 
             <media-browser @select="$options.editor.execute('imageBrowser', $event)" type="image" :field-key="$options.uuid + '-image'" :multiple="true" />
