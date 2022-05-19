@@ -46,6 +46,8 @@ export default {
     },
     created() {
         this.$options.uuid = this.uuid()
+
+        this.setInitialValue()
     },
     mounted() {
         const config = {
