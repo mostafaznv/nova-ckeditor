@@ -25,7 +25,7 @@
 
             <p v-if="hasError" class="my-2 text-danger">{{ firstError }}</p>
 
-            <media-browser :field-key="$options.uuid" :multiple="false" />
+            <media-browser :field-key="$options[editorUUID]" :multiple="false" />
         </template>
     </default-field>
 </template>
@@ -49,7 +49,7 @@ export default {
     }),
     computed: {
         event() {
-            return `ckeditor:media:${this.$options.uuid}`
+            return `ckeditor:media:${this.$options[this.editorUUID]}`
         }
     },
     methods: {
@@ -83,7 +83,7 @@ export default {
     },
     created() {
         this.$options.spinner = spinner
-        this.$options.uuid = this.uuid()
+        this.$options[this.editorUUID] = this.uuid()
         Nova.$on(`${this.event}:write`, this.handleChange)
     },
     beforeDestroy() {

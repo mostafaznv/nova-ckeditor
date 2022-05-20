@@ -3,9 +3,9 @@
         <template #field>
             <textarea ref="editor" class="hidden" :id="field.attribute" :class="errorClasses" :value="value" />
 
-            <media-browser @select="$options.editor.execute('imageBrowser', $event)" type="image" :field-key="$options.uuid + '-image'" :multiple="true" />
-            <media-browser @select="$options.editor.execute('videoBrowser', $event)" type="video" :field-key="$options.uuid + '-video'" :multiple="true" :has-larupload-trait="field.videoHasLaruploadTrait" />
-            <snippet-browser :field-key="$options.uuid" :snippets="field.snippetBrowser" />
+            <media-browser @select="$options[editorName].execute('imageBrowser', $event)" type="image" :field-key="$options[editorUUID] + '-image'" :multiple="true" />
+            <media-browser @select="$options[editorName].execute('videoBrowser', $event)" type="video" :field-key="$options[editorUUID] + '-video'" :multiple="true" :has-larupload-trait="field.videoHasLaruploadTrait" />
+            <snippet-browser :field-key="$options[editorUUID]" :snippets="field.snippetBrowser" />
         </template>
     </default-field>
 </template>
@@ -21,6 +21,13 @@ export default {
     mixins: [FormField, HandlesValidationErrors, HasUUID],
     props: ['resourceName', 'resourceId', 'field', 'toolbar'],
     components: {SnippetBrowser, MediaBrowser},
+    computed: {
+        editorName() {
+            const attribute = this.field.attribute.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
+
+            return attribute + 'Editor'
+        }
+    },
     methods: {
         setInitialValue() {
             this.value = this.field.value || ''
@@ -41,17 +48,17 @@ export default {
         },
 
         handleEditorSync() {
-            this.handleChange(this.$options.editor.getData())
+            this.handleChange(this.$options[this.editorName].getData())
         },
     },
     created() {
-        this.$options.uuid = this.uuid()
+        this.$options[this.editorUUID] = this.uuid()
 
         this.setInitialValue()
     },
     mounted() {
         const config = {
-            attribute: this.$options.uuid,
+            attribute: this.$options[this.editorUUID],
             imageBrowser: this.field.imageBrowser,
             videoBrowser: this.field.videoBrowser,
             snippetBrowser: this.field.snippetBrowser,
@@ -65,7 +72,7 @@ export default {
 
         CkEditor.create(this.$refs.editor, config)
             .then((editor) => {
-                const {editing, model} = this.$options.editor = editor
+                const {editing, model} = this.$options[this.editorName] = editor
 
                 // prevent question-mark & slash from triggering nova search
                 editing.view.document.on('keydown', this.handleEditorEvents, {
@@ -89,9 +96,9 @@ export default {
             })
     },
     beforeDestroy() {
-        if (this.$options.editor) {
-            this.$options.editor.destroy()
-                .then(() => this.$options.editor = null)
+        if (this.$options[this.editorName]) {
+            this.$options[this.editorName].destroy()
+                .then(() => this.$options[this.editorName] = null)
                 .catch((e) => this.$toasted.show(e.toString(), {type: 'error'}))
         }
     },
