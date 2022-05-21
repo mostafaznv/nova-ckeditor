@@ -64,6 +64,8 @@ return [
 
         'content-lang' => 'en',
 
+        'should-not-group-when-full' => false,
+
         'browser' => [
             'image' => true,
             'video' => true
