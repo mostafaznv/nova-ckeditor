@@ -46,6 +46,13 @@ class CkEditor extends Field
     public string $contentLanguage;
 
     /**
+     * Indicates whether the editor shows 3 dots in overflow mode
+     *
+     * @var bool
+     */
+    public bool $shouldNotGroupWhenFull = false;
+
+    /**
      * Indicates whether the image browser should be available
      *
      * @var bool $imageBrowser
@@ -86,6 +93,7 @@ class CkEditor extends Field
         $this->videoBrowser = $config['toolbar']['browser']['video'];
         $this->snippetBrowser = $this->prepareSnippets($config['toolbar']['snippets']);
         $this->contentLanguage = $config['toolbar']['content-lang'];
+        $this->shouldNotGroupWhenFull = $config['toolbar']['should-not-group-when-full'];
         $this->videoModel = $config['video-model'];
     }
 
@@ -138,6 +146,19 @@ class CkEditor extends Field
     public function contentLanguage(string $lang): self
     {
         $this->contentLanguage = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Set Should Not Group When Full
+     *
+     * @param bool $status
+     * @return $this
+     */
+    public function shouldNotGroupWhenFull(bool $status = true): self
+    {
+        $this->shouldNotGroupWhenFull = $status;
 
         return $this;
     }
@@ -197,6 +218,7 @@ class CkEditor extends Field
             'height'                 => $this->height,
             'indexLimit'             => $this->indexLimit,
             'contentLanguage'        => $this->contentLanguage,
+            'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait' => $this->hasLaruploadTrait(),
         ]);

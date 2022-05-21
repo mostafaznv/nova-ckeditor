@@ -66,7 +66,10 @@ export default {
                 ui: 'en',
                 content: this.field.contentLanguage
             },
-            toolbar: {items: this.field.toolbar},
+            toolbar: {
+                items: this.field.toolbar,
+                shouldNotGroupWhenFull: this.field.shouldNotGroupWhenFull
+            },
             ...this.field.toolbarOptions
         }
 

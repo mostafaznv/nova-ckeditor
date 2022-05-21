@@ -180,15 +180,16 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 
 ## CkEditor Field Options
 
-| method           | Type    | default          | description                                                                                   |
-|------------------|---------|------------------|-----------------------------------------------------------------------------------------------|
-| toolbar          | Array   | from config file | Set toolbar items                                                                             |
-| height           | Integer | from config file | Set editor's height                                                                           |
-| limitOnIndex     | Integer | 85               | Set character limit on index                                                                  |
-| contentLanguage  | Integer | from config file | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this  |
-| imageBrowser     | Boolean | from config file | Enable/Disable image picker                                                                   |
-| videoBrowser     | Boolean | from config file | Enable/Disable video picker                                                                   |
-| snippets         | Array   | from config file | Set Snippet items                                                                             |
+| method                 | Type    | default          | description                                                                                  |
+|------------------------|---------|------------------|----------------------------------------------------------------------------------------------|
+| toolbar                | Array   | from config file | Set toolbar items                                                                            |
+| height                 | Integer | from config file | Set editor's height                                                                          |
+| limitOnIndex           | Integer | 85               | Set character limit on index                                                                 |
+| contentLanguage        | Integer | from config file | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this |
+| shouldNotGroupWhenFull | Boolean | from config file | Indicates whether the editor shows 3 dots in overflow mode                                   |
+| imageBrowser           | Boolean | from config file | Enable/Disable image picker                                                                  |
+| videoBrowser           | Boolean | from config file | Enable/Disable video picker                                                                  |
+| snippets               | Array   | from config file | Set Snippet items                                                                            |
 
 
 
@@ -227,6 +228,11 @@ Editor's height.
 `string` `default: en` `format: ISO 639-1`
 
 Language of editor's content. if you want to change text-direction (RTL, LTR), you need this
+
+#### Should Not Group When Full
+`boolean` `default: false`
+
+Indicates whether the editor shows 3 dots in overflow mode
 
 #### Browser
 `boolean` `default: true`
