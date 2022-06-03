@@ -3,6 +3,8 @@
         <template #field>
             <textarea ref="editor" class="hidden" :id="field.attribute" :class="errorClasses" :value="value" />
 
+            <p v-if="field.helpText" class="help-text help-text mt-2">{{ field.helpText }}</p>
+
             <media-browser @select="$options[editorName].execute('imageBrowser', $event)" type="image" :field-key="$options[editorUUID] + '-image'" :multiple="true" />
             <media-browser @select="$options[editorName].execute('videoBrowser', $event)" type="video" :field-key="$options[editorUUID] + '-video'" :multiple="true" :has-larupload-trait="field.videoHasLaruploadTrait" />
             <snippet-browser :field-key="$options[editorUUID]" :snippets="field.snippetBrowser" />
