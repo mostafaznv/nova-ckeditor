@@ -8,6 +8,13 @@ CkEditor 5 for Laravel Nova.
 
 Includes custom written plugins for media (video and image), snippet and publishable stubs for out-of-the-box usage.
 
+----
+🚀 If you find this project interesting, please consider supporting me on the open source journey
+
+[![Donate](https://mostafaznv.github.io/donate/donate.svg)](https://mostafaznv.github.io/donate)
+
+----
+
 ## Features
 - CkEditor v5
 - Image Picker
