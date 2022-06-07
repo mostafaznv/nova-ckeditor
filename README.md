@@ -262,6 +262,11 @@ These are toolbar buttons. you can remove or rearrange them
 `array`
 Options of toolbar items. to see more information, please check the CkEditor's documentation.
 
+----
+🚀 If you find this project interesting, please consider supporting me on the open source journey
+
+[![Donate](https://mostafaznv.github.io/donate/donate.svg)](https://mostafaznv.github.io/donate)
+
 ------
 
 #### Credit and Thanks
