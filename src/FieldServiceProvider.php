@@ -28,6 +28,10 @@ class FieldServiceProvider extends ServiceProvider
             Nova::provideToScript(['ckeditor' => config('nova-ckeditor', [])]);
             Nova::style('field-ckeditor', __DIR__ . '/../dist/css/field.css');
 
+            if ($langScript = config('nova-ckeditor.toolbar.ui-language.script')) {
+                Nova::script('ckeditor-lang', $langScript);
+            }
+
             // allow hot reloading
             if (App::environment('local') && file_exists(__DIR__ . '/../dist/hot')) {
                 Nova::remoteScript('http://localhost:8080/js/field.js');

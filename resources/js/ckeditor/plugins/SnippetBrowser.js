@@ -1,10 +1,6 @@
-/**
- * @var Nova
- */
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
 
 export default class SnippetBrowser {
-
     constructor(editor) {
         this.editor = editor;
         this.config = editor.config;
@@ -70,12 +66,15 @@ export default class SnippetBrowser {
      * @return {ButtonView}
      */
     createButton(locale) {
+        const {t} = locale
         const view = new ButtonView(locale)
+
         view.set({
-            label: 'Insert Snippet',
+            label: t('Insert Snippet'),
             icon: this.icon,
             tooltip: true,
         })
+
         if (this.isEnabled) {
             view.on('execute', this.openModal.bind(this))
         }

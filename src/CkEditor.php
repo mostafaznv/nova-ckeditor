@@ -46,6 +46,13 @@ class CkEditor extends Field
     public string $contentLanguage;
 
     /**
+     * UI Language
+     *
+     * @var string
+     */
+    public string $uiLanguage = 'en';
+
+    /**
      * Indicates whether the editor shows 3 dots in overflow mode
      *
      * @var bool
@@ -93,6 +100,7 @@ class CkEditor extends Field
         $this->videoBrowser = $config['toolbar']['browser']['video'];
         $this->snippetBrowser = $this->prepareSnippets($config['toolbar']['snippets']);
         $this->contentLanguage = $config['toolbar']['content-lang'];
+        $this->uiLanguage = $config['toolbar']['ui-language']['name'] ?? 'en';
         $this->shouldNotGroupWhenFull = $config['toolbar']['should-not-group-when-full'];
         $this->videoModel = $config['video-model'];
     }
@@ -218,6 +226,7 @@ class CkEditor extends Field
             'height'                 => $this->height,
             'indexLimit'             => $this->indexLimit,
             'contentLanguage'        => $this->contentLanguage,
+            'uiLanguage'             => $this->uiLanguage,
             'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait' => $this->hasLaruploadTrait(),

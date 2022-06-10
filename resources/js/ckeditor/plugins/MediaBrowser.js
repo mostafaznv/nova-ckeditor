@@ -50,10 +50,11 @@ export default class MediaBrowser {
      * @return {ButtonView}
      */
     createButton(locale) {
+        const {t} = locale
         const view = new ButtonView(locale)
 
         view.set({
-            label: this.type === 'imageBrowser' ? 'Insert Image' : 'Insert Video',
+            label: t(this.type === 'imageBrowser' ? 'Insert Image' : 'Insert Video'),
             icon: this.icon,
             tooltip: true,
         })
