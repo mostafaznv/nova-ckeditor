@@ -64,6 +64,16 @@ return [
 
         'content-lang' => 'en',
 
+        'ui-language' => [
+            'name'   => 'en',
+
+            /**
+             * Example 1: asset('js/ckeditor-fa.js')
+             * Example 2: 'https://cdn.ckeditor.com/ckeditor5/34.0.0/decoupled-document/translations/fa.js'
+             */
+            'script' => null
+        ],
+
         'should-not-group-when-full' => false,
 
         'browser' => [

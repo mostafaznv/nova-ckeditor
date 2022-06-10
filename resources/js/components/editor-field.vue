@@ -65,7 +65,7 @@ export default {
             videoBrowser: this.field.videoBrowser,
             snippetBrowser: this.field.snippetBrowser,
             language: {
-                ui: 'en',
+                ui: this.field.uiLanguage,
                 content: this.field.contentLanguage
             },
             toolbar: {
@@ -112,7 +112,7 @@ export default {
 
 <style lang="sass">
 .ck.ck-reset_all, .ck.ck-reset_all *
-    direction: ltr !important
+    // direction: ltr !important
 
 .ck-content.ck-editor__editable
     resize: vertical

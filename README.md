@@ -27,8 +27,9 @@ Includes custom written plugins for media (video and image), snippet and publish
 
 
 ## Requirements
-- PHP 7.4 or higher
-- Laravel 8.* or higher
+- PHP 8.0.2 or higher
+- Laravel 8.40.* or higher
+- Nova 4
 - FFMPEG (required for larupload usage)
 
 <br><br>
@@ -192,7 +193,7 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 | toolbar                | Array   | from config file | Set toolbar items                                                                            |
 | height                 | Integer | from config file | Set editor's height                                                                          |
 | limitOnIndex           | Integer | 85               | Set character limit on index                                                                 |
-| contentLanguage        | Integer | from config file | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this |
+| contentLanguage        | String  | from config file | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this |
 | shouldNotGroupWhenFull | Boolean | from config file | Indicates whether the editor shows 3 dots in overflow mode                                   |
 | imageBrowser           | Boolean | from config file | Enable/Disable image picker                                                                  |
 | videoBrowser           | Boolean | from config file | Enable/Disable video picker                                                                  |
@@ -203,64 +204,27 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 ------
 
 ## Configuration
-You can change configuration options in `app/config/nova-ckeditor.php` 
+You can change configuration options in `app/config/nova-ckeditor.php`
 
-### Video Model
-`string` `default: App\Models\Video`
 
-Path of your video model
+| key                                | type                       | default          | description                                                                                                                                                                                                                                                           |
+|------------------------------------|----------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| video-model                        | String                     | App\Models\Video | Path of your video model                                                                                                                                                                                                                                              |
+| memory                             | String                     | 256M             | Max memory (php.ini override) for image resizing                                                                                                                                                                                                                      |
+| max-quality                        | Integer                    | 75               | Max image output quality                                                                                                                                                                                                                                              |
+| max-width                          | Integer                    | 1024             | Image max width                                                                                                                                                                                                                                                       |
+| max-height                         | Integer                    | 768              | Image max height                                                                                                                                                                                                                                                      |
+| toolbar.height                     | Integer                    | 400              | Editor's height.                                                                                                                                                                                                                                                      |
+| toolbar.content-lang               | String `format: ISO 639-1` | en               | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this                                                                                                                                                                          |
+| toolbar.ui-language.name           | String `format: ISO 639-1` | en               | Language of editor's ui.                                                                                                                                                                                                                                              |
+| toolbar.ui-language.script         | String                     | null             | URL of language file to use in editor's ui.<br>example 1: `asset('js/ckeditor-fa.js')`<br>example 2: `https://cdn.ckeditor.com/ckeditor5/34.0.0/decoupled-document/translations/fa.js`                                                                                |
+| toolbar.should-not-group-when-full | Boolean                    | false            | Indicates whether the editor shows 3 dots in overflow mode                                                                                                                                                                                                            |
+| toolbar.browser.image              | Boolean                    | true             | You can disable image picker by changing this flag                                                                                                                                                                                                                    |
+| toolbar.browser.video              | Boolean                    | true             | You can disable video picker by changing this flag                                                                                                                                                                                                                    |
+| toolbar.snippets                   | Array                      |                  | There are some pre-defined snippets in `resources/views/ckeditor`. you can add more snippets if you want. <br> > **Note**: Snippets will only render CkEditor Elements. Standard HTML or Figures (table, image, video), see included views. https://ckeditor.com/docs |
+| toolbar.items                      | Array                      |                  | These are toolbar buttons. you can remove or rearrange them                                                                                                                                                                                                           |
+| toolbar.options                    | Array                      |                  | Options of toolbar items. to see more information, please check the CkEditor's documentation.                                                                                                                                                                         |
 
-### Memory
-`string` `default: 256M`
-
-Max memory (php.ini override) for image resizing
-
-### Max Quality
-`integert` `default: 75`
-
-Max image output quality
-
-### Max Width and Height
-`integer` `default width: 1024` `default height: 768`
-
-Image max dimensions
-
-### Toolbar
-#### height
-`integer` `default: 400`
-
-Editor's height.
-
-#### Content Lang
-`string` `default: en` `format: ISO 639-1`
-
-Language of editor's content. if you want to change text-direction (RTL, LTR), you need this
-
-#### Should Not Group When Full
-`boolean` `default: false`
-
-Indicates whether the editor shows 3 dots in overflow mode
-
-#### Browser
-`boolean` `default: true`
-
-You can disable video and image picker by changing these options
-
-#### Snippets
-`array`
-
-There are some pre-defined snippets in `resources/views/ckeditor`. you can add more snippets if you want.
-
-> **Note**: Snippets will only render CkEditor Elements. Standard HTML or Figures (table, image, video), see included views. https://ckeditor.com/docs
-
-#### Items
-`array`
-
-These are toolbar buttons. you can remove or rearrange them
-
-#### Options
-`array`
-Options of toolbar items. to see more information, please check the CkEditor's documentation.
 
 ----
 🚀 If you find this project interesting, please consider supporting me on the open source journey
