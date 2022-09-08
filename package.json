@@ -49,6 +49,6 @@
     },
     "dependencies": {
         "postcss-scss": "^4.0.4",
-        "vue": "^2.6.11"
+        "vue": "^3.2.29"
     }
 }
