@@ -35,6 +35,7 @@ mix.setPublicPath('dist')
     .webpackConfig({
         externals: {
             vue: 'Vue',
+            'laravel-nova': 'LaravelNova'
         },
         plugins: [
             new CKEditorWebpackPlugin({
