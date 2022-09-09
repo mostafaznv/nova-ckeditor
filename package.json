@@ -36,7 +36,6 @@
         "cross-env": "^7.0.2",
         "drag-drop": "^6.0.0",
         "laravel-mix": "^6.0",
-        "laravel-nova": "^1.12.3",
         "postcss-loader": "^4.0.0",
         "raw-loader": "^4.0.1",
         "resolve-url-loader": "^5.0.0",
@@ -50,6 +49,6 @@
     },
     "dependencies": {
         "postcss-scss": "^4.0.4",
-        "vue": "^2.6.11"
+        "vue": "^3.2.29"
     }
 }
