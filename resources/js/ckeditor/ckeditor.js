@@ -22,6 +22,7 @@ import Font from '@ckeditor/ckeditor5-font/src/font'
 
 // Styles & Enhancements
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
+import RemoveFromat from '@ckeditor/ckeditor5-remove-format/src/removeformat'
 import StrikeThrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough'
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code'
 import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript'
@@ -103,6 +104,7 @@ export default class CkEditor extends ClassicEditorBase {
             Superscript,
             StrikeThrough,
             Code,
+            RemoveFromat,
             Image,
             ImageStyle,
             ImageUpload,
