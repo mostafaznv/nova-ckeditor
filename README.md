@@ -204,7 +204,7 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 ------
 
 ## Configuration
-You can change configuration options in `app/config/nova-ckeditor.php`
+You can change configuration options in `config/nova-ckeditor.php`
 
 
 | key                                | type                       | default          | description                                                                                                                                                                                                                                                           |
@@ -226,7 +226,15 @@ You can change configuration options in `app/config/nova-ckeditor.php`
 | toolbar.options                    | Array                      |                  | Options of toolbar items. to see more information, please check the CkEditor's documentation.                                                                                                                                                                         |
 
 
-----
+------
+
+## Migration
+
+#### From 3.1.1 to 3.2.0
+- Please add `removeFormat` to `toolbar.items` in config file ([config/nova-ckeditor.php](https://github.com/mostafaznv/nova-ckeditor/blob/master/config/nova-ckeditor.php)).
+
+
+------
 🚀 If you find this project interesting, please consider supporting me on the open source journey
 
 [![Donate](https://mostafaznv.github.io/donate/donate.svg)](https://mostafaznv.github.io/donate)

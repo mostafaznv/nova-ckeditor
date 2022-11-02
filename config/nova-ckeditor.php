@@ -111,6 +111,7 @@ return [
             'underline',
             'strikethrough',
             'code',
+            'removeFormat',
             '|',
             'outdent',
             'indent',
