@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Mostafaznv\NovaCkEditor;
 
+use Illuminate\Support\Str;
 use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -88,8 +89,8 @@ class ImageStorage
         $maxWidth = $config['max-width'];
         $maxHeight = $config['max-height'];
 
-        $hash = $this->hashFileContents($file);
-        $fileName = $this->makeTargetFilename($file, $hash);
+        $name = $this->fileName($file);
+        $fileName = $this->makeTargetFilename($file, $name);
         $filePath = $this->makeTargetFilePath($fileName);
 
         $image = $this->resizeImage($file, $maxWidth, $maxHeight)->save($filePath, $config['max-quality']);
@@ -106,14 +107,28 @@ class ImageStorage
     }
 
     /**
-     * Generate hash from file content
+     * Generate file name
      *
      * @param UploadedFile $file
      * @return string
      */
-    protected function hashFileContents(UploadedFile $file): string
+    protected function fileName(UploadedFile $file): string
     {
+        $method = config('nova-ckeditor.image-naming-method');
+
+        if ($method == 'real-file-name') {
+            return $this->getRealFileName($file);
+        }
+        else if ($method == 'unique-real-file-name') {
+            return $this->getRealFileName($file) . '-' . uniqid();
+        }
+
         return md5_file($file->getRealPath());
+    }
+
+    protected function getRealFileName(UploadedFile $file): string
+    {
+        return Str::kebab(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
     }
 
     /**
