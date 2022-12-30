@@ -64,6 +64,7 @@ export default {
             imageBrowser: this.field.imageBrowser,
             videoBrowser: this.field.videoBrowser,
             snippetBrowser: this.field.snippetBrowser,
+            isReadOnly: this.field.readonly,
             language: {
                 ui: this.field.uiLanguage,
                 content: this.field.contentLanguage
@@ -94,6 +95,10 @@ export default {
                     editor.editing.view.change(writer => {
                         writer.setStyle('height', `${this.field.height}px`, editor.editing.view.document.getRoot());
                     });
+                }
+
+                if (this.field.readonly) {
+                    editor.enableReadOnlyMode(this.$options[this.editorUUID]);
                 }
             })
             .catch((e) => {
