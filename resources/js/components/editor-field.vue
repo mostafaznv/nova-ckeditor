@@ -18,6 +18,7 @@ import SnippetBrowser from "./snippet-browser"
 import MediaBrowser from "./media-browser"
 import HasUUID from "./mixins/hasUUID"
 import {FormField, HandlesValidationErrors} from 'laravel-nova'
+import debounce from 'lodash/debounce'
 
 export default {
     mixins: [FormField, HandlesValidationErrors, HasUUID],
@@ -50,7 +51,11 @@ export default {
         },
 
         handleEditorSync() {
-            this.handleChange(this.$options[this.editorName].getData())
+            const editor = this.$options[this.editorName]
+
+            if (editor) {
+                this.handleChange(editor.getData())
+            }
         },
     },
     created() {
@@ -64,6 +69,7 @@ export default {
             imageBrowser: this.field.imageBrowser,
             videoBrowser: this.field.videoBrowser,
             snippetBrowser: this.field.snippetBrowser,
+            isReadOnly: this.field.readonly,
             language: {
                 ui: this.field.uiLanguage,
                 content: this.field.contentLanguage
@@ -85,7 +91,7 @@ export default {
                 })
 
                 // sync model changes to vue-model
-                model.document.on('change', this.handleEditorSync, {
+                model.document.on('change', debounce(this.handleEditorSync, 100), {
                     priority: 'lowest'
                 })
 
@@ -95,18 +101,22 @@ export default {
                         writer.setStyle('height', `${this.field.height}px`, editor.editing.view.document.getRoot());
                     });
                 }
+
+                if (this.field.readonly) {
+                    editor.enableReadOnlyMode(this.$options[this.editorUUID]);
+                }
             })
             .catch((e) => {
                 this.$toasted.show(e.toString(), {type: 'error'})
             })
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (this.$options[this.editorName]) {
             this.$options[this.editorName].destroy()
                 .then(() => this.$options[this.editorName] = null)
                 .catch((e) => this.$toasted.show(e.toString(), {type: 'error'}))
         }
-    },
+    }
 }
 </script>
 

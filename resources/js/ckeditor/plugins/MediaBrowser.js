@@ -62,7 +62,9 @@ export default class MediaBrowser {
         if (this.isEnabled) {
             view.on('execute', this.openModal.bind(this))
         }
+
         view.set('isVisible', this.isEnabled)
+        view.set('isEnabled', !this.config.get('isReadOnly'))
 
         return view
     }
