@@ -59,7 +59,7 @@ return [
      |
      */
 
-    'image-naming-method'  => 'hash-file',
+    'image-naming-method' => 'hash-file',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,6 +85,11 @@ return [
             'script' => null
         ],
 
+        'text-part-language' => [
+            ['title' => 'Farsi', 'languageCode' => 'fa'],
+            ['title' => 'English', 'languageCode' => 'en']
+        ],
+
         'should-not-group-when-full' => false,
 
         'browser' => [
@@ -98,7 +103,14 @@ return [
             ['name' => 'Table', 'html' => 'ckeditor.table']
         ],
 
+        'languages' => [
+            ['name' => 'Image', 'html' => 'ckeditor.image'],
+            ['name' => 'Media', 'html' => 'ckeditor.media'],
+            ['name' => 'Table', 'html' => 'ckeditor.table']
+        ],
+
         'items' => [
+            'textPartLanguage',
             'heading',
             '|',
             'fontSize',

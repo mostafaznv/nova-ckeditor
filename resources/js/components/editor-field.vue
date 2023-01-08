@@ -72,7 +72,8 @@ export default {
             isReadOnly: this.field.readonly,
             language: {
                 ui: this.field.uiLanguage,
-                content: this.field.contentLanguage
+                content: this.field.contentLanguage,
+                textPartLanguage: this.field.textPartLanguage
             },
             toolbar: {
                 items: this.field.toolbar,
