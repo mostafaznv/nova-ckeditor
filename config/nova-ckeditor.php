@@ -311,7 +311,9 @@ return [
                         'label' => 'Purple'
                     ]
                 ]
-            ]
+            ],
+
+            'mediaEmbed' => [],
         ]
     ],
 ];

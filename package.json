@@ -52,6 +52,7 @@
         "@ckeditor/ckeditor5-language": "^35.4.0",
         "lodash": "^4.17.21",
         "postcss-scss": "^4.0.4",
+        "regex-parser": "^2.2.11",
         "vue": "^3.2.29"
     }
 }
