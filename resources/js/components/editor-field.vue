@@ -19,6 +19,7 @@ import MediaBrowser from "./media-browser"
 import HasUUID from "./mixins/hasUUID"
 import {FormField, HandlesValidationErrors} from 'laravel-nova'
 import debounce from 'lodash/debounce'
+import RegexParser from 'regex-parser'
 
 export default {
     mixins: [FormField, HandlesValidationErrors, HasUUID],
@@ -34,6 +35,47 @@ export default {
     methods: {
         setInitialValue() {
             this.value = this.field.value || ''
+        },
+
+        initToolbarOptions(toolbarOptions) {
+            if (toolbarOptions.mediaEmbed) {
+                if (toolbarOptions.mediaEmbed.providers) {
+                    toolbarOptions.mediaEmbed.providers = this.normalizeMediaEmbedToolbarOptions(toolbarOptions.mediaEmbed.providers)
+                }
+                if (toolbarOptions.mediaEmbed.extraProviders) {
+                    toolbarOptions.mediaEmbed.extraProviders = this.normalizeMediaEmbedToolbarOptions(toolbarOptions.mediaEmbed.extraProviders)
+                }
+            }
+
+            return toolbarOptions
+        },
+
+        normalizeMediaEmbedToolbarOptions(providers) {
+            if (providers && Array.isArray(providers)) {
+                for (let i = 0; i < providers.length; i++) {
+                    const url = providers[i]?.url ?? null
+                    const html = providers[i]?.html ?? null
+
+                    if (Array.isArray(url)) {
+                        const urls = url
+
+                        for (let j = 0; j< urls.length; j++) {
+                            urls[j] = RegexParser(urls[j])
+                        }
+
+                        providers[i].url = urls
+                    }
+                    else if (url) {
+                        providers[i].url = RegexParser(url)
+                    }
+
+                    if (html) {
+                        providers[i].html = (match) => eval('`' + html + '`')
+                    }
+                }
+            }
+
+            return providers
         },
 
         fill(formData) {
@@ -64,6 +106,8 @@ export default {
         this.setInitialValue()
     },
     mounted() {
+        const toolbarOptions = this.initToolbarOptions(this.field.toolbarOptions)
+
         const config = {
             attribute: this.$options[this.editorUUID],
             imageBrowser: this.field.imageBrowser,
@@ -79,7 +123,7 @@ export default {
                 items: this.field.toolbar,
                 shouldNotGroupWhenFull: this.field.shouldNotGroupWhenFull
             },
-            ...this.field.toolbarOptions
+            ...toolbarOptions
         }
 
         CkEditor.create(this.$refs.editor, config)
