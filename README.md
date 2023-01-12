@@ -234,7 +234,7 @@ You can change configuration options in `config/nova-ckeditor.php`
 ## Media Embed
 The [media embed](https://ckeditor.com/docs/ckeditor5/latest/features/media-embed.html) feature brings support for inserting embeddable media such as YouTube or Vimeo videos and tweets into your rich text content.
 
-- You can use the Insert media button in the toolbar <img src="https://ckeditor.com/docs/ckeditor5/latest/assets/icons/1ce8c210b4.svg" style="max-width: 18px;vertical-align: middle;"> to embed media like in the following examples.
+- You can use the Insert media button in the toolbar <img align="center" width="18" height="18" src="https://user-images.githubusercontent.com/7619687/212122242-26996316-aca1-4dcd-9117-6b17a3f77fe5.png"> to embed media like in the following examples.
 - You can also paste the media URL directly into the editor content, and it will be automatically embedded.
 
 #### How to configure it?
