@@ -101,13 +101,18 @@ class CkEditor extends Field
 
         $config = config('nova-ckeditor');
 
+        $defaultTextPartLanguage = [
+            ['title' => 'Farsi', 'languageCode' => 'fa'],
+            ['title' => 'English', 'languageCode' => 'en']
+        ];
+
         $this->toolbar = $config['toolbar']['items'];
         $this->height = $config['toolbar']['height'];
         $this->imageBrowser = $config['toolbar']['browser']['image'];
         $this->videoBrowser = $config['toolbar']['browser']['video'];
         $this->snippetBrowser = $this->prepareSnippets($config['toolbar']['snippets']);
         $this->contentLanguage = $config['toolbar']['content-lang'];
-        $this->textPartLanguage = $config['toolbar']['text-part-language'];
+        $this->textPartLanguage = $config['toolbar']['text-part-language'] ?? $defaultTextPartLanguage;
         $this->uiLanguage = $config['toolbar']['ui-language']['name'] ?? 'en';
         $this->shouldNotGroupWhenFull = $config['toolbar']['should-not-group-when-full'];
         $this->videoModel = $config['video-model'];
