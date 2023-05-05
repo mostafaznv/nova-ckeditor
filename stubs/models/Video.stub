@@ -14,9 +14,9 @@ class Video extends Model
 
     protected $fillable = ['name', 'file', 'disk'];
 
-    protected static function boot()
+    protected static function booted(): void
     {
-        parent::boot();
+        parent::booted();
 
         self::saving(function($model) {
             $hasLaruploadTrait = method_exists(self::class, 'bootLarupload');
