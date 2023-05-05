@@ -8,11 +8,19 @@ export default {
         },
         toolbar: [
             'imageBrowser',
+            '|',
             'imageStyle:full',
             'imageStyle:alignLeft',
             'imageStyle:alignCenter',
             'imageStyle:alignRight',
+            '|',
             'imageTextAlternative',
+            'toggleImageCaption',
+            '|',
+            'imageStyle:block',
+            'imageStyle:side',
+            '|',
+            'linkImage'
         ],
         styles: [
             'full',
