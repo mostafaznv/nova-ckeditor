@@ -9,7 +9,9 @@ CkEditor 5 for Laravel Nova.
 Includes custom written plugins for media (video and image), snippet and publishable stubs for out-of-the-box usage.
 
 ----
-I develop in a open-source journey 🚀, I wish I lived in an environment where financial situation was fine and I could only focus on the path, but as you may know, life isn't perfect. <br>So if you end up using my packages, please consider making a donation, any amount would go along way and is much appreciated. 🍺
+I am on an open-source journey 🚀, and I wish I could solely focus on my development path without worrying about my financial situation. However, as life is not perfect, I have to consider other factors.
+
+Therefore, if you decide to use my packages, please kindly consider making a donation. Any amount, no matter how small, goes a long way and is greatly appreciated. 🍺
 
 [![Donate](https://mostafaznv.github.io/donate/donate.svg)](https://mostafaznv.github.io/donate)
 
@@ -302,7 +304,9 @@ return [
 
 
 ------
-I develop in a open-source journey 🚀, I wish I lived in an environment where financial situation was fine and I could only focus on the path, but as you may know, life isn't perfect. <br>So if you end up using my packages, please consider making a donation, any amount would go along way and is much appreciated. 🍺
+I am on an open-source journey 🚀, and I wish I could solely focus on my development path without worrying about my financial situation. However, as life is not perfect, I have to consider other factors.
+
+Therefore, if you decide to use my packages, please kindly consider making a donation. Any amount, no matter how small, goes a long way and is greatly appreciated. 🍺
 
 [![Donate](https://mostafaznv.github.io/donate/donate.svg)](https://mostafaznv.github.io/donate)
 
