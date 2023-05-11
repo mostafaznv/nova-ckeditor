@@ -94,6 +94,13 @@ class CkEditor extends Field
      */
     public string $videoModel = '';
 
+    /**
+     * Heading options
+     *
+     * @var array
+     */
+    public array $headings = [];
+
 
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
@@ -116,6 +123,7 @@ class CkEditor extends Field
         $this->uiLanguage = $config['toolbar']['ui-language']['name'] ?? 'en';
         $this->shouldNotGroupWhenFull = $config['toolbar']['should-not-group-when-full'];
         $this->videoModel = $config['video-model'];
+        $this->headings = $config['headings'];
     }
 
 
@@ -224,6 +232,19 @@ class CkEditor extends Field
     }
 
     /**
+     * Add heading options.
+     *
+     * @param array $headings
+     * @return $this
+     */
+    public function headings(array $headings = []): self
+    {
+        $this->headings = $headings;
+
+        return $this;
+    }
+
+    /**
      * Enable Snippets Browser
      *
      * @param array $snippets
@@ -257,6 +278,7 @@ class CkEditor extends Field
             'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait' => $this->hasLaruploadTrait(),
+            'headings'               => $this->headings,
         ]);
     }
 
