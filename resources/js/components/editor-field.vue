@@ -119,6 +119,9 @@ export default {
                 content: this.field.contentLanguage,
                 textPartLanguage: this.field.textPartLanguage
             },
+            heading: {
+                options: this.field.headings,
+            },
             toolbar: {
                 items: this.field.toolbar,
                 shouldNotGroupWhenFull: this.field.shouldNotGroupWhenFull
