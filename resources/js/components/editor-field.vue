@@ -107,6 +107,9 @@ export default {
     },
     mounted() {
         const toolbarOptions = this.initToolbarOptions(this.field.toolbarOptions)
+        const headings = toolbarOptions.headings
+
+        // delete toolbarOptions.headings
 
         const config = {
             attribute: this.$options[this.editorUUID],
@@ -120,7 +123,7 @@ export default {
                 textPartLanguage: this.field.textPartLanguage
             },
             heading: {
-                options: this.field.headings,
+                options: headings,
             },
             toolbar: {
                 items: this.field.toolbar,
