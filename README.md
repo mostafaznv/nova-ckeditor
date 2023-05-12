@@ -24,6 +24,7 @@ Therefore, if you decide to use my packages, please kindly consider making a don
 - Drag & Drop Uploading in Media Picker
 - Optimize Images
 - Generate Cover for Videos
+- Multiple Toolbars
 - Localization
 - Configurable
 
@@ -162,11 +163,6 @@ class Article extends Resource
     }
 }
 ```
-Optional change toolbar that is used for the field:
-```php
-CkEditor::make(trans('Content'), 'content', toolbar: 'toolbar2')->stacked()
-```
-Make sure that the toolbar2 exists in `config/nova-ckeditor.php`
 
 ------
 
@@ -195,17 +191,17 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 
 ## CkEditor Field Options
 
-| method                 | Type    | default          | description                                                                                                                                                                                                                                                                                                                                                          |
-|------------------------|---------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| toolbar                | Array   | from config file | Set toolbar items                                                                                                                                                                                                                                                                                                                                                    |
-| height                 | Integer | from config file | Set editor's height                                                                                                                                                                                                                                                                                                                                                  |
-| limitOnIndex           | Integer | 85               | Set character limit on index                                                                                                                                                                                                                                                                                                                                         |
-| contentLanguage        | String  | from config file | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this                                                                                                                                                                                                                                                                         |
-| textPartLanguage       | Array   | from config file | The text part language feature provides the ability to mark the language of selected text fragments. It makes working with multilingual content convenient and ensures that user agents can correctly present the content written in multiple languages, so graphical browsers and screen readers are able to identify how to pronounce text and display characters. |
-| shouldNotGroupWhenFull | Boolean | from config file | Indicates whether the editor shows 3 dots in overflow mode                                                                                                                                                                                                                                                                                                           |
-| imageBrowser           | Boolean | from config file | Enable/Disable image picker                                                                                                                                                                                                                                                                                                                                          |
-| videoBrowser           | Boolean | from config file | Enable/Disable video picker                                                                                                                                                                                                                                                                                                                                          |
-| snippets               | Array   | from config file | Set Snippet items                                                                                                                                                                                                                                                                                                                                                    |
+| method                 | Type          | default          | description                                                                                                                                                                                                                                                                                                                                                          |
+|------------------------|---------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| toolbar                | String, Array |                  | Set toolbar name items                                                                                                                                                                                                                                                                                                                                               |
+| height                 | Integer       | from config file | Set editor's height                                                                                                                                                                                                                                                                                                                                                  |
+| limitOnIndex           | Integer       | 85               | Set character limit on index                                                                                                                                                                                                                                                                                                                                         |
+| contentLanguage        | String        | from config file | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this                                                                                                                                                                                                                                                                         |
+| textPartLanguage       | Array         | from config file | The text part language feature provides the ability to mark the language of selected text fragments. It makes working with multilingual content convenient and ensures that user agents can correctly present the content written in multiple languages, so graphical browsers and screen readers are able to identify how to pronounce text and display characters. |
+| shouldNotGroupWhenFull | Boolean       | from config file | Indicates whether the editor shows 3 dots in overflow mode                                                                                                                                                                                                                                                                                                           |
+| imageBrowser           | Boolean       | from config file | Enable/Disable image picker                                                                                                                                                                                                                                                                                                                                          |
+| videoBrowser           | Boolean       | from config file | Enable/Disable video picker                                                                                                                                                                                                                                                                                                                                          |
+| snippets               | Array         | from config file | Set Snippet items                                                                                                                                                                                                                                                                                                                                                    |
 
 
 
@@ -215,27 +211,80 @@ $this->app->bind('ckeditor-image-storage', MyImageStorage::class);
 You can change configuration options in `config/nova-ckeditor.php`
 
 
-| key                                | type                       | default          | description                                                                                                                                                                                                                                                                                                                                                           |
-|------------------------------------|----------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| video-model                        | String                     | App\Models\Video | Path of your video model                                                                                                                                                                                                                                                                                                                                              |
-| memory                             | String                     | 256M             | Max memory (php.ini override) for image resizing                                                                                                                                                                                                                                                                                                                      |
-| max-quality                        | Integer                    | 75               | Max image output quality                                                                                                                                                                                                                                                                                                                                              |
-| max-width                          | Integer                    | 1024             | Image max width                                                                                                                                                                                                                                                                                                                                                       |
-| max-height                         | Integer                    | 768              | Image max height                                                                                                                                                                                                                                                                                                                                                      |
-| image-naming-method                | String                     | hash-file        | Naming Method of Images. <br>Available methods: `hash-file`, `real-file-name`, `unique-real-file-name`                                                                                                                                                                                                                                                                |
-| toolbar.headings                   | Array                      |                  | Heading options.                                                                                                                                                                                                                                                                                                                                                      |
-| toolbar.height                     | Integer                    | 400              | Editor's height.                                                                                                                                                                                                                                                                                                                                                      |
-| toolbar.content-lang               | String `format: ISO 639-1` | en               | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this                                                                                                                                                                                                                                                                          |
-| toolbar.ui-language.name           | String `format: ISO 639-1` | en               | Language of editor's ui.                                                                                                                                                                                                                                                                                                                                              |
-| toolbar.ui-language.script         | String                     | null             | URL of language file to use in editor's ui.<br>example 1: `asset('js/ckeditor-fa.js')`<br>example 2: `https://cdn.ckeditor.com/ckeditor5/34.0.0/decoupled-document/translations/fa.js`                                                                                                                                                                                |
-| toolbar.text-part-language         | Array                      |                  | The text part language feature provides the ability to mark the language of selected text fragments. It makes working with multilingual content convenient and ensures that user agents can correctly present the content written in multiple languages, so graphical browsers and screen readers are able to identify how to pronounce text and display characters.  |
-| toolbar.should-not-group-when-full | Boolean                    | false            | Indicates whether the editor shows 3 dots in overflow mode                                                                                                                                                                                                                                                                                                            |
-| toolbar.browser.image              | Boolean                    | true             | You can disable image picker by changing this flag                                                                                                                                                                                                                                                                                                                    |
-| toolbar.browser.video              | Boolean                    | true             | You can disable video picker by changing this flag                                                                                                                                                                                                                                                                                                                    |
-| toolbar.snippets                   | Array                      |                  | There are some pre-defined snippets in `resources/views/ckeditor`. you can add more snippets if you want. <br> > **Note**: Snippets will only render CkEditor Elements. Standard HTML or Figures (table, image, video), see included views. https://ckeditor.com/docs                                                                                                 |
-| toolbar.items                      | Array                      |                  | These are toolbar buttons. you can remove or rearrange them                                                                                                                                                                                                                                                                                                           |
-| toolbar.options                    | Array                      |                  | Options of toolbar items. to see more information, please check the CkEditor's documentation.                                                                                                                                                                                                                                                                         |
+| key                                           | type                       | default          | description                                                                                                                                                                                                                                                                                                                                                          |
+|-----------------------------------------------|----------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| video-model                                   | String                     | App\Models\Video | Path of your video model                                                                                                                                                                                                                                                                                                                                             |
+| memory                                        | String                     | 256M             | Max memory (php.ini override) for image resizing                                                                                                                                                                                                                                                                                                                     |
+| max-quality                                   | Integer                    | 75               | Max image output quality                                                                                                                                                                                                                                                                                                                                             |
+| max-width                                     | Integer                    | 1024             | Image max width                                                                                                                                                                                                                                                                                                                                                      |
+| max-height                                    | Integer                    | 768              | Image max height                                                                                                                                                                                                                                                                                                                                                     |
+| image-naming-method                           | String                     | hash-file        | Naming Method of Images. <br>Available methods: `hash-file`, `real-file-name`, `unique-real-file-name`                                                                                                                                                                                                                                                               |
+| toolbars.default                              | String                     | toolbar-1        | Specifies the default toolbar                                                                                                                                                                                                                                                                                                                                        |
+| toolbars.toolbar-1.height                     | Integer                    | 400              | Editor's height.                                                                                                                                                                                                                                                                                                                                                     |
+| toolbars.toolbar-1.content-lang               | String `format: ISO 639-1` | en               | Language of editor's content. if you want to change text-direction (RTL, LTR), you need this                                                                                                                                                                                                                                                                         |
+| toolbars.toolbar-1.ui-language.name           | String `format: ISO 639-1` | en               | Language of editor's ui.                                                                                                                                                                                                                                                                                                                                             |
+| toolbars.toolbar-1.ui-language.script         | String                     | null             | URL of language file to use in editor's ui.<br>example 1: `asset('js/ckeditor-fa.js')`<br>example 2: `https://cdn.ckeditor.com/ckeditor5/34.0.0/decoupled-document/translations/fa.js`                                                                                                                                                                               |
+| toolbars.toolbar-1.text-part-language         | Array                      |                  | The text part language feature provides the ability to mark the language of selected text fragments. It makes working with multilingual content convenient and ensures that user agents can correctly present the content written in multiple languages, so graphical browsers and screen readers are able to identify how to pronounce text and display characters. |
+| toolbars.toolbar-1.should-not-group-when-full | Boolean                    | false            | Indicates whether the editor shows 3 dots in overflow mode                                                                                                                                                                                                                                                                                                           |
+| toolbars.toolbar-1.browser.image              | Boolean                    | true             | You can disable image picker by changing this flag                                                                                                                                                                                                                                                                                                                   |
+| toolbars.toolbar-1.browser.video              | Boolean                    | true             | You can disable video picker by changing this flag                                                                                                                                                                                                                                                                                                                   |
+| toolbars.toolbar-1.snippets                   | Array                      |                  | There are some pre-defined snippets in `resources/views/ckeditor`. you can add more snippets if you want. <br> > **Note**: Snippets will only render CkEditor Elements. Standard HTML or Figures (table, image, video), see included views. https://ckeditor.com/docs                                                                                                |
+| toolbars.toolbar-1.items                      | Array                      |                  | These are toolbar buttons. you can remove or rearrange them                                                                                                                                                                                                                                                                                                          |
+| toolbars.toolbar-1.options                    | Array                      |                  | Options of toolbar items. to see more information, please check the CkEditor's documentation.                                                                                                                                                                                                                                                                        |
 
+
+------
+
+## Multiple Toolbars
+You can use multiple toolbars in your CkEditor fields. Simply clone `toolbars.toolbar-1` in `config/nova-ckeditor.php` and use it in your field options.
+
+1- Add new toolbar in `config/nova-ckeditor.php`:
+
+```php
+// config/nova-ckeditor.php
+return [
+    'toolbars' => [
+        'toolbar-1' => [
+            ...
+        ],
+        'toolbar-2' => [
+            ...
+        ],   
+    ]
+];
+```
+
+2- Use it in your CkEditor field:
+
+```php
+use Mostafaznv\NovaCkEditor\CkEditor;
+
+class Article extends Resource
+{
+    public function fields(Request $request): array
+    {
+        return [
+            ID::make()->sortable(),
+
+            CkEditor::make(trans('Content'), 'content')->stacked(),
+
+            CkEditor::make(trans('Description'), 'description')
+                ->toolbar('toolbar-2')
+                ->stacked()
+        ];
+    }
+}
+```
+
+> Note: You can pass custom toolbar items using the second argument of `toolbar()` method.
+
+```php
+CkEditor::make(trans('Description'), 'description')
+    ->toolbar('toolbar-2', [
+        'textPartLanguage', 'heading', '|', 'fontSize'
+    ])
+    ->stacked()
+```
 
 ------
 
@@ -304,6 +353,15 @@ return [
 ------
 
 ## Migration
+
+#### From 4.1.2 to 5.0.0
+
+There were some backward incompatible changes made to the configuration file. Please review the updated config file for changes and make corresponding updates to ensure compatibility.
+
+- `headings` removed from config file and moved to `toolbars.toolbar-1.options`.
+- `headings` method removed from `CkEditor` field.
+- `toolbar` property of config file moved to `toolbars.toolbar-1`.
+- the arguments of `toolbar` method have changed. now you can pass toolbar name as first argument and toolbar items as second argument.
 
 #### From 3.1.1 to 3.2.0
 - Please add `removeFormat` to `toolbar.items` in config file ([config/nova-ckeditor.php](https://github.com/mostafaznv/nova-ckeditor/blob/master/config/nova-ckeditor.php)).

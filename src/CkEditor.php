@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\Field;
 use Mostafaznv\Larupload\Traits\Larupload;
 
 /**
- * @method static static make(mixed $name, string|\Closure|callable|object|null $attribute = null, callable|null $resolveCallback = null, string $toolbar = 'toolbar')
+ * @method static static make(mixed $name, string|\Closure|callable|object|null $attribute = null, callable|null $resolveCallback = null)
  */
 class CkEditor extends Field
 {
@@ -26,6 +26,12 @@ class CkEditor extends Field
      * @var array $toolbar
      */
     public array $toolbar;
+
+    /**
+     * Specifies the toolbar options
+     * @var array
+     */
+    public array $toolbarOptions;
 
     /**
      * Specifies the editor default height in pixels
@@ -97,90 +103,29 @@ class CkEditor extends Field
      */
     public string $videoModel = '';
 
-    /**
-     * Heading options
-     *
-     * @var array
-     */
-    public array $headings = [];
 
-
-    public function __construct($name, $attribute = null, callable $resolveCallback = null, string $toolbar = 'toolbar')
+    public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback);
 
-        $config = config('nova-ckeditor');
+        $this->prepareToolbar(
+            config('nova-ckeditor.toolbars.default')
+        );
 
-        $defaultTextPartLanguage = [
-            ['title' => 'Farsi', 'languageCode' => 'fa'],
-            ['title' => 'English', 'languageCode' => 'en']
-        ];
-
-        $this->toolbar = $config[$toolbar]['items'];
-        $this->height = $config[$toolbar]['height'];
-        $this->imageBrowser = $config[$toolbar]['browser']['image'];
-        $this->videoBrowser = $config[$toolbar]['browser']['video'];
-        $this->snippetBrowser = $this->prepareSnippets($config[$toolbar]['snippets']);
-        $this->contentLanguage = $config[$toolbar]['content-lang'];
-        $this->textPartLanguage = $config[$toolbar]['text-part-language'] ?? $defaultTextPartLanguage;
-        $this->uiLanguage = $config[$toolbar]['ui-language']['name'] ?? 'en';
-        $this->shouldNotGroupWhenFull = $config[$toolbar]['should-not-group-when-full'];
-        $this->videoModel = $config['video-model'];
-        $this->headings = $config[$toolbar]['headings'] ?? $config['headings'] ?? [
-            [
-                'model' => 'paragraph',
-                'title' => 'Paragraph',
-                'class' => 'ck-heading_paragraph',
-            ],
-            [
-                'model' => 'heading1',
-                'view'  => 'h1',
-                'title' => 'Heading 1',
-                'class' => 'ck-heading_heading1',
-            ],
-            [
-                'model' => 'heading2',
-                'view'  => 'h2',
-                'title' => 'Heading 2',
-                'class' => 'ck-heading_heading2',
-            ],
-            [
-                'model' => 'heading3',
-                'view'  => 'h3',
-                'title' => 'Heading 3',
-                'class' => 'ck-heading_heading3',
-            ],
-            [
-                'model' => 'heading4',
-                'view'  => 'h4',
-                'title' => 'Heading 4',
-                'class' => 'ck-heading_heading4',
-            ],
-            [
-                'model' => 'heading5',
-                'view'  => 'h5',
-                'title' => 'Heading 5',
-                'class' => 'ck-heading_heading5',
-            ],
-            [
-                'model' => 'heading6',
-                'view'  => 'h6',
-                'title' => 'Heading 6',
-                'class' => 'ck-heading_heading6',
-            ]
-        ];
+        $this->videoModel = config('nova-ckeditor.video-model');
     }
 
 
     /**
-     * Set the toolbar item layout
+     * Set the toolbar name and items
      *
-     * @param array $items
+     * @param string $name
+     * @param array|null $items
      * @return $this
      */
-    public function toolbar(array $items): self
+    public function toolbar(string $name, array $items = null): self
     {
-        $this->toolbar = $items;
+        $this->prepareToolbar($name, $items);
 
         return $this;
     }
@@ -277,19 +222,6 @@ class CkEditor extends Field
     }
 
     /**
-     * Add heading options.
-     *
-     * @param array $headings
-     * @return $this
-     */
-    public function headings(array $headings = []): self
-    {
-        $this->headings = $headings;
-
-        return $this;
-    }
-
-    /**
      * Enable Snippets Browser
      *
      * @param array $snippets
@@ -314,7 +246,7 @@ class CkEditor extends Field
             'imageBrowser'           => $this->imageBrowser,
             'videoBrowser'           => $this->videoBrowser,
             'toolbar'                => $this->toolbar,
-            'toolbarOptions'         => config('nova-ckeditor.toolbar.options'),
+            'toolbarOptions'         => $this->toolbarOptions,
             'height'                 => $this->height,
             'indexLimit'             => $this->indexLimit,
             'contentLanguage'        => $this->contentLanguage,
@@ -323,7 +255,6 @@ class CkEditor extends Field
             'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait' => $this->hasLaruploadTrait(),
-            'headings'               => $this->headings,
         ]);
     }
 
@@ -357,5 +288,25 @@ class CkEditor extends Field
         }
 
         return $snippets;
+    }
+
+    private function prepareToolbar(string $toolbar, array $items = null): void
+    {
+        $toolbar = config('nova-ckeditor.toolbars.' . $toolbar);
+        $defaultTextPartLanguage = [
+            ['title' => 'Farsi', 'languageCode' => 'fa'],
+            ['title' => 'English', 'languageCode' => 'en']
+        ];
+
+        $this->toolbar = is_null($items) ? $toolbar['items'] : $items;
+        $this->toolbarOptions = $toolbar['options'];
+        $this->height = $toolbar['height'];
+        $this->imageBrowser = $toolbar['browser']['image'];
+        $this->videoBrowser = $toolbar['browser']['video'];
+        $this->snippetBrowser = $this->prepareSnippets($toolbar['snippets']);
+        $this->contentLanguage = $toolbar['content-lang'];
+        $this->textPartLanguage = $toolbar['text-part-language'] ?? $defaultTextPartLanguage;
+        $this->uiLanguage = $toolbar['ui-language']['name'] ?? 'en';
+        $this->shouldNotGroupWhenFull = $toolbar['should-not-group-when-full'];
     }
 }
