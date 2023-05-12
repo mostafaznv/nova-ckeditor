@@ -6,6 +6,9 @@ use Laravel\Nova\Fields\Expandable;
 use Laravel\Nova\Fields\Field;
 use Mostafaznv\Larupload\Traits\Larupload;
 
+/**
+ * @method static static make(mixed $name, string|\Closure|callable|object|null $attribute = null, callable|null $resolveCallback = null, string $toolbar = 'toolbar')
+ */
 class CkEditor extends Field
 {
     use Expandable;
@@ -102,7 +105,7 @@ class CkEditor extends Field
     public array $headings = [];
 
 
-    public function __construct($name, $attribute = null, callable $resolveCallback = null)
+    public function __construct($name, $attribute = null, callable $resolveCallback = null, string $toolbar = 'toolbar')
     {
         parent::__construct($name, $attribute, $resolveCallback);
 
@@ -113,17 +116,59 @@ class CkEditor extends Field
             ['title' => 'English', 'languageCode' => 'en']
         ];
 
-        $this->toolbar = $config['toolbar']['items'];
-        $this->height = $config['toolbar']['height'];
-        $this->imageBrowser = $config['toolbar']['browser']['image'];
-        $this->videoBrowser = $config['toolbar']['browser']['video'];
-        $this->snippetBrowser = $this->prepareSnippets($config['toolbar']['snippets']);
-        $this->contentLanguage = $config['toolbar']['content-lang'];
-        $this->textPartLanguage = $config['toolbar']['text-part-language'] ?? $defaultTextPartLanguage;
-        $this->uiLanguage = $config['toolbar']['ui-language']['name'] ?? 'en';
-        $this->shouldNotGroupWhenFull = $config['toolbar']['should-not-group-when-full'];
+        $this->toolbar = $config[$toolbar]['items'];
+        $this->height = $config[$toolbar]['height'];
+        $this->imageBrowser = $config[$toolbar]['browser']['image'];
+        $this->videoBrowser = $config[$toolbar]['browser']['video'];
+        $this->snippetBrowser = $this->prepareSnippets($config[$toolbar]['snippets']);
+        $this->contentLanguage = $config[$toolbar]['content-lang'];
+        $this->textPartLanguage = $config[$toolbar]['text-part-language'] ?? $defaultTextPartLanguage;
+        $this->uiLanguage = $config[$toolbar]['ui-language']['name'] ?? 'en';
+        $this->shouldNotGroupWhenFull = $config[$toolbar]['should-not-group-when-full'];
         $this->videoModel = $config['video-model'];
-        $this->headings = $config['headings'];
+        $this->headings = $config[$toolbar]['headings'] ?? $config['headings'] ?? [
+            [
+                'model' => 'paragraph',
+                'title' => 'Paragraph',
+                'class' => 'ck-heading_paragraph',
+            ],
+            [
+                'model' => 'heading1',
+                'view'  => 'h1',
+                'title' => 'Heading 1',
+                'class' => 'ck-heading_heading1',
+            ],
+            [
+                'model' => 'heading2',
+                'view'  => 'h2',
+                'title' => 'Heading 2',
+                'class' => 'ck-heading_heading2',
+            ],
+            [
+                'model' => 'heading3',
+                'view'  => 'h3',
+                'title' => 'Heading 3',
+                'class' => 'ck-heading_heading3',
+            ],
+            [
+                'model' => 'heading4',
+                'view'  => 'h4',
+                'title' => 'Heading 4',
+                'class' => 'ck-heading_heading4',
+            ],
+            [
+                'model' => 'heading5',
+                'view'  => 'h5',
+                'title' => 'Heading 5',
+                'class' => 'ck-heading_heading5',
+            ],
+            [
+                'model' => 'heading6',
+                'view'  => 'h6',
+                'title' => 'Heading 6',
+                'class' => 'ck-heading_heading6',
+            ]
+        ];
     }
 
 
