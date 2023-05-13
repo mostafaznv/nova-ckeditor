@@ -109,7 +109,7 @@ export default {
         const toolbarOptions = this.initToolbarOptions(this.field.toolbarOptions)
         const headings = toolbarOptions.headings
 
-        // delete toolbarOptions.headings
+        delete toolbarOptions.headings
 
         const config = {
             attribute: this.$options[this.editorUUID],
