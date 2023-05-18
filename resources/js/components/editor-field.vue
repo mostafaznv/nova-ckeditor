@@ -1,13 +1,13 @@
 <template>
-    <default-field :field="field" :errors="errors" :full-width-content="true">
+    <default-field :field="currentField" :errors="errors" :full-width-content="true">
         <template #field>
-            <textarea ref="editor" class="hidden" :id="field.attribute" :class="errorClasses" :value="value" />
+            <textarea ref="editor" class="hidden" :id="currentField.attribute" :class="errorClasses" :value="value" />
 
-            <p v-if="field.helpText" v-html="field.helpText" class="help-text help-text mt-2" />
+            <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
 
             <media-browser @select="$options[editorName].execute('imageBrowser', $event)" type="image" :field-key="$options[editorUUID] + '-image'" :multiple="true" />
-            <media-browser @select="$options[editorName].execute('videoBrowser', $event)" type="video" :field-key="$options[editorUUID] + '-video'" :multiple="true" :has-larupload-trait="field.videoHasLaruploadTrait" />
-            <snippet-browser :field-key="$options[editorUUID]" :snippets="field.snippetBrowser" />
+            <media-browser @select="$options[editorName].execute('videoBrowser', $event)" type="video" :field-key="$options[editorUUID] + '-video'" :multiple="true" :has-larupload-trait="currentField.videoHasLaruploadTrait" />
+            <snippet-browser :field-key="$options[editorUUID]" :snippets="currentField.snippetBrowser" />
         </template>
     </default-field>
 </template>
@@ -17,24 +17,107 @@ import CkEditor from '../ckeditor/ckeditor'
 import SnippetBrowser from "./snippet-browser"
 import MediaBrowser from "./media-browser"
 import HasUUID from "./mixins/hasUUID"
-import {FormField, HandlesValidationErrors} from 'laravel-nova'
+import {DependentFormField, HandlesValidationErrors} from 'laravel-nova'
 import debounce from 'lodash/debounce'
 import RegexParser from 'regex-parser'
 
 export default {
-    mixins: [FormField, HandlesValidationErrors, HasUUID],
+    mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
     props: ['resourceName', 'resourceId', 'field', 'toolbar'],
     components: {SnippetBrowser, MediaBrowser},
+    data() {
+        return {
+            mounted: false
+        }
+    },
     computed: {
         editorName() {
-            const attribute = this.field.attribute.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
+            const attribute = this.currentField.attribute.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
 
             return attribute + 'Editor'
         }
     },
+    watch: {
+        value(value) {
+            this.emitFieldValueChange(this.currentField.attribute, value || '')
+        },
+
+        currentlyIsVisible(status) {
+            if (status && this.mounted) {
+                setTimeout(this.createCkEditor, 5)
+            }
+        }
+    },
     methods: {
+        createCkEditor() {
+            const toolbarOptions = this.initToolbarOptions(this.currentField.toolbarOptions)
+            const headings = toolbarOptions.headings
+
+            delete toolbarOptions.headings
+
+            const config = {
+                attribute: this.$options[this.editorUUID],
+                imageBrowser: this.currentField.imageBrowser,
+                videoBrowser: this.currentField.videoBrowser,
+                snippetBrowser: this.currentField.snippetBrowser,
+                isReadOnly: this.currentField.readonly,
+                language: {
+                    ui: this.currentField.uiLanguage,
+                    content: this.currentField.contentLanguage,
+                    textPartLanguage: this.currentField.textPartLanguage
+                },
+                heading: {
+                    options: headings,
+                },
+                toolbar: {
+                    items: this.currentField.toolbar,
+                    shouldNotGroupWhenFull: this.currentField.shouldNotGroupWhenFull
+                },
+                ...toolbarOptions
+            }
+
+            CkEditor.create(this.$refs.editor, config)
+                .then((editor) => {
+                    const {editing, model} = this.$options[this.editorName] = editor
+
+                    // prevent question-mark & slash from triggering nova search
+                    editing.view.document.on('keydown', this.handleEditorEvents, {
+                        priority: 'highest'
+                    })
+
+                    // sync model changes to vue-model
+                    model.document.on('change', debounce(this.handleEditorSync, 100), {
+                        priority: 'lowest'
+                    })
+
+                    // set the height of the editor when editing
+                    if (this.currentField.height > 1) {
+                        editor.editing.view.change(writer => {
+                            writer.setStyle('height', `${this.currentField.height}px`, editor.editing.view.document.getRoot());
+                        });
+                    }
+
+                    if (this.currentField.readonly) {
+                        editor.enableReadOnlyMode(this.$options[this.editorUUID]);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e)
+                    Nova.error(e.toString())
+                })
+        },
+
+        destroyCkEditor() {
+            if (this.$options[this.editorName]) {
+                this.$options[this.editorName]
+                    .destroy()
+                    .then(() => this.$options[this.editorName] = null)
+                    .catch((e) => Nova.error(e.toString()))
+            }
+        },
+
         setInitialValue() {
-            this.value = this.field.value || ''
+            this.value = this.currentField.value || ''
         },
 
         initToolbarOptions(toolbarOptions) {
@@ -79,7 +162,9 @@ export default {
         },
 
         fill(formData) {
-            formData.append(this.field.attribute, this.value || '')
+            if (this.currentlyIsVisible) {
+                formData.append(this.currentField.attribute, this.value || '')
+            }
         },
 
         handleChange(value) {
@@ -106,67 +191,14 @@ export default {
         this.setInitialValue()
     },
     mounted() {
-        const toolbarOptions = this.initToolbarOptions(this.field.toolbarOptions)
-        const headings = toolbarOptions.headings
-
-        delete toolbarOptions.headings
-
-        const config = {
-            attribute: this.$options[this.editorUUID],
-            imageBrowser: this.field.imageBrowser,
-            videoBrowser: this.field.videoBrowser,
-            snippetBrowser: this.field.snippetBrowser,
-            isReadOnly: this.field.readonly,
-            language: {
-                ui: this.field.uiLanguage,
-                content: this.field.contentLanguage,
-                textPartLanguage: this.field.textPartLanguage
-            },
-            heading: {
-                options: headings,
-            },
-            toolbar: {
-                items: this.field.toolbar,
-                shouldNotGroupWhenFull: this.field.shouldNotGroupWhenFull
-            },
-            ...toolbarOptions
+        if (this.currentlyIsVisible) {
+            this.createCkEditor()
         }
 
-        CkEditor.create(this.$refs.editor, config)
-            .then((editor) => {
-                const {editing, model} = this.$options[this.editorName] = editor
-
-                // prevent question-mark & slash from triggering nova search
-                editing.view.document.on('keydown', this.handleEditorEvents, {
-                    priority: 'highest'
-                })
-
-                // sync model changes to vue-model
-                model.document.on('change', debounce(this.handleEditorSync, 100), {
-                    priority: 'lowest'
-                })
-
-                // set the height of the editor when editing
-                if (this.field.height > 1) {
-                    editor.editing.view.change(writer => {
-                        writer.setStyle('height', `${this.field.height}px`, editor.editing.view.document.getRoot());
-                    });
-                }
-
-                if (this.field.readonly) {
-                    editor.enableReadOnlyMode(this.$options[this.editorUUID]);
-                }
-            })
-            .catch((e) => {
-                this.$toasted.show(e.toString(), {type: 'error'})
-            })
+        this.mounted = true
     },
     beforeUnmount() {
-        if (this.$options[this.editorName]) {
-            this.$options[this.editorName].destroy()
-                .then(() => this.$options[this.editorName] = null)
-                .catch((e) => this.$toasted.show(e.toString(), {type: 'error'}))
-        }
+        this.destroyCkEditor()
     }
 }
 </script>

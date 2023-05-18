@@ -4,6 +4,7 @@ namespace Mostafaznv\NovaCkEditor;
 
 use Laravel\Nova\Fields\Expandable;
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Fields\SupportsDependentFields;
 use Mostafaznv\Larupload\Traits\Larupload;
 
 /**
@@ -11,7 +12,7 @@ use Mostafaznv\Larupload\Traits\Larupload;
  */
 class CkEditor extends Field
 {
-    use Expandable;
+    use SupportsDependentFields, Expandable;
 
     /**
      * The field's component
