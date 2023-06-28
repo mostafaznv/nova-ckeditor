@@ -29,9 +29,7 @@ class FieldServiceProvider extends ServiceProvider
             Nova::provideToScript(['ckeditor' => config('nova-ckeditor', [])]);
             Nova::style('field-ckeditor', __DIR__ . '/../dist/css/field.css');
 
-            if ($langScript = config('nova-ckeditor.toolbar.ui-language.script')) {
-                Nova::script('ckeditor-lang', $langScript);
-            }
+            $this->registerUiLanguageScripts();
 
             // allow hot reloading
             if (App::environment('local') && file_exists(__DIR__ . '/../dist/hot')) {
@@ -67,6 +65,23 @@ class FieldServiceProvider extends ServiceProvider
             __DIR__ . '/../stubs/resources/Image.stub' => app_path('Nova/Resources/Image.php'),
             __DIR__ . '/../stubs/resources/Video.stub' => app_path('Nova/Resources/Video.php')
         ], 'nova-ckeditor-stubs');
+    }
+
+    private function registerUiLanguageScripts(): void {
+        $toolbars = config('nova-ckeditor.toolbars');
+        $scripts = [];
+
+        foreach ($toolbars as $key => $toolbar) {
+            if (isset($toolbars[$key]['ui-language']['script'])) {
+                $scripts[] = $toolbars[$key]['ui-language']['script'];
+            }
+        }
+
+        $scripts = array_unique($scripts);
+
+        foreach ($scripts as $script) {
+            Nova::script('ckeditor-lang', $script);
+        }
     }
 
     private function isLegacy(): bool
