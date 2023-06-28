@@ -60,6 +60,7 @@ export default {
                 imageBrowser: this.currentField.imageBrowser,
                 videoBrowser: this.currentField.videoBrowser,
                 snippetBrowser: this.currentField.snippetBrowser,
+                htmlSupport: this.normalizeHtmlSupportItems(this.currentField.htmlSupport),
                 isReadOnly: this.currentField.readonly,
                 language: {
                     ui: this.currentField.uiLanguage,
@@ -159,6 +160,53 @@ export default {
             }
 
             return providers
+        },
+
+        normalizeHtmlSupportItems(htmlSupport) {
+            if (htmlSupport) {
+                if (htmlSupport.allow) {
+                    htmlSupport.allow.map(item => {
+                        if (item.name) {
+                            item.name = this.stringToRegex(item.name)
+                        }
+
+                        return item
+                    })
+                }
+                else {
+                    htmlSupport.allow = []
+                }
+
+                if (htmlSupport.disallow) {
+                    htmlSupport.disallow.map(item => {
+                        if (item.name) {
+                            item.name = this.stringToRegex(item.name)
+                        }
+
+                        return item
+                    })
+                }
+                else {
+                    htmlSupport.disallow = []
+                }
+
+                return htmlSupport
+            }
+
+            return {
+                allow: [],
+                disallow: []
+            }
+        },
+
+        stringToRegex(string) {
+            if (typeof string === 'string' && string.startsWith('/') && string.endsWith('/')) {
+                const regexPattern = string.slice(1, -1)
+
+                return new RegExp(regexPattern)
+            }
+
+            return string
         },
 
         fill(formData) {

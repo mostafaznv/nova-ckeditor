@@ -21,6 +21,7 @@
         "@ckeditor/ckeditor5-heading": "^35.0.0",
         "@ckeditor/ckeditor5-horizontal-line": "^35.0.0",
         "@ckeditor/ckeditor5-html-embed": "^35.0.0",
+        "@ckeditor/ckeditor5-html-support": "^35.0.0",
         "@ckeditor/ckeditor5-image": "^35.0.0",
         "@ckeditor/ckeditor5-indent": "^35.0.0",
         "@ckeditor/ckeditor5-link": "^35.0.0",

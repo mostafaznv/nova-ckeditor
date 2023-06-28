@@ -30,6 +30,7 @@ class CkEditor extends Field
 
     /**
      * Specifies the toolbar options
+     *
      * @var array
      */
     public array $toolbarOptions;
@@ -61,6 +62,13 @@ class CkEditor extends Field
      * @var array
      */
     public array $textPartLanguage;
+
+    /**
+     * General HTML Support
+     *
+     * @var array
+     */
+    public array $htmlSupport;
 
     /**
      * UI Language
@@ -184,6 +192,19 @@ class CkEditor extends Field
     }
 
     /**
+     * Set General HTML Support
+     *
+     * @param array $htmlSupport
+     * @return $this
+     */
+    public function htmlSupport(array $htmlSupport): self
+    {
+        $this->htmlSupport = $htmlSupport;
+
+        return $this;
+    }
+
+    /**
      * Set Should Not Group When Full
      *
      * @param bool $status
@@ -252,6 +273,7 @@ class CkEditor extends Field
             'indexLimit'             => $this->indexLimit,
             'contentLanguage'        => $this->contentLanguage,
             'textPartLanguage'       => $this->textPartLanguage,
+            'htmlSupport'            => $this->htmlSupport,
             'uiLanguage'             => $this->uiLanguage,
             'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
@@ -294,9 +316,15 @@ class CkEditor extends Field
     private function prepareToolbar(string $toolbar, array $items = null): void
     {
         $toolbar = config('nova-ckeditor.toolbars.' . $toolbar);
+
         $defaultTextPartLanguage = [
             ['title' => 'Farsi', 'languageCode' => 'fa'],
             ['title' => 'English', 'languageCode' => 'en']
+        ];
+
+        $defaultHtmlSupport = [
+            'allow'    => [],
+            'disallow' => []
         ];
 
         $this->toolbar = is_null($items) ? $toolbar['items'] : $items;
@@ -307,6 +335,7 @@ class CkEditor extends Field
         $this->snippetBrowser = $this->prepareSnippets($toolbar['snippets']);
         $this->contentLanguage = $toolbar['content-lang'];
         $this->textPartLanguage = $toolbar['text-part-language'] ?? $defaultTextPartLanguage;
+        $this->htmlSupport = $toolbar['html-support'] ?? $defaultHtmlSupport;
         $this->uiLanguage = $toolbar['ui-language']['name'] ?? 'en';
         $this->shouldNotGroupWhenFull = $toolbar['should-not-group-when-full'];
     }

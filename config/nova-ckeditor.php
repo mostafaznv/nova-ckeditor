@@ -93,6 +93,26 @@ return [
                 ['title' => 'English', 'languageCode' => 'en']
             ],
 
+            /*
+             * General HTML Support
+             *
+             * @see https://ckeditor.com/docs/ckeditor5/latest/features/html/general-html-support.html#configuration
+             */
+
+            'html-support' => [
+                'allow' => [
+                    [
+                        'name'   => 'div',
+                        'classes' => true,
+                    ],
+                    [
+                        'name' => '/^(div|section|article)$/'
+                    ]
+                ],
+
+                'disallow' => []
+            ],
+
             'should-not-group-when-full' => false,
 
             'browser' => [

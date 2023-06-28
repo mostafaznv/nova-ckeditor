@@ -7,5 +7,9 @@ export default {
                 hasChanged: false
             }
         }
+    },
+    htmlSupport: {
+        allow: [],
+        disallow: []
     }
 }
