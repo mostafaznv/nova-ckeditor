@@ -1,26 +1,28 @@
 <template>
     <modal v-model="isVisible" ref="modal" :title="__('Snippets')">
-        <div class="flex min-h-full">
-            <div class="w-1/5">
-                <div
-                    v-for="(snippet, key) in snippets"
-                    :key="key"
-                    @click="selected = snippet.html"
-                    class="snippet border-l-4 p-3 cursor-pointer"
-                    :class="{'snippet-selected': selected === snippet.html}">
-                    <strong>{{ __(snippet.name) }}</strong>
+        <div class="relative flex min-h-full bg-white max-h-full overflow-y-scroll">
+            <div class="w-1/5 p-sticky top-0 min-h-full bg-gray-100">
+                <div class="sidebar-group">
+                    <div
+                        v-for="(snippet, key) in snippets"
+                        :key="key"
+                        @click="selected = snippet.html"
+                        class="snippet border-l-4 p-3 cursor-pointer"
+                        :class="{'snippet-selected': selected === snippet.html}">
+                        <strong>{{ __(snippet.name) }}</strong>
+                    </div>
                 </div>
             </div>
 
-            <div class="w-4/5 bg-white min-h-full p-8 relative">
+            <div class="w-4/5 min-h-full p-8 relative">
                 <div v-html="selected" class="snippet-content" />
             </div>
         </div>
 
-        <template v-slot:footer>
+        <template #footer>
             <div class="flex p-2">
                 <div>
-                    <button :disabled="!selected" @click.prevent="insert(selected)" class="btn btn-default btn-primary items-center relative mr-3">
+                    <button :disabled="!selected" @click.prevent="insert(selected)" class="bg h-9 shadow bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded inline-flex items-center justify-center px-3 shadow relative">
                         <span>{{ __('Insert Snippet') }}</span>
                     </button>
                 </div>
@@ -85,15 +87,6 @@ export default {
 </script>
 
 <style lang="sass">
-.snippet
-    color: white
-    border-color: gray
-    font-size: 14px
-
-    &:hover:not(.snippet-selected)
-        background: rgba(100, 100, 100, 0.3)
-        border-color: #5f5f5f
-
 .snippet-content
     border-color: #999999
     @import "./../../sass/figures.sass"

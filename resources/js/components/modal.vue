@@ -1,30 +1,41 @@
 <template>
     <transition name="editorModal" mode="out-in">
-        <div v-if="value" role="dialog" class="media-modal fixed pin z-50 flex flex-col shadow" :class="fullscreen ? 'w-screen h-screen' :  'max-w-2x max-h-2x'">
-            <div class="flex-0 flex items-center border-b bg-logo pl-2 pr-2 py-2">
+        <div
+            v-if="modelValue"
+            role="dialog"
+            class="modal select-none fixed pin z-50 overflow-x-hidden overflow-y-auto flex flex-col bg-gray-100 dark:bg-gray-700"
+            :class="{
+                'full-screen-modal w-screen h-screen top-0 left-0 w-full': fullscreen,
+                'centered-modal rounded-lg shadow-lg border': !fullscreen
+            }"
+        >
+            <div class="flex-0 flex items-center px-3 py-2 bg-white border-b border-primary-10%">
                 <div v-if="title" class="flex-0 text-gray-400 pl-2">
-                    <h3 class="self-center text-white">{{ title }}</h3>
+                    <h2 class="self-center text-primary-600 text-base font-semibold">{{ title }}</h2>
                 </div>
 
                 <div class="flex-1 px-1 items-center">
-                    <slot name="header"></slot>
+                    <slot name="header" />
                 </div>
 
                 <div class="flex-0 flex items-center" :class="{'pr-2': title}">
-                    <button @click.prevent="$emit('input',false)" class="h-8 w-8 m-0 cursor-pointer text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill="currentColor" d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                    <button @click.prevent="$emit('update:modelValue',false)" class="h-8 w-8 m-0 cursor-pointer text-primary-400">
+                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
                         </svg>
                     </button>
                 </div>
             </div>
 
-            <div class="flex-1 w-full bg-grad-sidebar" style="overflow-y: scroll">
-                <slot name="default"></slot>
+            <div
+                class="flex-1 w-full bg-grad-sidebar modal-content"
+                :style="{'overflow-y': contentNoOverflow ? 'hidden' : 'scroll'}"
+            >
+                <slot name="default" />
             </div>
 
-            <div class="flex-0 w-full bg-logo border-t p-2" v-if="hasSlot('footer')">
-                <slot name="footer"></slot>
+            <div class="flex-0 w-full bg-logo border-t border-gray-300 p-2" v-if="hasSlot('footer')">
+                <slot name="footer" />
             </div>
         </div>
     </transition>
@@ -34,12 +45,13 @@
 export default {
     props: {
         title: {type: String, default: null},
-        value: {type: Boolean, default: false},
+        modelValue: {type: Boolean, default: false},
         scrollLock: {type: Boolean, default: true},
         fullscreen: {type: Boolean, default: false},
+        contentNoOverflow: {type: Boolean, default: false},
     },
     watch: {
-        value: {
+        modelValue: {
             immediate: true,
             handler(value) {
                 if (value) {
@@ -62,7 +74,7 @@ export default {
     methods: {
         onKeyDownEsc(event) {
             if (event.key === "Escape") {
-                this.$emit('input', false)
+                this.$emit('update:modelValue', false)
             }
         },
 
@@ -87,5 +99,15 @@ export default {
 html.modal-open,
 html.modal-open body {
     overflow: hidden !important;
+}
+
+.modal {
+    &.centered-modal {
+        position: fixed;
+        width: 80%;
+        height: 70%;
+        left: 10%;
+        top: 15%;
+    }
 }
 </style>

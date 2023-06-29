@@ -4,7 +4,6 @@
             viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
             class="tronFilter"
-            :style="{filter: `drop-shadow(0 0px 3px ${color})`}"
         >
             <circle cx="50" cy="50" r="45" :stroke="color" />
         </svg>
@@ -17,7 +16,7 @@ export default {
     props: {
         color: {
             required: false,
-            default: () => 'white'
+            default: () => 'black'
         }
     }
 }

@@ -7,7 +7,16 @@ export default {
          */
         resourceToObject({fields}) {
             return fields.reduce((obj, item) => {
-                obj[item.attribute] = item.value
+                if (item.value) {
+                    obj[item.attribute] = item.value
+                }
+                else if (item.displayedAs) {
+                    obj[item.attribute] = item.displayedAs
+                }
+                else {
+                    obj[item.attribute] = null
+                }
+
                 if (item.hasOwnProperty('thumbnailUrl')) {
                     obj.url = item.thumbnailUrl
                 }
@@ -68,9 +77,7 @@ export default {
          * @return void
          */
         handleResourceError(error) {
-            this.$toasted.show(this.__(':message', {message: error}), {
-                type: 'error'
-            })
+            Nova.error(this.__(':message', {message: error}))
         }
     }
 }

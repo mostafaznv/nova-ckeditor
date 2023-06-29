@@ -1,6 +1,6 @@
 <template>
     <default-field :field="field" :errors="errors" :full-width-content="true">
-        <template slot="field">
+        <template #field>
             <textarea ref="editor" class="hidden" :id="field.attribute" :class="errorClasses" :value="value" />
 
             <media-browser @select="$options.editor.execute('imageBrowser', $event)" type="image" :field-key="$options.uuid + '-image'" :multiple="true" />
@@ -83,14 +83,15 @@ export default {
                 }
             })
             .catch((e) => {
-                this.$toasted.show(e.toString(), {type: 'error'})
+                console.log(e)
+                Nova.error(e.toString())
             })
     },
     beforeDestroy() {
         if (this.$options.editor) {
             this.$options.editor.destroy()
                 .then(() => this.$options.editor = null)
-                .catch((e) => this.$toasted.show(e.toString(), {type: 'error'}))
+                .catch((e) => Nova.error(e.toString()))
         }
     },
 }
