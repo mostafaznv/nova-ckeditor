@@ -22,6 +22,7 @@ Includes custom written plugins for media (video and image), snippet and publish
 ## Requirements
 - PHP 7.4 or higher
 - Laravel 8.* or higher
+- Laravel Nova 4.26.* or higher
 - FFMPEG (required for larupload usage)
 
 <br><br>
