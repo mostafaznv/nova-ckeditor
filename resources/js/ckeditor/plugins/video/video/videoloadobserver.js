@@ -22,4 +22,8 @@ export default class VideoLoadObserver extends Observer {
             this.document.fire('videoLoaded', domEvent);
         }
     }
+
+    stopObserving(domRoot) {
+        this.stopListening(domRoot);
+    }
 }
