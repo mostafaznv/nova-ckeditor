@@ -52,8 +52,10 @@ export default {
         createCkEditor() {
             const toolbarOptions = this.initToolbarOptions(this.currentField.toolbarOptions)
             const headings = toolbarOptions.headings
+            const image = toolbarOptions.image ?? CkEditor.defaultConfig.image
 
             delete toolbarOptions.headings
+            delete toolbarOptions.image
 
             const config = {
                 attribute: this.$options[this.editorUUID],
@@ -62,6 +64,7 @@ export default {
                 snippetBrowser: this.currentField.snippetBrowser,
                 htmlSupport: this.normalizeHtmlSupportItems(this.currentField.htmlSupport),
                 isReadOnly: this.currentField.readonly,
+                image: image,
                 language: {
                     ui: this.currentField.uiLanguage,
                     content: this.currentField.contentLanguage,
