@@ -4,9 +4,7 @@ description: max-quality
 
 # Max Image Quality
 
-| Property Name | Type | Default |
-| ------------- | ---- | ------- |
-| max-quality   | int  | 75      |
+<table><thead><tr><th>Property Name</th><th width="214.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>max-quality</td><td>int</td><td>75</td></tr></tbody></table>
 
 The `max-quality` configuration option allows you to specify the maximum <mark style="color:red;">image</mark> output quality for image processing within the CKEditor field. This setting determines the level of compression applied to images when they are processed and resized.
 

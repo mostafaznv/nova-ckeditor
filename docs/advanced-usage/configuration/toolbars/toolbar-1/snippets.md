@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.snippets
 
 # Snippets
 
-| Property Name               | Type  | Default |
-| --------------------------- | ----- | ------- |
-| toolbars.toolbar-1.snippets | array |         |
+<table><thead><tr><th>Property Name</th><th width="197.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.snippets</td><td>array</td><td></td></tr></tbody></table>
 
 This option allows you to define and customize the snippets available within the toolbar. Snippets are pre-defined content blocks that can be easily inserted into the CKEditor field.
 

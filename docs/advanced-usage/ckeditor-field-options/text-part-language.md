@@ -4,7 +4,7 @@ description: textPartLanguage
 
 # Text Part Language
 
-<table><thead><tr><th>Argument</th><th>Type</th><th data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>languages</td><td>array</td><td>true</td><td></td></tr></tbody></table>
+<table><thead><tr><th>Argument</th><th>Type</th><th width="136" data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>languages</td><td>array</td><td>true</td><td></td></tr></tbody></table>
 
 This method enables you to mark the language of selected text fragments, making it convenient to work with multilingual content. It ensures that user agents, such as graphical browsers and screen readers, correctly present and interpret the content written in multiple languages.
 

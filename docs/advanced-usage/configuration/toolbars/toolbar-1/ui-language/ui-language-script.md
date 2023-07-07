@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.ui-language.script
 
 # UI Language Script
 
-| Property Name                         | Type   | Default |
-| ------------------------------------- | ------ | ------- |
-| toolbars.toolbar-1.ui-language.script | string | null    |
+<table><thead><tr><th width="342">Property Name</th><th width="173.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.ui-language.script</td><td>string</td><td>null</td></tr></tbody></table>
 
 This option allows you to specify the URL of the language file to be used for the CKEditor's user interface (UI) within Toolbar in the NovaCkeditor field. This option provides the ability to load a language-specific JavaScript file that contains translations for the UI elements.
 

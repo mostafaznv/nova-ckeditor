@@ -4,7 +4,7 @@ description: snippets
 
 # Snippets
 
-<table><thead><tr><th>Argument</th><th>Type</th><th data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>snippets</td><td>array</td><td>true</td><td></td></tr></tbody></table>
+<table><thead><tr><th>Argument</th><th width="153">Type</th><th width="149" data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>snippets</td><td>array</td><td>true</td><td></td></tr></tbody></table>
 
 This method allows you to set snippet items within the CKEditor field, providing a convenient way to insert predefined content or code snippets into the editor.
 

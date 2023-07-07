@@ -4,7 +4,7 @@ description: contentLanguage
 
 # Content Language
 
-<table><thead><tr><th>Argument</th><th>Type</th><th data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>lang</td><td>string</td><td>true</td><td></td></tr></tbody></table>
+<table><thead><tr><th>Argument</th><th width="141">Type</th><th width="149" data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>lang</td><td>string</td><td>true</td><td></td></tr></tbody></table>
 
 This method allows you to define the language of the editor's content, enabling you to set the text direction (RTL or LTR) based on your requirements.
 

@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.height
 
 # Height
 
-| Property Name             | Type | Default |
-| ------------------------- | ---- | ------- |
-| toolbars.toolbar-1.height | int  | 400     |
+<table><thead><tr><th>Property Name</th><th width="202.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.height</td><td>int</td><td>400</td></tr></tbody></table>
 
 The `toolbars.toolbar-1.height` configuration option allows you to specify the height of the CKEditor field within Toolbar 1. This option determines the vertical size of the editor's content area.
 

@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.items
 
 # Items
 
-| Property Name            | Type  | Default |
-| ------------------------ | ----- | ------- |
-| toolbars.toolbar-1.items | array |         |
+<table><thead><tr><th>Property Name</th><th width="188.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.items</td><td>array</td><td></td></tr></tbody></table>
 
 This option allows you to define the toolbar buttons within the toolbar. This option provides flexibility to remove or rearrange the toolbar buttons according to your specific requirements.
 

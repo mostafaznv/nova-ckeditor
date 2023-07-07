@@ -4,9 +4,7 @@ description: video-model
 
 # Video Model
 
-| Property Name | Type   | Default                                            |
-| ------------- | ------ | -------------------------------------------------- |
-| video-model   | string | <mark style="color:red;">`App\Models\Video`</mark> |
+<table><thead><tr><th>Property Name</th><th width="211.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>video-model</td><td>string</td><td><mark style="color:red;"><code>App\Models\Video</code></mark></td></tr></tbody></table>
 
 The `video-model` configuration option allows you to specify the path of your **video** model within your Laravel application. This configuration determines which video model will be used for handling videos within the CKEditor field.
 

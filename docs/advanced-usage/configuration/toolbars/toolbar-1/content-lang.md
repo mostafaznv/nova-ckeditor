@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.content-lang
 
 # Content Lang
 
-| Property Name                   | Type                                                       | Default |
-| ------------------------------- | ---------------------------------------------------------- | ------- |
-| toolbars.toolbar-1.content-lang | string <mark style="color:red;">`format: ISO 639-1`</mark> | en      |
+<table><thead><tr><th width="284">Property Name</th><th width="253.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.content-lang</td><td>string <mark style="color:red;"><code>format: ISO 639-1</code></mark></td><td>en</td></tr></tbody></table>
 
 This option determines the language used for text rendering and can also affect the text direction (<mark style="color:red;">RTL</mark> or <mark style="color:red;">LTR</mark>) within the editor.
 

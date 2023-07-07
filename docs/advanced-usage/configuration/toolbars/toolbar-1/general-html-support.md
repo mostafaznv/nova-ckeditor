@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.html-support
 
 # General HTML Support
 
-| Property Name                   | Type  | Default |
-| ------------------------------- | ----- | ------- |
-| toolbars.toolbar-1.html-support | array |         |
+<table><thead><tr><th>Property Name</th><th width="168.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.html-support</td><td>array</td><td></td></tr></tbody></table>
 
 This option enables the General HTML Support ("GHS") feature within the toolbar NovaCkeditor field. This feature allows you to enable HTML features that are not supported by any other dedicated CKEditor 5 plugins.
 

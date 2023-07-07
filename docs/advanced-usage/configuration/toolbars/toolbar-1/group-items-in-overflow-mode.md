@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.should-not-group-when-full
 
 # Group Items In Overflow Mode
 
-| Property Name                                 | Type | Default |
-| --------------------------------------------- | ---- | ------- |
-| toolbars.toolbar-1.should-not-group-when-full | bool | false   |
+<table><thead><tr><th width="404">Property Name</th><th width="149.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.should-not-group-when-full</td><td>bool</td><td>false</td></tr></tbody></table>
 
 This option determines whether the editor's toolbar in the toolbar should display three dots (...) in overflow mode when the toolbar is full and cannot accommodate all the items within the available space.
 

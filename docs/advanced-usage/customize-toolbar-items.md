@@ -6,8 +6,9 @@ While the configuration file provides a generic way to customize toolbar items f
 
 By leveraging these two approaches, you have the flexibility to customize toolbar items globally or on a per-field basis, depending on the level of customization required in your application.
 
-<pre class="language-php"><code class="lang-php"><strong>use Mostafaznv\NovaCkEditor\CkEditor;
-</strong>
+```php
+use Mostafaznv\NovaCkEditor\CkEditor;
+
 class Article extends Resource
 {
     public function fields(Request $request): array
@@ -23,7 +24,7 @@ class Article extends Resource
         ];
     }
 }
-</code></pre>
+```
 
 
 

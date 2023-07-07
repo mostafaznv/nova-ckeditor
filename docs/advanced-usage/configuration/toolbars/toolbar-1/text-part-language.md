@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.text-part-language
 
 # Text Part Language
 
-| Property Name                         | Type  | Default |
-| ------------------------------------- | ----- | ------- |
-| toolbars.toolbar-1.text-part-language | array | en, fa  |
+<table><thead><tr><th width="345">Property Name</th><th width="147.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.text-part-language</td><td>array</td><td>en, fa</td></tr></tbody></table>
 
 This feature enables the ability to mark the language of selected text fragments, making it convenient to work with multilingual content.
 

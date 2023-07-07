@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.browser.video
 
 # Video Browser
 
-| Property Name                    | Type | Default |
-| -------------------------------- | ---- | ------- |
-| toolbars.toolbar-1.browser.video | bool | true    |
+<table><thead><tr><th width="351.3333333333333">Property Name</th><th width="166">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.browser.video</td><td>bool</td><td>true</td></tr></tbody></table>
 
 This option allows you to enable or disable the video picker within the toolbar. By default, this option is set to `true`, indicating that the video picker is enabled.
 

@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.options
 
 # Options
 
-| Property Name              | Type  | Default |
-| -------------------------- | ----- | ------- |
-| toolbars.toolbar-1.options | array |         |
+<table><thead><tr><th>Property Name</th><th width="194.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.options</td><td>array</td><td></td></tr></tbody></table>
 
 This option allows you to customize the options of the toolbar items withinthe toolbar. This option provides the ability to configure various settings for each toolbar.
 

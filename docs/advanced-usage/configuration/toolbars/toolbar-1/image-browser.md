@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.browser.image
 
 # Image Browser
 
-| Property Name                    | Type | Default |
-| -------------------------------- | ---- | ------- |
-| toolbars.toolbar-1.browser.image | bool | true    |
+<table><thead><tr><th width="340">Property Name</th><th width="158.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.browser.image</td><td>bool</td><td>true</td></tr></tbody></table>
 
 This option allows you to enable or disable the image picker within the toolbar. By default, this option is set to `true`, indicating that the image picker is enabled.
 

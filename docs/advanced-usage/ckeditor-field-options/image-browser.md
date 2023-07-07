@@ -4,7 +4,7 @@ description: imageBrowser
 
 # Image Browser
 
-<table><thead><tr><th>Argument</th><th>Type</th><th data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>enabled</td><td>bool</td><td>false</td><td>true</td></tr></tbody></table>
+<table><thead><tr><th>Argument</th><th width="140">Type</th><th width="155" data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>enabled</td><td>bool</td><td>false</td><td>true</td></tr></tbody></table>
 
 This method allows you to enable or disable the image picker functionality within the CKEditor field.
 

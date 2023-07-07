@@ -4,9 +4,7 @@ description: toolbars.toolbar-1.ui-language.name
 
 # UI Language Name
 
-| Property Name                       | Type                                                       | Default |
-| ----------------------------------- | ---------------------------------------------------------- | ------- |
-| toolbars.toolbar-1.ui-language.name | string <mark style="color:red;">`format: ISO 639-1`</mark> | en      |
+<table><thead><tr><th width="326">Property Name</th><th width="267.3333333333333">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.ui-language.name</td><td>string <mark style="color:red;"><code>format: ISO 639-1</code></mark></td><td>en</td></tr></tbody></table>
 
 The `toolbars.toolbar-1.ui-language.name` configuration option allows you to specify the language of the CKEditor's user interface (UI) within Toolbar 1 in the Nova Ckeditor package. This option determines the language used for labels, tooltips, and other UI elements specific to Toolbar 1.
 

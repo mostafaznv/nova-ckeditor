@@ -4,7 +4,7 @@ description: limitOnIndex
 
 # Limit On Index
 
-<table><thead><tr><th>Argument</th><th>Type</th><th data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>limit</td><td>int</td><td>true</td><td>85</td></tr></tbody></table>
+<table><thead><tr><th>Argument</th><th width="142">Type</th><th data-type="checkbox">Required</th><th>Default</th></tr></thead><tbody><tr><td>limit</td><td>int</td><td>true</td><td>85</td></tr></tbody></table>
 
 By utilizing the `limitOnIndex` method, you can define a maximum character limit that will be enforced when displaying the CKEditor field in the index view of your Laravel Nova resource. This is useful for providing a concise preview or summary of the content without overwhelming the view with excessive text.
 
