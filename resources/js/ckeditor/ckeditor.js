@@ -60,6 +60,7 @@ import Video from "./plugins/video/video"
 
 
 // Other
+import {Clipboard} from '@ckeditor/ckeditor5-clipboard'
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting'
 import ElementAddAttributes from './plugins/element-attribute/src/add-attribute-to-element'
 
@@ -124,7 +125,8 @@ export default class CkEditor extends ClassicEditorBase {
             SourceEditing,
             Indent,
             IndentBlock,
-            ElementAddAttributes
+            ElementAddAttributes,
+            Clipboard
         ]
     }
 }
