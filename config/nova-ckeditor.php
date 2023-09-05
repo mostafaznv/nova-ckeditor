@@ -168,6 +168,7 @@ return [
                 'undo',
                 'redo',
                 '|',
+                'showBlocks',
                 'sourceEditing'
             ],
 
