@@ -59,8 +59,8 @@
                     </div>
                 </div>
 
-                <div v-if="isLoading" class="inline-flex self-center items-center p-2">
-                    <div class="relative" style="height: 32px">
+                <div v-if="isLoading" class="inline-flex self-center items-center">
+                    <div class="relative">
                         <loading />
                     </div>
                 </div>
@@ -68,37 +68,40 @@
         </template>
 
         <transition name="image-loading" mode="out-in">
-            <div v-if="isUploading" class="flex flex-col h-full text-primary-600 content-center justify-center text-center overflow-hidden">
-                <div class="relative" style="height: 64px">
-                    <loading />
+            <div @drop.prevent="handleUploads" @dragover.prevent="" @dragenter="dragCounter++" @dragleave="dragCounter--" class="media-main h-full overflow-hidden" :class="{active: dragCounter > 0}">
+                <div v-if="isUploading" class="flex flex-col h-full text-primary-600 content-center justify-center text-center overflow-hidden">
+                    <div class="flex items-center justify-center" style="height: 64px">
+                        <loading />
+                    </div>
+
+                    <p>{{ __('Optimizing & Uploading to Storage...') }}</p>
                 </div>
 
-                <p>{{ __('Optimizing & Uploading to Storage...') }}</p>
-            </div>
+                <div v-else-if="items.length" ref="scrollable" @scroll="onScroll" class="h-full w-full overflow-y-scroll">
+                    <div class="grid nc-grid-cols-6 gap-4 mb-12 mt-6 px-6">
+                        <div v-for="item in items" :key="item.hash" @click="select(item)" class="media-container text-center p-1 cursor-pointer" :title="item.name">
+                            <v-lazy-image
+                                v-if="isImagePicker"
+                                class="image-preview rounded shadow bg-white mx-auto"
+                                :key="item.id"
+                                :src="item.url"
+                                :src-placeholder="$options.spinner"
+                                :class="{'image-preview-selected': isSelected(item)}"
+                            />
 
-            <div v-else-if="items.length" ref="scrollable" @scroll="onScroll" @dragover.prevent="" @drop.prevent="handleUploads" class="h-full w-full overflow-y-scroll">
-                <div class="flex flex-row flex-wrap justify-center content-center mb-12 mt-6 px-6">
-                    <div v-for="item in items" :key="item.hash" @click="select(item)" class="media-container text-center p-1 cursor-pointer flex flex-col" :title="item.name" :class="{'w-1/6': isImagePicker, 'w-1/5': isVideoPicker}">
-                        <v-lazy-image
-                            v-if="isImagePicker"
-                            class="image-preview rounded shadow bg-white self-center mx-auto"
-                            :key="item.id"
-                            :src="item.url"
-                            :src-placeholder="$options.spinner"
-                            :class="{'image-preview-selected': isSelected(item)}"
-                        />
+                            <video v-else class="video-player" :poster="item.urls.cover" :class="{'selected': isSelected(item)}">
+                                <source :src="item.urls.video" type="video/mp4">
+                            </video>
 
-                        <video v-else class="video-player" :poster="item.urls.cover" :class="{'selected': isSelected(item)}">
-                            <source :src="item.urls.video" type="video/mp4">
-                        </video>
-
-                        <strong class="media-name text-primary-600">{{ item.name }}</strong>
+                            <strong class="media-name text-primary-600">{{ item.name }}</strong>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div v-else @drop.prevent="handleUploads" @dragover.prevent="" class="flex flex-col h-full text-primary-600 content-center justify-center text-center">
-                <p>{{ __(isLoading ? 'Loading...' : 'No Results.') }}</p>
+                <div v-else class="flex flex-col h-full text-primary-600 content-center justify-center text-center">
+                    <p>{{ __('No Results.') }}</p>
+                    <span class="block">{{ __('Drop your files here') }}</span>
+                </div>
             </div>
         </transition>
 
@@ -124,8 +127,9 @@
 import modal from './modal'
 import loading from './loading'
 import spinner from './../assets/spinner'
-import interactsWithResources from "./mixins/interactsWithResources"
+import interactsWithResources from './mixins/interactsWithResources'
 import VLazyImage from "v-lazy-image"
+import debounce from 'lodash/debounce'
 
 export default {
     name: "MediaBrowser",
@@ -148,18 +152,25 @@ export default {
             }
         }
     },
-    data: () => ({
-        items: [],
-        selected: [],
-        isVisible: false,
-        isLoading: false,
-        isUploading: false,
-        searchTerm: '',
-        orderBy: 'id',
-        sort: 'desc',
-        perPage: 100,
-        page: 1,
-    }),
+    data() {
+        const introKey = 'nova-ckeditor-uploader-intro-' + this.type
+
+        return {
+            items: [],
+            selected: [],
+            dragCounter: 0,
+            introKey: introKey,
+            intro: localStorage.getItem(introKey) === 'true',
+            isVisible: false,
+            isLoading: false,
+            isUploading: false,
+            searchTerm: '',
+            orderBy: 'id',
+            sort: 'desc',
+            perPage: 100,
+            page: 1,
+        }
+    },
     computed: {
         isImagePicker() {
             return this.type === 'image'
@@ -243,6 +254,7 @@ export default {
             }
 
             this.isUploading = true
+            this.dragCounter = 0
 
             const uploads = []
             const requests = ([...dataTransfer.files]).map(file => {
@@ -339,17 +351,18 @@ export default {
          *
          * @param target EventTarget
          */
-        onScroll({target}) {
+        onScroll: debounce(function({target}) {
             if ((target.scrollHeight - target.scrollTop) <= target.clientHeight + 200) {
                 this.fetch()
             }
-        },
+        }, 300),
 
         /**
          * Show the Modal
          */
         show() {
             this.isVisible = true
+            this.displayIntro()
             this.fetch(1)
         },
 
@@ -362,6 +375,23 @@ export default {
                 this.isVisible = false
             }
         },
+
+        /**
+         * Display Intro Toast
+         */
+        displayIntro() {
+            if (!this.intro) {
+                localStorage.setItem(this.introKey, 'true')
+
+                const icon = '<svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>'
+                const content = this.__('You can upload your files by dragging them here')
+
+                Nova.$toasted.info(icon + ' ' + content, {
+                    duration: 15000,
+                    keepOnHover: true
+                })
+            }
+        }
     },
     created() {
         this.$options.spinner = spinner
@@ -383,6 +413,7 @@ export default {
         border: 3px solid transparent;
         transition: all 120ms ease-in-out;
         height: 11rem;
+        object-fit: cover;
 
         &:hover {
             border-color: var(--primary);
@@ -427,6 +458,16 @@ export default {
         display: block;
         margin-top: 8px;
         margin-bottom: 4px;
+    }
+}
+
+.media-main {
+    position: relative;
+    border: dashed 2px transparent;
+    transition: all 300ms;
+
+    &.active {
+        border-color: rgba(var(--colors-primary-400));
     }
 }
 </style>
