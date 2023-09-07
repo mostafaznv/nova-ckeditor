@@ -1,13 +1,7 @@
 <template>
-    <span class="p-2">&nbsp;
-        <svg
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            class="tronFilter"
-        >
-            <circle cx="50" cy="50" r="45" :stroke="color" />
-        </svg>
-    </span>
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="tronFilter">
+        <circle cx="50" cy="50" r="45" :stroke="color" />
+    </svg>
 </template>
 
 <script>
@@ -16,7 +10,7 @@ export default {
     props: {
         color: {
             required: false,
-            default: () => 'black'
+            default: () => 'grey'
         }
     }
 }
@@ -25,12 +19,9 @@ export default {
 <style lang="scss" scoped>
 svg {
     animation: 800ms linear infinite svg;
-    height: 60%;
-    width: 100%;
-    position: absolute;
+    height: 24px;
+    width: 24px;
     display: block;
-    top: 20%;
-    left: 0;
 
     circle {
         animation: 800ms ease-in-out infinite both circle;

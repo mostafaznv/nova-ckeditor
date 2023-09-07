@@ -102,6 +102,8 @@ html.modal-open body {
 }
 
 .modal {
+    z-index: 2000;
+
     &.centered-modal {
         position: fixed;
         width: 80%;
