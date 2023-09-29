@@ -63,6 +63,17 @@ return [
 
     /*
      |--------------------------------------------------------------------------
+     | Naming Method of Audio
+     |--------------------------------------------------------------------------
+     |
+     | Available methods: hash-file, real-file-name, unique-real-file-name
+     |
+     */
+
+    'audio-naming-method' => 'hash-file',
+
+    /*
+     |--------------------------------------------------------------------------
      | Toolbar
      |--------------------------------------------------------------------------
      |
@@ -117,7 +128,8 @@ return [
 
             'browser' => [
                 'image' => true,
-                'video' => true
+                'video' => true,
+                'audio' => true
             ],
 
             'snippets' => [
@@ -138,6 +150,7 @@ return [
                 'insertTable',
                 'imageBrowser',
                 'videoBrowser',
+                'audioBrowser',
                 'mediaEmbed',
                 'link',
                 'resizeImage',

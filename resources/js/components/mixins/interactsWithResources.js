@@ -17,6 +17,10 @@ export default {
                     obj[item.attribute] = null
                 }
 
+                if (item.id) {
+                    obj.id = item.id
+                }
+
                 if (item.hasOwnProperty('thumbnailUrl')) {
                     obj.url = item.thumbnailUrl
                 }
@@ -26,6 +30,7 @@ export default {
                 if (item.hasOwnProperty('meta')) {
                     obj.meta = item.meta
                 }
+
                 return obj
             }, {})
         },
