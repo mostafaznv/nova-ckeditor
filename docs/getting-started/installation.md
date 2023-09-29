@@ -34,7 +34,7 @@ php artisan vendor:publish --provider="Mostafaznv\NovaCkEditor\FieldServiceProvi
 
 #### 3. Prepare the migration and models
 
-After publishing stubs, essential `Image` and `Video` classes will be created in the `app/Models` and `app/Nova/Resources` directories respectively. These classes are used for the `media-picker` in the CKEditor field.
+After publishing stubs, essential `Image`, `Video` and `Audio` classes will be created in the `app/Models` and `app/Nova/Resources` directories respectively. These classes are used for the `media-picker` in the CKEditor field.
 
 {% tabs %}
 {% tab title="Image" %}
@@ -51,7 +51,7 @@ You should create a disk in `config/filesystems.php`:
 ```
 
 {% hint style="info" %}
-If you wish to modify the disk name, remember to update it in the `App\Nova\Resources\Image` class as well. The second argument of the make function in the ImageUpload field corresponds to the disk name.
+If you wish to modify the disk name, remember to update it in the `App\Nova\Resources\Image` class as well. The third argument of the make function in the ImageUpload field corresponds to the disk name.
 {% endhint %}
 {% endtab %}
 
@@ -87,6 +87,24 @@ Larupload utilizes <mark style="color:red;">`FFMPEG`</mark> to generate covers f
 ```bash
 php artisan vendor:publish --provider="Mostafaznv\Larupload\LaruploadServiceProvider
 ```
+{% endhint %}
+{% endtab %}
+
+{% tab title="Audio" %}
+You should create a disk in `config/filesystems.php`:
+
+```php
+'disks' => [
+    'audio' => [
+        'driver'     => 'local',
+        'root'       => public_path('uploads/audio'),
+        'url'        => env('APP_URL') . '/uploads/audio',
+    ]
+]
+```
+
+{% hint style="info" %}
+If you wish to modify the disk name, remember to update it in the `App\Nova\Resources\Audio` class as well. The third argument of the make function in the AudioUpload field corresponds to the disk name.
 {% endhint %}
 {% endtab %}
 

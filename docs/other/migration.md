@@ -1,5 +1,21 @@
 # Migration
 
+**From 5.3.0 to 5.4.0**
+
+The `AudioPicker` feature has been introduced to the ckeditor field.
+
+To activate this functionality, you need to republish the configuration, migrations, models and resources.
+
+Execute the following command:
+
+```sh
+php artisan vendor:publish --provider="Mostafaznv\NovaCkEditor\FieldServiceProvider"
+```
+
+This command will generate two classes for Audio in `Models` and `App\Nova\Resources` directories, along with a migration file for the audio table.\
+Additionally, a new `config/nova-ckeditor.php` will be created, including audio-related configurations such as `audio-naming-method`, `toolbars.toolbar-1.browser.audio`, `toolbars.toolbar-1.items.audioBrowser`.\
+
+
 **From 5.1.0 to 5.1.1**
 
 * `html-support` has been added to the toolbar properties in `config/nova-ckeditor.php`.
