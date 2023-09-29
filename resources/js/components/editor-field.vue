@@ -7,6 +7,7 @@
 
             <media-browser @select="$options[editorName].execute('imageBrowser', $event)" type="image" :field-key="$options[editorUUID] + '-image'" :multiple="true" />
             <media-browser @select="$options[editorName].execute('videoBrowser', $event)" type="video" :field-key="$options[editorUUID] + '-video'" :multiple="true" :has-larupload-trait="currentField.videoHasLaruploadTrait" />
+            <media-browser @select="$options[editorName].execute('audioBrowser', $event)" type="audio" :field-key="$options[editorUUID] + '-audio'" :multiple="true" />
             <snippet-browser :field-key="$options[editorUUID]" :snippets="currentField.snippetBrowser" />
         </template>
     </default-field>
@@ -61,6 +62,7 @@ export default {
                 attribute: this.$options[this.editorUUID],
                 imageBrowser: this.currentField.imageBrowser,
                 videoBrowser: this.currentField.videoBrowser,
+                audioBrowser: this.currentField.audioBrowser,
                 snippetBrowser: this.currentField.snippetBrowser,
                 htmlSupport: this.normalizeHtmlSupportItems(this.currentField.htmlSupport),
                 isReadOnly: this.currentField.readonly,

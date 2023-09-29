@@ -1,5 +1,5 @@
 <template>
-    <modal v-model="isVisible" ref="modal" class="image-browser-modal" :title="__(isImagePicker ? 'Image Picker' : 'Video Picker')" fullscreen scroll-lock>
+    <modal v-model="isVisible" ref="modal" class="image-browser-modal" :title="__(title)" fullscreen scroll-lock>
         <template #header>
             <div class="pl-6 flex -mx-2">
                 <div class="p-2">
@@ -8,7 +8,7 @@
                         type="search"
                         class="form-control form-input form-input-bordered"
                         @keydown.enter.prevent="fetch(1)"
-                        :placeholder="__(isImagePicker ? 'Search Image ...' : 'Search Video ...')"
+                        :placeholder="__(searchPlaceholder)"
                     />
                 </div>
 
@@ -33,6 +33,10 @@
                                         <option value="file_file_width">{{ __('Width') }}</option>
                                         <option value="file_file_height">{{ __('Height') }}</option>
                                         <option value="file_file_duration">{{ __('Duration') }}</option>
+                                    </template>
+
+                                    <template v-if="isAudioPicker">
+                                        <option value="size">{{ __('Size') }}</option>
                                     </template>
                                 </template>
                             </optgroup>
@@ -79,19 +83,31 @@
 
                 <div v-else-if="items.length" ref="scrollable" @scroll="onScroll" class="h-full w-full overflow-y-scroll">
                     <div class="grid nc-grid-cols-6 gap-4 mb-12 mt-6 px-6">
-                        <div v-for="item in items" :key="item.hash" @click="select(item)" class="media-container text-center p-1 cursor-pointer" :title="item.name">
-                            <v-lazy-image
-                                v-if="isImagePicker"
-                                class="image-preview rounded shadow bg-white mx-auto"
-                                :key="item.id"
-                                :src="item.url"
-                                :src-placeholder="$options.spinner"
-                                :class="{'image-preview-selected': isSelected(item)}"
-                            />
+                        <div v-for="(item, key) in items" :key="item.hash" @click="select(item)" class="media-container text-center p-1 cursor-pointer" :title="item.name">
+                            <div class="content-container" :class="{'selected': isSelected(item)}">
+                                <v-lazy-image
+                                    v-if="isImagePicker"
+                                    class="image-preview bg-white mx-auto"
+                                    :key="item.id ?? key"
+                                    :src="item.url"
+                                    :src-placeholder="$options.spinner"
+                                />
 
-                            <video v-else class="video-player" :poster="item.urls.cover" :class="{'selected': isSelected(item)}">
-                                <source :src="item.urls.video" type="video/mp4">
-                            </video>
+                                <v-lazy-image
+                                    v-else-if="isVideoPicker"
+                                    class="image-preview bg-white mx-auto"
+                                    :key="item.id ?? key"
+                                    :src="item.urls.cover"
+                                    :src-placeholder="$options.spinner"
+                                />
+
+                                <div v-else class="audio-placeholder">
+                                    <svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="256" height="256" fill="#e7ebef"/>
+                                        <path d="M128 97.0625C109.35 97.0625 93.9687 111.02 91.7187 129.055C93.3711 128.387 95.1641 128 97.0625 128C101.721 128 105.5 131.779 105.5 136.438V158.938C105.5 163.596 101.721 167.375 97.0625 167.375C89.293 167.375 83 161.082 83 153.312V150.5V142.062V133.625C83 108.77 103.145 88.625 128 88.625C152.855 88.625 173 108.77 173 133.625V142.062V150.5V153.312C173 161.082 166.707 167.375 158.938 167.375C154.279 167.375 150.5 163.596 150.5 158.938V136.438C150.5 131.779 154.279 128 158.938 128C160.836 128 162.629 128.369 164.281 129.055C162.031 111.02 146.65 97.0625 128 97.0625Z" fill="#64748B"/>
+                                    </svg>
+                                </div>
+                            </div>
 
                             <strong class="media-name text-primary-600">{{ item.name }}</strong>
                         </div>
@@ -109,9 +125,10 @@
             <div class="flex p-2">
                 <div>
                     <button @click.prevent="insert" :disabled="!selected.length" class="bg h-9 shadow bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded inline-flex items-center justify-center px-3 shadow relative">
-                        <span v-if="selected.length < 2">{{ __(isImagePicker ? 'Choose Image' : 'Choose Video') }}</span>
+                        <span v-if="selected.length < 2">{{ __(pickerLabel) }}</span>
                         <span v-else-if="isImagePicker">{{ __('Insert :count Images', {count: selected.length}) }}</span>
-                        <span v-else>{{ __('Insert :count Videos', {count: selected.length}) }}</span>
+                        <span v-else-if="isVideoPicker">{{ __('Insert :count Videos', {count: selected.length}) }}</span>
+                        <span v-else>{{ __('Insert :count Audios', {count: selected.length}) }}</span>
                     </button>
                 </div>
 
@@ -148,7 +165,7 @@ export default {
             type: String,
             default: 'image',
             validator: (value) => {
-                return ['image', 'video'].includes(value)
+                return ['image', 'video', 'audio'].includes(value)
             }
         }
     },
@@ -177,11 +194,55 @@ export default {
         },
 
         isVideoPicker() {
-            return !this.isImagePicker
+            return this.type === 'video'
+        },
+
+        isAudioPicker() {
+            return this.type === 'audio'
+        },
+
+        title() {
+            if (this.isImagePicker) {
+                return 'Image Picker'
+            }
+            if (this.isVideoPicker) {
+                return 'Video Picker'
+            }
+
+            return 'Audio Picker'
+        },
+
+        searchPlaceholder() {
+            if (this.isImagePicker) {
+                return 'Search Image ...'
+            }
+            if (this.isVideoPicker) {
+                return 'Search Video ...'
+            }
+
+            return 'Search Audio ...'
+        },
+
+        pickerLabel() {
+            if (this.isImagePicker) {
+                return 'Choose Image'
+            }
+            if (this.isVideoPicker) {
+                return 'Choose Video'
+            }
+
+            return 'Choose Audio'
         },
 
         resourceKey() {
-            return this.isImagePicker ? 'images' : 'videos'
+            if (this.isImagePicker) {
+                return 'images'
+            }
+            else if (this.isVideoPicker) {
+                return 'videos'
+            }
+
+            return 'audio'
         },
 
         event() {
@@ -410,18 +471,11 @@ export default {
     position: relative;
 
     .image-preview {
-        border: 3px solid transparent;
-        transition: all 120ms ease-in-out;
         height: 11rem;
         object-fit: cover;
 
         &:hover {
             border-color: var(--primary);
-        }
-
-        &.image-preview-selected {
-            outline-color: rgb(var(--colors-green-500));
-            border: 3px solid rgb(var(--colors-green-500)) !important;
         }
 
         &.v-lazy-image {
@@ -435,18 +489,24 @@ export default {
         }
     }
 
-    .video-player {
+    .video-player, .audio-player {
         width: 100%;
         max-width: 100%;
         height: 11rem;
         display: block;
         object-fit: cover;
-        transition: all 200ms;
+        pointer-events: none;
+    }
+
+    .audio-placeholder {
+        width: 100%;
+        max-width: 100%;
+        object-fit: cover;
         pointer-events: none;
 
-        &.selected {
-            outline-color: rgb(var(--colors-green-500));
-            border: 3px solid rgb(var(--colors-green-500)) !important;
+        svg {
+            width: 100%;
+            height: auto;
         }
     }
 
@@ -458,6 +518,32 @@ export default {
         display: block;
         margin-top: 8px;
         margin-bottom: 4px;
+    }
+
+    .content-container {
+        position: relative;
+        transition: all 300ms;
+        border: solid 3px transparent;
+
+        &:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            content: "";
+            transition: all 300ms;
+        }
+
+        &.selected {
+            outline-color: rgb(var(--colors-primary-400));
+            border: 3px solid rgb(var(--colors-primary-400)) !important;
+
+            &:after {
+                background: rgba(0, 0, 0, 0.3);
+            }
+        }
     }
 }
 

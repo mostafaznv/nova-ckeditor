@@ -54,10 +54,14 @@ import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 // Browser
 import ImageBrowser from './plugins/ImageBrowser'
 import VideoBrowser from './plugins/VideoBrowser'
+import AudioBrowser from './plugins/AudioBrowser'
 import SnippetBrowser from './plugins/SnippetBrowser'
 
 // Video
 import Video from "./plugins/video/video"
+
+// Audio
+import Audio from "./plugins/audio/audio"
 
 
 // Other
@@ -79,7 +83,8 @@ export default class CkEditor extends ClassicEditorBase {
             ...require('./config/toolbar').default,
             ...require('./config/headings').default,
             ...require('./config/html').default,
-            ...require('./config/video').default
+            ...require('./config/video').default,
+            ...require('./config/audio').default
         }
     }
 
@@ -88,8 +93,10 @@ export default class CkEditor extends ClassicEditorBase {
         return [
             ImageBrowser,
             VideoBrowser,
+            AudioBrowser,
             SnippetBrowser,
             Video,
+            Audio,
             Essentials,
             Font,
             Link,

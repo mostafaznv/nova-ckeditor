@@ -14,7 +14,7 @@ With "Nova Ckeditor," you can seamlessly integrate CKEditor 5 into Laravel Nova 
 ### Features:
 
 * **CKEditor 5 Integration**: "Nova Ckeditor" seamlessly integrates CKEditor 5 into Laravel Nova, empowering you with a feature-rich and user-friendly text editing solution.
-* **Custom Media Plugins**: The package includes custom-written plugins that enhance media handling within the editor. These plugins offer convenient options for embedding and managing media elements like images and videos in your content.
+* **Custom Media Plugins**: The package includes custom-written plugins that enhance media handling within the editor. These plugins offer convenient options for embedding and managing media elements like image, video and audio in your content.
 * **Drag & Drop Uploading in Media Picker**: With the drag and drop uploading feature in the media picker, you can conveniently upload media files directly into the editor, saving time and effort.
 * **Optimize Images:** "Nova Ckeditor" includes functionality to optimize images, reducing file sizes while maintaining visual quality and improving page load times.
 * **Generate Cover for Videos**: Enhance your videos by generating custom covers. "Nova Ckeditor" allows you to generate visually appealing video covers, ensuring an engaging experience for your audience.

@@ -1,68 +1,28 @@
 <?php
-declare(strict_types=1);
 
 namespace Mostafaznv\NovaCkEditor;
 
-use Illuminate\Support\Str;
-use Throwable;
-use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\Image as InterventionImage;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
-class ImageStorage
+class ImageStorage extends Storage
 {
-    /**
-     * Storage Disk
-     *
-     * @var string
-     */
-    private string $disk;
-
-
-    /**
-     * ImageStorage constructor
-     *
-     * @param string $disk
-     */
     public function __construct(string $disk = 'image')
     {
-        $this->disk = $disk;
+        parent::__construct($disk);
+
+        $this->namingMethod = config('nova-ckeditor.image-naming-method');
     }
 
-    /**
-     * Make Instance
-     *
-     * @param string $disk
-     * @return static
-     */
     public static function make(string $disk = 'image'): self
     {
         return app('ckeditor-image-storage', compact('disk'));
     }
 
-    /**
-     * Save a new image file from the Nova request
-     *
-     * @param Request $request
-     * @return array
-     * @throws Throwable
-     */
-    public function __invoke(Request $request): array
-    {
-        return $this->handleUpload($request->file('file'));
-    }
 
-    /**
-     * Handle the File Upload
-     *
-     * @param UploadedFile $file
-     * @return array
-     * @throws Throwable
-     */
     public function handleUpload(UploadedFile $file): array
     {
         $attributes = $this->resize($file);
@@ -74,13 +34,6 @@ class ImageStorage
         return $attributes;
     }
 
-    /**
-     * Perform Resize & Conversion Operations
-     *
-     * @param UploadedFile $file
-     * @return array
-     * @throws Throwable
-     */
     protected function resize(UploadedFile $file): array
     {
         $config = config('nova-ckeditor');
@@ -106,62 +59,6 @@ class ImageStorage
         ];
     }
 
-    /**
-     * Generate file name
-     *
-     * @param UploadedFile $file
-     * @return string
-     */
-    protected function fileName(UploadedFile $file): string
-    {
-        $method = config('nova-ckeditor.image-naming-method');
-
-        if ($method == 'real-file-name') {
-            return $this->getRealFileName($file);
-        }
-        else if ($method == 'unique-real-file-name') {
-            return $this->getRealFileName($file) . '-' . uniqid();
-        }
-
-        return md5_file($file->getRealPath());
-    }
-
-    protected function getRealFileName(UploadedFile $file): string
-    {
-        return Str::kebab(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-    }
-
-    /**
-     * Create file name with extension
-     *
-     * @param UploadedFile $file
-     * @param string $name
-     * @return string
-     */
-    protected function makeTargetFilename(UploadedFile $file, string $name): string
-    {
-        return sprintf("%s.%s", $name, $file->guessExtension());
-    }
-
-    /**
-     * Make target file path
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function makeTargetFilePath(string $name): string
-    {
-        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . $name;
-    }
-
-    /**
-     * Resize Image
-     *
-     * @param UploadedFile $file
-     * @param int $maxWidth
-     * @param int $maxHeight
-     * @return InterventionImage
-     */
     protected function resizeImage(UploadedFile $file, int $maxWidth, int $maxHeight): InterventionImage
     {
         $image = Image::make($file->getRealPath());
@@ -176,45 +73,10 @@ class ImageStorage
         return $image;
     }
 
-    /**
-     * Perform Optimization Operations
-     *
-     * @param string $tempPath
-     * @return int
-     * @throws Throwable
-     */
     public function optimize(string $tempPath): int
     {
         ImageOptimizer::optimize($tempPath);
 
         return filesize($tempPath);
-    }
-
-    /**
-     * Get formatted bytes
-     *
-     * @param int $bytes
-     * @return string
-     */
-    public static function bytesForHumans(int $bytes): string
-    {
-        $units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
-
-        for ($i = 0; $bytes > 1024; $i++) {
-            $bytes /= 1024;
-        }
-
-        return round($bytes, 2) . ' ' . $units[$i];
-    }
-
-    /**
-     * Get the URL for the media file
-     *
-     * @param string $file
-     * @return string
-     */
-    public function url(string $file): string
-    {
-        return Storage::disk($this->disk)->url($file);
     }
 }
