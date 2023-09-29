@@ -11,7 +11,7 @@ class AudioStorage extends Storage
     {
         parent::__construct($disk);
 
-        $this->namingMethod = config('nova-ckeditor.audio-naming-method');
+        $this->namingMethod = config('nova-ckeditor.audio-naming-method') ?? 'hash-file';
     }
 
     public static function make(string $disk = 'audio'): self

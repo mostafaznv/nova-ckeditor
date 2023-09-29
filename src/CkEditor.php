@@ -353,7 +353,7 @@ class CkEditor extends Field
         $this->height = $toolbar['height'];
         $this->imageBrowser = $toolbar['browser']['image'];
         $this->videoBrowser = $toolbar['browser']['video'];
-        $this->audioBrowser = $toolbar['browser']['audio'];
+        $this->audioBrowser = $toolbar['browser']['audio'] ?? true;
         $this->snippetBrowser = $this->prepareSnippets($toolbar['snippets']);
         $this->contentLanguage = $toolbar['content-lang'];
         $this->textPartLanguage = $toolbar['text-part-language'] ?? $defaultTextPartLanguage;
