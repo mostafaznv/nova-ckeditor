@@ -15,6 +15,7 @@
 ## ⚙ Advanced Usage
 
 * [Customize ImageStorage](advanced-usage/customize-imagestorage.md)
+* [Customize AudioStorage](advanced-usage/customize-audiostorage.md)
 * [Multiple Toolbars](advanced-usage/multiple-toolbars.md)
 * [Customize Toolbar Items](advanced-usage/customize-toolbar-items.md)
 * [Media Embed](advanced-usage/media-embed.md)
@@ -27,6 +28,7 @@
   * [General HTML Support](advanced-usage/ckeditor-field-options/general-html-support.md)
   * [Group Items In Overflow Mode](advanced-usage/ckeditor-field-options/group-items-in-overflow-mode.md)
   * [Image Browser](advanced-usage/ckeditor-field-options/image-browser.md)
+  * [Audio Browser](advanced-usage/ckeditor-field-options/audio-browser.md)
   * [Video Browser](advanced-usage/ckeditor-field-options/video-browser.md)
   * [Snippets](advanced-usage/ckeditor-field-options/snippets.md)
 * [Configuration](advanced-usage/configuration/README.md)
@@ -36,6 +38,7 @@
   * [Image Max Width](advanced-usage/configuration/image-max-width.md)
   * [Image Max Height](advanced-usage/configuration/image-max-height.md)
   * [Image Naming Method](advanced-usage/configuration/image-naming-method.md)
+  * [Audio Naming Method](advanced-usage/configuration/audio-naming-method.md)
   * [Toolbars](advanced-usage/configuration/toolbars/README.md)
     * [Defualt Toolbar](advanced-usage/configuration/toolbars/defualt-toolbar.md)
     * [Toolbar 1](advanced-usage/configuration/toolbars/toolbar-1/README.md)
@@ -50,6 +53,7 @@
       * [General HTML Support](advanced-usage/configuration/toolbars/toolbar-1/general-html-support.md)
       * [Group Items In Overflow Mode](advanced-usage/configuration/toolbars/toolbar-1/group-items-in-overflow-mode.md)
       * [Image Browser](advanced-usage/configuration/toolbars/toolbar-1/image-browser.md)
+      * [Audio Browser](advanced-usage/configuration/toolbars/toolbar-1/audio-browser.md)
       * [Video Browser](advanced-usage/configuration/toolbars/toolbar-1/video-browser.md)
       * [Snippets](advanced-usage/configuration/toolbars/toolbar-1/snippets.md)
 
