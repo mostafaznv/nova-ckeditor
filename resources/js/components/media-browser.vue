@@ -122,18 +122,34 @@
         </transition>
 
         <template #footer>
-            <div class="flex p-2">
-                <div>
-                    <button @click.prevent="insert" :disabled="!selected.length" class="bg h-9 shadow bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded inline-flex items-center justify-center px-3 shadow relative">
-                        <span v-if="selected.length < 2">{{ __(pickerLabel) }}</span>
-                        <span v-else-if="isImagePicker">{{ __('Insert :count Images', {count: selected.length}) }}</span>
-                        <span v-else-if="isVideoPicker">{{ __('Insert :count Videos', {count: selected.length}) }}</span>
-                        <span v-else>{{ __('Insert :count Audios', {count: selected.length}) }}</span>
-                    </button>
+            <div class="flex justify-between p-2">
+                <div class="flex">
+                    <div>
+                        <button @click.prevent="insert" :disabled="!selected.length" class="bg h-9 shadow bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded inline-flex items-center justify-center px-3 shadow relative">
+                            <span v-if="selected.length < 2">{{ __(pickerLabel) }}</span>
+                            <span v-else-if="isImagePicker">{{ __('Insert :count Images', {count: selected.length}) }}</span>
+                            <span v-else-if="isVideoPicker">{{ __('Insert :count Videos', {count: selected.length}) }}</span>
+                            <span v-else>{{ __('Insert :count Audios', {count: selected.length}) }}</span>
+                        </button>
+                    </div>
+
+                    <div class="inline-flex flex-grow text-primary-600 self-center items-center ml-3" v-if="selected.length > 1">
+                        <span>{{ __(':count Items Selected', {count: selected.length}) }}</span>
+                    </div>
                 </div>
 
-                <div class="inline-flex flex-grow text-primary-600 self-center items-center ml-3" v-if="selected.length > 1">
-                    <span>{{ __(':count Items Selected', {count: selected.length}) }}</span>
+                <div class="file-input">
+                    <input
+                        @change="onSelectFiles"
+                        type="file"
+                        :id="fileInputId"
+                        :accept="acceptedMimeTypes"
+                        multiple
+                    />
+
+                    <label :for="fileInputId" class="focus:outline-none focus:ring rounded border-2 border-primary-300 dark:border-gray-500 hover:border-primary-500 active:border-primary-400 dark:hover:border-gray-400 dark:active:border-gray-300 bg-white dark:bg-transparent text-primary-500 dark:text-gray-400 px-3 h-9 inline-flex items-center font-bold">
+                        <span>{{ __('Choose Files') }}</span>
+                    </label>
                 </div>
             </div>
         </template>
@@ -178,6 +194,7 @@ export default {
             dragCounter: 0,
             introKey: introKey,
             intro: localStorage.getItem(introKey) === 'true',
+            fileInputId: `${this.type}-input-` + Date.now(),
             isVisible: false,
             isLoading: false,
             isUploading: false,
@@ -225,13 +242,24 @@ export default {
 
         pickerLabel() {
             if (this.isImagePicker) {
-                return 'Choose Image'
+                return 'Insert Image'
             }
             if (this.isVideoPicker) {
-                return 'Choose Video'
+                return 'Insert Video'
             }
 
-            return 'Choose Audio'
+            return 'Insert Audio'
+        },
+
+        acceptedMimeTypes() {
+            if (this.isImagePicker) {
+                return 'image/*'
+            }
+            if (this.isVideoPicker) {
+                return 'video/*'
+            }
+
+            return 'audio/*'
         },
 
         resourceKey() {
@@ -303,6 +331,25 @@ export default {
                     this.isLoading = false
                 })
         },
+
+
+        /**
+         * Handle File Selection
+         *
+         * @param e {Event}
+         */
+        onSelectFiles(e) {
+            if (e.target?.files?.length) {
+                const data = {
+                    dataTransfer: {
+                        files: e.target.files
+                    }
+                }
+
+                this.handleUploads(data)
+            }
+        },
+
 
         /**
          * Handle Dropped File Uploads
@@ -554,6 +601,21 @@ export default {
 
     &.active {
         border-color: rgba(var(--colors-primary-400));
+    }
+}
+
+.file-input {
+    position: relative;
+    z-index: 1;
+
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        z-index: -1;
     }
 }
 </style>
