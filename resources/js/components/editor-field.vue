@@ -103,6 +103,16 @@ export default {
                         });
                     }
 
+                    editor.editing.view.change((writer) => {
+                        // set the height of the editor when editing
+                        if (this.currentField.height > 1) {
+                            writer.setStyle('height', `${this.currentField.height}px`, editor.editing.view.document.getRoot());
+                        }
+
+                        this.editorResizeFix(editor, writer)
+                    });
+
+
                     if (this.currentField.readonly) {
                         editor.enableReadOnlyMode(this.$options[this.editorUUID]);
                     }
@@ -237,6 +247,23 @@ export default {
                 this.handleChange(editor.getData())
             }
         },
+
+        // fix for keeping editor height on resize
+        editorResizeFix(editor, writer) {
+            const resizeObserver = new ResizeObserver(
+                debounce((element) => {
+                    const height = element[0].target.offsetHeight
+
+                    writer.setStyle('height', `${height}px`, editor.editing.view.document.getRoot())
+                }, 100),
+            )
+
+            const innerEditor = editor.ui.view.element.getElementsByClassName('ck-editor__editable')
+
+            if (innerEditor?.length) {
+                resizeObserver.observe(innerEditor[0])
+            }
+        }
     },
     created() {
         this.$options[this.editorUUID] = this.uuid()
