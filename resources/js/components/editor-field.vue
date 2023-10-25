@@ -96,13 +96,6 @@ export default {
                         priority: 'lowest'
                     })
 
-                    // set the height of the editor when editing
-                    if (this.currentField.height > 1) {
-                        editor.editing.view.change(writer => {
-                            writer.setStyle('height', `${this.currentField.height}px`, editor.editing.view.document.getRoot());
-                        });
-                    }
-
                     editor.editing.view.change((writer) => {
                         // set the height of the editor when editing
                         if (this.currentField.height > 1) {
@@ -254,7 +247,9 @@ export default {
                 debounce((element) => {
                     const height = element[0].target.offsetHeight
 
-                    writer.setStyle('height', `${height}px`, editor.editing.view.document.getRoot())
+                    if (height > 10) {
+                        writer.setStyle('height', `${height}px`, editor.editing.view.document.getRoot())
+                    }
                 }, 100),
             )
 
