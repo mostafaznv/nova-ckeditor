@@ -24,7 +24,7 @@ import RegexParser from 'regex-parser'
 
 export default {
     mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
-    props: ['resourceName', 'resourceId', 'field', 'toolbar'],
+    props: ['resourceName', 'resourceId', 'field', 'toolbar', 'formUniqueId'],
     components: {SnippetBrowser, MediaBrowser},
     data() {
         return {
@@ -35,7 +35,7 @@ export default {
         editorName() {
             const attribute = this.currentField.attribute.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
 
-            return attribute + 'Editor'
+            return attribute + 'Editor' + this.formUniqueId;
         }
     },
     watch: {
