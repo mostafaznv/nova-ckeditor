@@ -85,6 +85,10 @@
                     <div class="grid nc-grid-cols-6 gap-4 mb-12 mt-6 px-6">
                         <div v-for="(item, key) in items" :key="item.hash" @click="select(item)" class="media-container text-center p-1 cursor-pointer" :title="item.name">
                             <div class="content-container" :class="{'selected': isSelected(item)}">
+                                <div @click.stop.prevent="directSelect(item)" class="direct-select" :title="__('Direct Select')">
+                                    <Icon type="plus" />
+                                </div>
+
                                 <v-lazy-image
                                     v-if="isImagePicker"
                                     class="image-preview bg-white mx-auto"
@@ -435,6 +439,15 @@ export default {
         },
 
         /**
+         * Direct Select an Item
+         */
+        directSelect(item) {
+            this.selected = [item]
+
+            this.insert()
+        },
+
+        /**
          * Deselect Item
          *
          * @param item
@@ -589,6 +602,29 @@ export default {
 
             &:after {
                 background: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .direct-select {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgb(var(--colors-gray-100));
+            color: rgb(var(--colors-primary-600));
+            border-radius: 1px;
+            opacity: 0;
+            transition: all 300ms;
+            z-index: 1;
+        }
+
+        &:hover {
+            .direct-select {
+                opacity: 1;
             }
         }
     }

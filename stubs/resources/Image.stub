@@ -24,7 +24,7 @@ class Image extends Resource
                 ->sortable(),
 
             ImageUpload::make(trans('File'), 'image')
-                ->rules('required', 'mimes:jpg,jpeg,png,gif', 'max:5000')
+                ->rules('required', 'mimes:jpg,jpeg,png,gif,webp', 'max:5000')
                 ->help(trans(':size Megabyte Max FileSize.', ['size' => 5])),
 
             Text::make(trans('Filename'), 'file_name')
