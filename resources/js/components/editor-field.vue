@@ -5,9 +5,29 @@
 
             <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
 
-            <media-browser @select="$options[editorName].execute('imageBrowser', $event)" type="image" :field-key="$options[editorUUID] + '-image'" :multiple="true" />
-            <media-browser @select="$options[editorName].execute('videoBrowser', $event)" type="video" :field-key="$options[editorUUID] + '-video'" :multiple="true" :has-larupload-trait="currentField.videoHasLaruploadTrait" />
-            <media-browser @select="$options[editorName].execute('audioBrowser', $event)" type="audio" :field-key="$options[editorUUID] + '-audio'" :multiple="true" />
+            <media-browser
+                @select="$options[editorName].execute('imageBrowser', $event)"
+                type="image"
+                :field-key="$options[editorUUID] + '-image'"
+                :multiple="true"
+            />
+
+            <media-browser
+                @select="$options[editorName].execute('videoBrowser', $event)"
+                type="video"
+                :field-key="$options[editorUUID] + '-video'"
+                :multiple="true"
+                :has-larupload-trait="currentField.videoHasLaruploadTrait"
+                :nova-video-is-legacy="currentField.novaVideoIsLegacy"
+            />
+
+            <media-browser
+                @select="$options[editorName].execute('audioBrowser', $event)"
+                type="audio"
+                :field-key="$options[editorUUID] + '-audio'"
+                :multiple="true"
+            />
+
             <snippet-browser :field-key="$options[editorUUID]" :snippets="currentField.snippetBrowser" />
         </template>
     </default-field>

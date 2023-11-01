@@ -7,11 +7,11 @@ export default {
          */
         resourceToObject({fields}) {
             return fields.reduce((obj, item) => {
-                if (item.value) {
-                    obj[item.attribute] = item.value
-                }
-                else if (item.displayedAs) {
+                if (item.displayedAs) {
                     obj[item.attribute] = item.displayedAs
+                }
+                else if (item.value) {
+                    obj[item.attribute] = item.value
                 }
                 else {
                     obj[item.attribute] = null
@@ -70,6 +70,7 @@ export default {
         async uploadResource(resourceKey, params) {
             const data = new FormData
             Object.entries(params).forEach(([key, value]) => data.append(key, value))
+
             return await Nova.request()
                 .post(`/nova-api/${resourceKey}`, data)
                 .then(({data}) => data.resource)

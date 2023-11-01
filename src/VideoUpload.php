@@ -20,9 +20,19 @@ class VideoUpload extends Video
     public function __construct(string $label, string $fieldName, string $disk = 'video')
     {
         if ($this->hasLaruploadTrait()) {
-            parent::__construct($label, $fieldName . '_field', $disk);
+            # version 6.* and higher
+            if (property_exists($this, 'storeWithLarupload')) {
+                parent::__construct($label, $fieldName, $disk);
 
-            $this->storeWithLarupload($fieldName);
+                $this->storeWithLarupload();
+            }
+            # older versions
+            else {
+                parent::__construct($label, $fieldName . '_field', $disk);
+
+                $this->storeWithLarupload($fieldName);
+            }
+
         }
         else {
             parent::__construct($label, $fieldName, $disk);
