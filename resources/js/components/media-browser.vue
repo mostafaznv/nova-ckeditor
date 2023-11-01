@@ -181,6 +181,10 @@ export default {
             type: Boolean,
             default: false
         },
+        novaVideoIsLegacy: {
+            type: Boolean,
+            default: true
+        },
         type: {
             type: String,
             default: 'image',
@@ -310,10 +314,19 @@ export default {
                     if (this.isVideoPicker) {
                         this.items.map((item) => {
                             if (this.hasLaruploadTrait) {
-                                item.url = item.file_field.cover
-                                item.urls = {
-                                    cover: item.file_field.cover,
-                                    video: item.file_field.original,
+                                if (this.novaVideoIsLegacy) {
+                                    item.url = item.file_field.cover
+                                    item.urls = {
+                                        cover: item.file_field.cover,
+                                        video: item.file_field.original,
+                                    }
+                                }
+                                else {
+                                    item.url = item.file.cover
+                                    item.urls = {
+                                        cover: item.file.cover,
+                                        video: item.file.original,
+                                    }
                                 }
                             }
                             else {
@@ -378,7 +391,12 @@ export default {
                 }
                 else {
                     if (this.hasLaruploadTrait) {
-                        data.file_field = file
+                        if (this.novaVideoIsLegacy) {
+                            data.file_field = file
+                        }
+                        else {
+                            data['file[original]'] = file
+                        }
                     }
                     else {
                         data.file = file

@@ -6,6 +6,7 @@ use Laravel\Nova\Fields\Expandable;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Fields\SupportsDependentFields;
 use Mostafaznv\Larupload\Traits\Larupload;
+use Mostafaznv\NovaVideo\Video;
 
 /**
  * @method static static make(mixed $name, string|\Closure|callable|object|null $attribute = null, callable|null $resolveCallback = null)
@@ -299,23 +300,8 @@ class CkEditor extends Field
             'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait' => $this->hasLaruploadTrait(),
+            'novaVideoIsLegacy'      => $this->isLegacyNovaVideo(),
         ]);
-    }
-
-    /**
-     * Check if class has larupload trait
-     *
-     * @return bool
-     */
-    protected function hasLaruploadTrait(): bool
-    {
-        if ($this->videoModel) {
-            $class = $this->videoModel;
-
-            return class_exists($class) and in_array(Larupload::class, class_uses($class));
-        }
-
-        return false;
     }
 
     /**
@@ -332,6 +318,36 @@ class CkEditor extends Field
         }
 
         return $snippets;
+    }
+
+    /**
+     * Check if class has larupload trait
+     *
+     * @return bool
+     */
+    private function hasLaruploadTrait(): bool
+    {
+        if ($this->videoModel) {
+            $class = $this->videoModel;
+
+            return class_exists($class) and in_array(Larupload::class, class_uses($class));
+        }
+
+        return false;
+    }
+
+    /**
+     * Check whether NovaVideo is legacy
+     *
+     * @return bool
+     */
+    private function isLegacyNovaVideo(): bool
+    {
+        if (property_exists(Video::class, 'storeWithLarupload')) {
+            return false;
+        }
+
+        return true;
     }
 
     private function prepareToolbar(string $toolbar, array $items = null): void

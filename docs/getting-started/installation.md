@@ -32,7 +32,7 @@ composer require mostafaznv/nova-ckeditor
 php artisan vendor:publish --provider="Mostafaznv\NovaCkEditor\FieldServiceProvider"
 ```
 
-#### 3. Prepare the migration and models
+#### 3. Prepare the migration, configurations and models
 
 After publishing stubs, essential `Image`, `Video` and `Audio` classes will be created in the `app/Models` and `app/Nova/Resources` directories respectively. These classes are used for the `media-picker` in the CKEditor field.
 
