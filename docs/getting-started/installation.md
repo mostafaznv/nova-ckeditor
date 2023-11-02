@@ -3,7 +3,7 @@
 ### Requirements
 
 * PHP 8.0.2 or higher
-* Laravel 8.40.\* or higher
+* Laravel 9.\* or higher
 * Nova 4
 * FFMPEG (required for larupload usage)
 
