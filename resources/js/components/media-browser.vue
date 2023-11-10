@@ -339,6 +339,22 @@ export default {
                             return item
                         })
                     }
+                    else if (this.isImagePicker) {
+                        this.items.map((item) => {
+                            if (this.hasLaruploadTrait) {
+                                item.url = item.file.meta.format === 'gif'
+                                    ? item.file.original
+                                    : item.file.cover
+
+                                item.urls = {
+                                    cover: item.file.cover,
+                                    image: item.file.original,
+                                }
+                            }
+
+                            return item
+                        })
+                    }
 
                     if (entities.length) {
                         this.page = newPage
@@ -386,8 +402,14 @@ export default {
                 const data = {}
 
                 if (this.isImagePicker) {
-                    data.file = file
                     data.name = file.name.split('.').slice(0, -1).join('.')
+
+                    if (this.hasLaruploadTrait) {
+                        data['file[original]'] = file
+                    }
+                    else {
+                        data.file = file
+                    }
                 }
                 else {
                     if (this.hasLaruploadTrait) {

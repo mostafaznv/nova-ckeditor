@@ -155,10 +155,23 @@ export default class MediaBrowser {
         this.model.change((writer) => {
             items.forEach(({file, url, urls}, index) => {
                 if (index === 0 && this.hasSelectedWidget) {
+                    if (urls) {
+                        if (urls.image) {
+                            url = urls.image
+                        }
+                        else if (urls.video) {
+                            url = urls.video
+                        }
+                    }
+
                     return writer.setAttributes({src: url, alt: file, imageCaption: file}, this.selected)
                 }
 
                 if (this.localType === 'image') {
+                    if (urls && urls.image) {
+                        url = urls.image
+                    }
+
                     return this.model.insertContent(
                         writer.createElement('imageBlock', {src: url, alt: file, imageCaption: file}),
                         this.model.document.selection.getLastPosition()

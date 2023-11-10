@@ -10,6 +10,7 @@
                 type="image"
                 :field-key="$options[editorUUID] + '-image'"
                 :multiple="true"
+                :has-larupload-trait="currentField.imageHasLaruploadTrait"
             />
 
             <media-browser
