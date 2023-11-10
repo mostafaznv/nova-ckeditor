@@ -15,6 +15,7 @@
 ## ⚙ Advanced Usage
 
 * [Customize ImageStorage](advanced-usage/customize-imagestorage.md)
+* [Integrating NovaFileArtisan (Larupload) with Image Resource](advanced-usage/integrating-novafileartisan-larupload-with-image-resource.md)
 * [Customize AudioStorage](advanced-usage/customize-audiostorage.md)
 * [Multiple Toolbars](advanced-usage/multiple-toolbars.md)
 * [Customize Toolbar Items](advanced-usage/customize-toolbar-items.md)
@@ -33,6 +34,7 @@
   * [Snippets](advanced-usage/ckeditor-field-options/snippets.md)
 * [Configuration](advanced-usage/configuration/README.md)
   * [Video Model](advanced-usage/configuration/video-model.md)
+  * [Image Model](advanced-usage/configuration/image-model.md)
   * [Memory](advanced-usage/configuration/memory.md)
   * [Max Image Quality](advanced-usage/configuration/max-image-quality.md)
   * [Image Max Width](advanced-usage/configuration/image-max-width.md)
