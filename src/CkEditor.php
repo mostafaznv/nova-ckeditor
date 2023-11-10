@@ -120,6 +120,13 @@ class CkEditor extends Field
      */
     public string $videoModel = '';
 
+    /**
+     * Specifies the path of your image model
+     *
+     * @var string
+     */
+    public string $imageModel = '';
+
 
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
@@ -130,6 +137,7 @@ class CkEditor extends Field
         );
 
         $this->videoModel = config('nova-ckeditor.video-model');
+        $this->imageModel = config('nova-ckeditor.image-model', 'App\Models\Image');
     }
 
 
@@ -299,7 +307,8 @@ class CkEditor extends Field
             'uiLanguage'             => $this->uiLanguage,
             'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
-            'videoHasLaruploadTrait' => $this->hasLaruploadTrait(),
+            'videoHasLaruploadTrait' => $this->videoHasLaruploadTrait(),
+            'imageHasLaruploadTrait' => $this->imageHasLaruploadTrait(),
             'novaVideoIsLegacy'      => $this->isLegacyNovaVideo(),
         ]);
     }
@@ -321,19 +330,42 @@ class CkEditor extends Field
     }
 
     /**
-     * Check if class has larupload trait
+     * Check if image class has larupload trait
      *
      * @return bool
      */
-    private function hasLaruploadTrait(): bool
+    private function imageHasLaruploadTrait(): bool
     {
-        if ($this->videoModel) {
-            $class = $this->videoModel;
-
-            return class_exists($class) and in_array(Larupload::class, class_uses($class));
+        if ($this->imageModel) {
+            return $this->hasLaruploadTrait($this->imageModel);
         }
 
         return false;
+    }
+
+    /**
+     * Check if video class has larupload trait
+     *
+     * @return bool
+     */
+    private function videoHasLaruploadTrait(): bool
+    {
+        if ($this->videoModel) {
+            return $this->hasLaruploadTrait($this->videoModel);
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if class has larupload trait
+     *
+     * @param string $class
+     * @return bool
+     */
+    private function hasLaruploadTrait(string $class): bool
+    {
+        return class_exists($class) and in_array(Larupload::class, class_uses($class));
     }
 
     /**
