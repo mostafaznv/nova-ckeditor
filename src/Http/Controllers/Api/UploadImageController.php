@@ -68,10 +68,16 @@ class UploadImageController extends ApiController
             $mimeTypes = implode(',', $options['types']);
         }
 
+        $rules = [
+            'required', 'file', "mimes:$mimeTypes"
+        ];
+
+        if ($maxSize) {
+            $rules[] = "max:$maxSize";
+        }
+
         return [
-            'upload' => [
-                'required', 'file', "mimes:$mimeTypes", "max:$maxSize"
-            ],
+            'upload' => $rules,
         ];
     }
 
