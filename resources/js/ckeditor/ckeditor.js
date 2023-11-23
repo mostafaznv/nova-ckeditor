@@ -51,6 +51,9 @@ import ImageTextAlternative from '@ckeditor/ckeditor5-image/src/imagetextalterna
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 
+// Upload
+import {SimpleUploadAdapter} from '@ckeditor/ckeditor5-upload'
+
 // Browser
 import ImageBrowser from './plugins/ImageBrowser'
 import VideoBrowser from './plugins/VideoBrowser'
@@ -84,7 +87,8 @@ export default class CkEditor extends ClassicEditorBase {
             ...require('./config/headings').default,
             ...require('./config/html').default,
             ...require('./config/video').default,
-            ...require('./config/audio').default
+            ...require('./config/audio').default,
+            ...require('./config/simple-upload').default
         }
     }
 
@@ -135,7 +139,8 @@ export default class CkEditor extends ClassicEditorBase {
             Indent,
             IndentBlock,
             ElementAddAttributes,
-            Clipboard
+            Clipboard,
+            SimpleUploadAdapter
         ]
     }
 }

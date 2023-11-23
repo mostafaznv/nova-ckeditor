@@ -100,6 +100,14 @@ export default {
                     items: this.currentField.toolbar,
                     shouldNotGroupWhenFull: this.currentField.shouldNotGroupWhenFull
                 },
+                simpleUpload: {
+                    ...CkEditor.defaultConfig.simpleUpload,
+
+                    headers: {
+                        ...CkEditor.defaultConfig.simpleUpload.headers,
+                        'X-Toolbar':  this.currentField.toolbarName
+                    },
+                },
                 ...toolbarOptions
             }
 

@@ -143,6 +143,17 @@ return [
                 'audio' => true
             ],
 
+            'image' => [
+                /*
+                 * Insert images directly into the editor by pasting or dragging.
+                 */
+
+                'insert' => [
+                    'types' => ['gif', 'png', 'jpg', 'jpeg', 'webp'],
+                    'size'  => 1500 // kb, nullable
+                ]
+            ],
+
             'snippets' => [
                 ['name' => 'Image', 'html' => 'ckeditor.image'],
                 ['name' => 'Media', 'html' => 'ckeditor.media'],

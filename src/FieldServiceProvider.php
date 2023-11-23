@@ -3,10 +3,12 @@
 namespace Mostafaznv\NovaCkEditor;
 
 use Composer\InstalledVersions;
+use Illuminate\Support\Facades\Route;
 use Laravel\Nova\Nova;
 use Illuminate\Support\Facades\App;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
+
 
 class FieldServiceProvider extends ServiceProvider
 {
@@ -43,6 +45,10 @@ class FieldServiceProvider extends ServiceProvider
                 Nova::script('field-ckeditor', __DIR__ . '/../dist/js/field.js');
             }
         });
+
+        $this->app->booted(function() {
+            $this->routes();
+        });
     }
 
     protected function publish(): void
@@ -72,6 +78,17 @@ class FieldServiceProvider extends ServiceProvider
             __DIR__ . '/../stubs/resources/Video.stub' => app_path('Nova/Resources/Video.php'),
             __DIR__ . '/../stubs/resources/Audio.stub' => app_path('Nova/Resources/Audio.php')
         ], 'nova-ckeditor-stubs');
+    }
+
+    private function routes(): void
+    {
+        if ($this->app->routesAreCached()) {
+            return;
+        }
+
+        Route::middleware(['nova:api'])
+            ->prefix('nova-vendor/nova-ckeditor')
+            ->group(__DIR__ . '/../routes/api.php');
     }
 
     private function registerUiLanguageScripts(): void {
