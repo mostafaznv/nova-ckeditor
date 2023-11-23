@@ -57,6 +57,8 @@
       * [Image Browser](advanced-usage/configuration/toolbars/toolbar-1/image-browser.md)
       * [Audio Browser](advanced-usage/configuration/toolbars/toolbar-1/audio-browser.md)
       * [Video Browser](advanced-usage/configuration/toolbars/toolbar-1/video-browser.md)
+      * [Insert Image Types](advanced-usage/configuration/toolbars/toolbar-1/insert-image-types.md)
+      * [Insert Image Size](advanced-usage/configuration/toolbars/toolbar-1/insert-image-size.md)
       * [Snippets](advanced-usage/configuration/toolbars/toolbar-1/snippets.md)
 
 ## ⚪ Other
