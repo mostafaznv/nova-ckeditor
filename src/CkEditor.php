@@ -23,6 +23,13 @@ class CkEditor extends Field
     public $component = 'ckeditor';
 
     /**
+     * Specifies the toolbar name
+     *
+     * @var string $toolbarName
+     */
+    public string $toolbarName;
+
+    /**
      * Specifies the available toolbar items
      *
      * @var array $toolbar
@@ -293,6 +300,7 @@ class CkEditor extends Field
     public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
+            'toolbarName'            => $this->toolbarName,
             'snippetBrowser'         => $this->snippetBrowser,
             'imageBrowser'           => $this->imageBrowser,
             'videoBrowser'           => $this->videoBrowser,
@@ -384,6 +392,8 @@ class CkEditor extends Field
 
     private function prepareToolbar(string $toolbar, array $items = null): void
     {
+        $this->toolbarName = $toolbar;
+
         $toolbar = config('nova-ckeditor.toolbars.' . $toolbar);
 
         $defaultTextPartLanguage = [
