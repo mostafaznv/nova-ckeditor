@@ -13,7 +13,9 @@
                     v-model:keyword="keyword"
                     v-model:display-options="displayOptions"
                     v-model:show-info-sidebar="withInfo"
+                    @deleted="refresh"
                     :selected-items="selectedItems"
+                    :type="type"
                 />
 
                 <div class="media-browser__list p-4">

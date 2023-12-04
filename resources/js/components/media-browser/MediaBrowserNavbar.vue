@@ -8,10 +8,11 @@
                         <span>{{ __('Download') }}</span>
                     </button>
 
-                    <button type="button" class="navbar__button">
-                        <Icon type="trash" />
-                        <span>{{ __('Delete') }}</span>
-                    </button>
+                    <media-browser-delete
+                        @deleted="$emit('deleted')"
+                        :selected-items="selectedItems"
+                        :type="type"
+                    />
 
                     <button type="button" class="navbar__button" :disabled="!itemSelected">
                         <Icon type="pencil" />
@@ -59,6 +60,7 @@ import MediaBrowserUpload from "./MediaBrowserUpload.vue"
 import {useClipboard} from "../../composables/useClipboard"
 import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue";
 import MediaBrowserSearchModal from "./MediaBrowserSearchModal.vue";
+import MediaBrowserDelete from "./MediaBrowserDelete.vue";
 
 
 // composables
@@ -69,7 +71,8 @@ const {copyToClipboard} = useClipboard()
 const emit = defineEmits([
     'update:displayOptions',
     'update:keyword',
-    'update:showInfoSidebar'
+    'update:showInfoSidebar',
+    'deleted'
 ])
 
 
@@ -86,6 +89,13 @@ const props = defineProps({
     showInfoSidebar: {
         type: Boolean,
         default: false
+    },
+    type: {
+        type: String,
+        required: true,
+        validator(value) {
+            return ['image', 'video', 'audio'].includes(value)
+        }
     },
     displayOptions: {
         type: Object,
