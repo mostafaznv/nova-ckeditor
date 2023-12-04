@@ -6,26 +6,8 @@
             <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
 
             <media-browser
-                @select="$options[editorName].execute('imageBrowser', $event)"
-                type="image"
-                :field-key="$options[editorUUID] + '-image'"
-                :multiple="true"
-                :has-larupload-trait="currentField.imageHasLaruploadTrait"
-            />
-
-            <media-browser
-                @select="$options[editorName].execute('videoBrowser', $event)"
-                type="video"
-                :field-key="$options[editorUUID] + '-video'"
-                :multiple="true"
-                :has-larupload-trait="currentField.videoHasLaruploadTrait"
-                :nova-video-is-legacy="currentField.novaVideoIsLegacy"
-            />
-
-            <media-browser
-                @select="$options[editorName].execute('audioBrowser', $event)"
-                type="audio"
-                :field-key="$options[editorUUID] + '-audio'"
+                @select="$options[editorName].execute('mediaBrowser', $event)"
+                :field-key="$options[editorUUID] + '-media-browser'"
                 :multiple="true"
             />
 
@@ -37,7 +19,7 @@
 <script>
 import CkEditor from '../ckeditor/ckeditor'
 import SnippetBrowser from "./snippet-browser"
-import MediaBrowser from "./media-browser"
+import MediaBrowser from './media-browser/MediaBrowser.vue'
 import HasUUID from "./mixins/hasUUID"
 import {DependentFormField, HandlesValidationErrors} from 'laravel-nova'
 import debounce from 'lodash/debounce'
@@ -81,9 +63,7 @@ export default {
 
             const config = {
                 attribute: this.$options[this.editorUUID],
-                imageBrowser: this.currentField.imageBrowser,
-                videoBrowser: this.currentField.videoBrowser,
-                audioBrowser: this.currentField.audioBrowser,
+                mediaBrowser: true,
                 snippetBrowser: this.currentField.snippetBrowser,
                 htmlSupport: this.normalizeHtmlSupportItems(this.currentField.htmlSupport),
                 isReadOnly: this.currentField.readonly,

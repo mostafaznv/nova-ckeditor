@@ -15,13 +15,13 @@
                 </div>
 
                 <div class="flex-1 px-1 items-center">
-                    <slot name="header" />
+                    <slot name="header"/>
                 </div>
 
                 <div class="flex-0 flex items-center" :class="{'pr-2': title}">
-                    <button @click.prevent="$emit('update:modelValue',false)" class="h-8 w-8 m-0 cursor-pointer text-primary-400">
-                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                    <button @click.prevent="$emit('update:modelValue',false)" class="h-5 w-5 m-0 cursor-pointer text-primary-400">
+                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-testid="CloseOutlined-icon" class="ckbox-icon ckbox-icon--base ckbox-btn__icon">
+                            <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
                         </svg>
                     </button>
                 </div>
@@ -31,11 +31,11 @@
                 class="flex-1 w-full bg-grad-sidebar modal-content"
                 :style="{'overflow-y': contentNoOverflow ? 'hidden' : 'scroll'}"
             >
-                <slot name="default" />
+                <slot name="default"/>
             </div>
 
             <div class="flex-0 w-full bg-logo border-t border-gray-300 p-2" v-if="hasSlot('footer')">
-                <slot name="footer" />
+                <slot name="footer"/>
             </div>
         </div>
     </transition>

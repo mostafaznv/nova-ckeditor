@@ -48,3 +48,59 @@
 
 .nc-grid-cols-6
     grid-template-columns: repeat(6, minmax(0, 1fr))
+
+
+// fade
+.fade-enter-active, .fade-leave-active
+    transition: opacity 200ms ease
+
+.fade-enter-from, .fade-leave-to
+    opacity: 0
+
+// range-slider
+input
+    &.nova-ckeditor-range[type="range"]
+        appearance: none
+        width: 100%
+        cursor: pointer
+        outline: none
+        border-radius: 15px
+        height: 6px
+        background: rgba(var(--colors-primary-100))
+
+    &.nova-ckeditor-range[type="range"]::-webkit-slider-thumb
+        appearance: none
+        height: 15px
+        width: 15px
+        background-color: rgba(var(--colors-primary-600))
+        border-radius: 50%
+        border: none
+        transition: .2s ease-in-out
+
+        &:hover
+            box-shadow: 0 0 0 10px rgba(var(--colors-primary-200), 0.5)
+
+    &.nova-ckeditor-range[type="range"]::-moz-range-thumb
+        height: 15px
+        width: 15px
+        background-color: rgba(var(--colors-primary-600))
+        border-radius: 50%
+        border: none
+        transition: .2s ease-in-out
+
+        &:hover
+            box-shadow: 0 0 0 10px rgba(var(--colors-primary-200), 0.5)
+
+    &.nova-ckeditor-range[type="range"]:active
+        &::-webkit-slider-thumb
+            box-shadow: 0 0 0 13px rgba(var(--colors-primary-300), 0.5)
+
+        &::-moz-range-thumb
+            box-shadow: 0 0 0 13px rgba(var(--colors-primary-300), 0.5)
+
+    &.nova-ckeditor-range[type="range"]:focus
+        &::-webkit-slider-thumb
+            box-shadow: 0 0 0 13px rgba(var(--colors-primary-300), 0.5)
+
+        &::-moz-range-thumb
+            box-shadow: 0 0 0 13px rgba(var(--colors-primary-300), 0.5)

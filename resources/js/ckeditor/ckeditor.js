@@ -55,9 +55,7 @@ import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import {SimpleUploadAdapter} from '@ckeditor/ckeditor5-upload'
 
 // Browser
-import ImageBrowser from './plugins/ImageBrowser'
-import VideoBrowser from './plugins/VideoBrowser'
-import AudioBrowser from './plugins/AudioBrowser'
+import MediaBrowser from './plugins/MediaBrowser'
 import SnippetBrowser from './plugins/SnippetBrowser'
 
 // Video
@@ -95,9 +93,7 @@ export default class CkEditor extends ClassicEditorBase {
     // Add Plugins
     static get builtinPlugins() {
         return [
-            ImageBrowser,
-            VideoBrowser,
-            AudioBrowser,
+            MediaBrowser,
             SnippetBrowser,
             Video,
             Audio,

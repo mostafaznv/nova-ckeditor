@@ -1,5 +1,5 @@
 <template>
-    <modal v-model="isVisible" ref="modal" class="image-browser-modal" :title="__(title)" fullscreen scroll-lock>
+    <modal v-model="isVisible" ref="modal" class="media-browser" :title="__(title)" scroll-lock>
         <template #header>
             <div class="pl-6 flex -mx-2">
                 <div class="p-2">
@@ -158,6 +158,10 @@
             </div>
         </template>
     </modal>
+
+    <Transition name="fade">
+        <div v-if="isVisible" class="overlay" />
+    </Transition>
 </template>
 
 <script>
@@ -167,6 +171,7 @@ import spinner from './../assets/spinner'
 import interactsWithResources from './mixins/interactsWithResources'
 import VLazyImage from "v-lazy-image"
 import debounce from 'lodash/debounce'
+import MediaBrowserNew from './media-browser/MediaBrowser'
 
 export default {
     name: "MediaBrowser",
@@ -694,12 +699,19 @@ export default {
         z-index: -1;
     }
 }
-</style>
 
-<style lang="scss">
-.image-browser-modal {
-    .bg-grad-sidebar {
-        overflow-y: hidden !important;
-    }
+.media-browser {
+    z-index: 99999999;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    margin: 0 !important;
 }
 </style>
