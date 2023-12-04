@@ -96,7 +96,7 @@ function submit() {
         Nova.request()
             .post('/nova-vendor/nova-ckeditor/delete-assets', payload)
             .then(() => {
-                Nova.success(__('The assets has been deleted successfully.'))
+                Nova.success(__('Assets have been deleted successfully.'))
 
                 emit('deleted')
             })
