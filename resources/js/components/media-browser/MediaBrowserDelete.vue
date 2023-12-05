@@ -1,5 +1,5 @@
 <template>
-    <button @click.stop="open" type="button" class="delete-button">
+    <button @click.stop="open" type="button" class="delete-button" :disabled="disabled">
         <Icon type="trash" />
         <span>{{ __('Delete') }}</span>
     </button>
@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import {ref, defineEmits} from "vue"
+import {ref, computed, defineEmits} from "vue"
 import modal from "../modal"
 import {useLocalization} from 'laravel-nova'
 
@@ -74,9 +74,16 @@ const modalStatus = ref(false)
 
 
 
+// computed properties
+const disabled = computed(() => {
+    return props.selectedItems.length === 0
+})
+
+
+
 // methods
 function open() {
-    if (props.selectedItems.length) {
+    if (!disabled.value) {
         modalStatus.value = true
     }
 }
@@ -86,7 +93,7 @@ function close() {
 }
 
 function submit() {
-    if (props.selectedItems.length) {
+    if (!disabled.value) {
         const payload = {
             id: props.selectedItems.map(item => item.id),
             type: props.type

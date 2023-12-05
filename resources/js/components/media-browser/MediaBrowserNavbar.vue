@@ -2,8 +2,13 @@
     <div class="navbar">
         <div class="inline-flex items-center gap-4">
             <transition name="fade">
-                <div v-if="itemSelected || multipleItemsSelected">
-                    <button @click.stop="download" type="button" class="navbar__button" :disabled="!itemSelected">
+                <div>
+                    <button
+                        @click.stop="download"
+                        type="button"
+                        class="navbar__button"
+                        :disabled="!itemSelected"
+                    >
                         <Icon type="download" />
                         <span>{{ __('Download') }}</span>
                     </button>
