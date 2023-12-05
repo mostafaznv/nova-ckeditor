@@ -213,7 +213,7 @@ const info = computed(() => {
 watch(
     () => item.value,
     (value) => {
-        name.value = value.name ?? ''
+        name.value = value?.name ?? ''
     }
 )
 
