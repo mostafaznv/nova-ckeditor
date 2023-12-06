@@ -52,44 +52,19 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="mt-6 mb-3">
-                <label for="ck-file-name" class="block leading-tight space-x-1 mb-1">
-                    <span>{{ __('Name') }}</span>
-                </label>
-
-                <input
-                    v-model="name"
-                    @keydown.enter.stop.prevent="updateName"
-                    class="w-full form-control form-input form-input-bordered"
-                >
-            </div>
-        </div>
-
-        <div class="info__bottom-bar flex items-center gap-2">
-            <default-button @click.stop="updateName" type="button" size="sm">
-                {{ __('Submit') }}
-            </default-button>
-
-            <basic-button @click.stop="close" type="button" size="sm">
-                {{ __('Cancel') }}
-            </basic-button>
         </div>
     </div>
 </template>
 
 <script setup>
-import {ref, computed, watch, defineEmits} from 'vue'
+import {computed, defineEmits} from 'vue'
 import {useLocalization} from 'laravel-nova'
 import {useClipboard} from "../../composables/useClipboard"
 
 
 // emits
 const emit = defineEmits([
-    'update:modelValue',
-    'updated'
+    'update:modelValue'
 ])
 
 
@@ -117,9 +92,6 @@ const props = defineProps({
     }
 })
 
-const name = ref(props.selectedItems[0]?.name)
-
-
 // computed properties
 const item = computed(() => {
     return props.selectedItems.length === 1
@@ -127,11 +99,8 @@ const item = computed(() => {
         : null
 })
 
-
 const info = computed(() => {
     const info = []
-
-    window.item = item.value
 
     if (item.value.created_at) {
         info.push({
@@ -209,13 +178,6 @@ const info = computed(() => {
 })
 
 
-// watchers
-watch(
-    () => item.value,
-    (value) => {
-        name.value = value?.name ?? ''
-    }
-)
 
 // methods
 function open() {
@@ -258,25 +220,6 @@ function secondsToHms(seconds) {
     const secondsString = s.toString().padStart(2, '0')
 
     return hoursString + minutesString + secondsString;
-}
-
-function updateName() {
-    if (item.value && name.value) {
-        const payload = {
-            id: item.value.id,
-            name: name.value,
-            type: props.type
-        }
-
-
-        Nova.request()
-            .put('/nova-vendor/nova-ckeditor/update-name', payload)
-            .then(() => {
-                Nova.success(__('Name updated successfully'))
-
-                emit('updated')
-            })
-    }
 }
 </script>
 
@@ -334,8 +277,8 @@ function updateName() {
             justify-content: space-between;
             font-size: 14px;
             color: rgba(var(--colors-gray-500));
-            border-bottom: solid 1px rgba(var(--colors-gray-200));
-            height: 32px;
+            border-bottom: solid 1px rgba(var(--colors-gray-100));
+            height: 36px;
 
             &-label {
                 font-weight: bold;
@@ -359,15 +302,6 @@ function updateName() {
                 border-bottom: none;
             }
         }
-    }
-
-    &__bottom-bar {
-        box-shadow: 0 0 6px rgba(46, 49, 56, 0.20);
-        min-height: 46px;
-        margin-left: -8px;
-        margin-right: -8px;
-        padding: 0 8px;
-        width: calc(100% + 16px);
     }
 }
 </style>

@@ -14,6 +14,7 @@
                     v-model:display-options="displayOptions"
                     v-model:show-info-sidebar="withInfo"
                     @deleted="refresh"
+                    @updated="refresh"
                     :selected-items="selectedItems"
                     :type="type"
                 />
@@ -84,7 +85,6 @@
             <media-browser-info
                 v-if="withInfo"
                 v-model="withInfo"
-                @updated="refresh"
                 :selected-items="selectedItems"
                 :type="type"
             />

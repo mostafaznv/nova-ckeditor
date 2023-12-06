@@ -19,10 +19,12 @@
                         :type="type"
                     />
 
-                    <button type="button" class="navbar__button" :disabled="!itemSelected">
-                        <Icon type="pencil" />
-                        <span>{{ __('Rename') }}</span>
-                    </button>
+                    <media-browser-rename-modal
+                        @update:model-value="$emit('updated')"
+                        :selected-items="selectedItems"
+                        :type="type"
+                        :disabled="!itemSelected"
+                    />
 
                     <button @click.stop="copyUrl" type="button" class="navbar__button" :disabled="!itemSelected">
                         <Icon type="clipboard" />
@@ -66,6 +68,7 @@ import {useClipboard} from "../../composables/useClipboard"
 import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue";
 import MediaBrowserSearchModal from "./MediaBrowserSearchModal.vue";
 import MediaBrowserDelete from "./MediaBrowserDelete.vue";
+import MediaBrowserRenameModal from "./MediaBrowserRenameModal.vue";
 
 
 // composables
@@ -77,7 +80,8 @@ const emit = defineEmits([
     'update:displayOptions',
     'update:keyword',
     'update:showInfoSidebar',
-    'deleted'
+    'updated',
+    'deleted',
 ])
 
 
