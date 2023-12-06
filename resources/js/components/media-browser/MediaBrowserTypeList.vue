@@ -61,12 +61,15 @@ const props = defineProps({
     }
 })
 
-const extended = ref(true)
+const localStorageKey = 'nova-ckeditor.left-sidebar-status'
+const extended = ref(localStorage.getItem(localStorageKey) !== 'false')
 
 
 // methods
 function toggle() {
     extended.value = !extended.value
+
+    localStorage.setItem(localStorageKey, extended.value ? 'true' : 'false')
 }
 
 function select(item) {
