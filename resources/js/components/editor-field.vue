@@ -8,6 +8,8 @@
             <media-browser
                 @select="$options[editorName].execute('mediaBrowser', $event)"
                 :field-key="$options[editorUUID] + '-media-browser'"
+                :image-has-larupload-trait="currentField.imageHasLaruploadTrait"
+                :video-has-larupload-trait="currentField.videoHasLaruploadTrait"
                 :multiple="true"
             />
 

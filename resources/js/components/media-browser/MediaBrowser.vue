@@ -17,6 +17,7 @@
                     @updated="refresh"
                     :selected-items="selectedItems"
                     :type="type"
+                    :has-larupload-trait="hasLaruploadTrait"
                 />
 
                 <div class="media-browser__list p-4">
@@ -33,7 +34,7 @@
                             v-model:selected-items="selectedItems"
                             type="image"
                             :page="page"
-                            :has-larupload-trait="true"
+                            :has-larupload-trait="hasLaruploadTrait"
                             :gallery-size="displayOptions?.size ?? 180"
                             :keep-aspect-ratio="displayOptions?.keepAspectRatio ?? false"
                             :order-by="displayOptions?.orderBy ?? 'id'"
@@ -49,7 +50,7 @@
                             v-model:selected-items="selectedItems"
                             type="video"
                             :page="page"
-                            :has-larupload-trait="true"
+                            :has-larupload-trait="hasLaruploadTrait"
                             :gallery-size="displayOptions?.size ?? 180"
                             :keep-aspect-ratio="displayOptions?.keepAspectRatio ?? false"
                             :order-by="displayOptions?.orderBy ?? 'id'"
@@ -65,7 +66,7 @@
                             v-model:selected-items="selectedItems"
                             type="audio"
                             :page="page"
-                            :has-larupload-trait="true"
+                            :has-larupload-trait="hasLaruploadTrait"
                             :gallery-size="displayOptions?.size ?? 180"
                             :keep-aspect-ratio="displayOptions?.keepAspectRatio ?? false"
                             :order-by="displayOptions?.orderBy ?? 'id'"
@@ -112,6 +113,14 @@ const props = defineProps({
         type: String,
         required: true
     },
+    imageHasLaruploadTrait: {
+        type: Boolean,
+        default: false
+    },
+    videoHasLaruploadTrait: {
+        type: Boolean,
+        default: false
+    },
     fieldKey: {
         type: String,
         default: 'content'
@@ -147,6 +156,17 @@ const gallerySize = computed(() => {
     const size = displayOptions.value?.size ?? 180
 
     return size + 'px'
+})
+
+const hasLaruploadTrait = computed(() => {
+    if (type.value === 'image') {
+        return props.imageHasLaruploadTrait
+    }
+    else if (type.value === 'video') {
+        return props.videoHasLaruploadTrait
+    }
+
+    return false
 })
 
 

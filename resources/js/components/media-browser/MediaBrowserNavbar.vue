@@ -56,7 +56,11 @@
                 v-model:keep-aspect-ratio="keepAspectRatio"
             />
 
-            <media-browser-upload />
+            <media-browser-upload
+                @uploaded="$emit('updated')"
+                :type="type"
+                :has-larupload-trait="hasLaruploadTrait"
+            />
         </div>
     </div>
 </template>
@@ -98,6 +102,10 @@ const props = defineProps({
     showInfoSidebar: {
         type: Boolean,
         default: false
+    },
+    hasLaruploadTrait: {
+        type: Boolean,
+        required: true
     },
     type: {
         type: String,
