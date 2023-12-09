@@ -32,14 +32,8 @@
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
+                            v-bind="listComponentProps"
                             type="image"
-                            :page="page"
-                            :has-larupload-trait="hasLaruploadTrait"
-                            :gallery-size="displayOptions?.size ?? 180"
-                            :keep-aspect-ratio="displayOptions?.keepAspectRatio ?? false"
-                            :order-by="displayOptions?.orderBy ?? 'id'"
-                            :sort="displayOptions?.orderByDirection ?? 'desc'"
-                            :keyword="keyword"
                         />
 
                         <media-browser-list
@@ -48,14 +42,8 @@
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
+                            v-bind="listComponentProps"
                             type="video"
-                            :page="page"
-                            :has-larupload-trait="hasLaruploadTrait"
-                            :gallery-size="displayOptions?.size ?? 180"
-                            :keep-aspect-ratio="displayOptions?.keepAspectRatio ?? false"
-                            :order-by="displayOptions?.orderBy ?? 'id'"
-                            :sort="displayOptions?.orderByDirection ?? 'desc'"
-                            :keyword="keyword"
                         />
 
                         <media-browser-list
@@ -64,14 +52,8 @@
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
+                            v-bind="listComponentProps"
                             type="audio"
-                            :page="page"
-                            :has-larupload-trait="hasLaruploadTrait"
-                            :gallery-size="displayOptions?.size ?? 180"
-                            :keep-aspect-ratio="displayOptions?.keepAspectRatio ?? false"
-                            :order-by="displayOptions?.orderBy ?? 'id'"
-                            :sort="displayOptions?.orderByDirection ?? 'desc'"
-                            :keyword="keyword"
                         />
                     </div>
                 </div>
@@ -168,6 +150,19 @@ const hasLaruploadTrait = computed(() => {
 
     return false
 })
+
+const listComponentProps = computed(() => {
+    return {
+        page: page.value,
+        gallerySize: displayOptions.value?.size ?? 180,
+        keepAspectRatio: displayOptions.value?.keepAspectRatio ?? false,
+        orderBy: displayOptions.value?.orderBy ?? 'id',
+        sort: displayOptions.value?.orderByDirection ?? 'desc',
+        keyword: keyword.value,
+        hasLaruploadTrait: hasLaruploadTrait.value
+    }
+})
+
 
 
 // watchers
