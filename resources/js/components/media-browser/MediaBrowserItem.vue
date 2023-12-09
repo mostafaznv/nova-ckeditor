@@ -29,7 +29,7 @@
 
 <script setup>
 import {computed, defineEmits} from "vue"
-import AudioIcon from "../AudioIcon.vue"
+import AudioIcon from "../icons/AudioIcon.vue"
 
 
 // emits

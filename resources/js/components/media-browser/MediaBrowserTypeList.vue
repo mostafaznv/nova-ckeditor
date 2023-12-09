@@ -45,7 +45,7 @@
 
 <script setup>
 import {defineEmits, ref} from 'vue'
-import AudioIcon from "../AudioIcon.vue";
+import AudioIcon from "../icons/AudioIcon.vue"
 
 
 const emit = defineEmits([
