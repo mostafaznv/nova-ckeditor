@@ -21,9 +21,7 @@
             <span class="item__details--name" :title="item.name">{{ item.name }}</span>
 
             <button @click.stop.prevent="select(false)" type="button" class="item__details--select">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                </svg>
+                <Icon type="check" />
             </button>
         </div>
     </div>
@@ -196,7 +194,7 @@ function select(one = false) {
             svg {
                 width: 16px;
                 height: 16px;
-                fill: rgba(var(--colors-gray-600));
+                color: rgba(var(--colors-gray-600));
                 transition: all 300ms;
             }
 
@@ -204,7 +202,7 @@ function select(one = false) {
                 background: rgba(var(--colors-gray-100));
 
                 svg {
-                    fill: rgba(var(--colors-gray-800));
+                    color: rgba(var(--colors-gray-800));
                 }
             }
         }
@@ -224,8 +222,10 @@ function select(one = false) {
 
         .item__details {
             .item__details--select {
+                opacity: 1;
+
                 svg {
-                    fill: rgba(var(--colors-primary-600));
+                    color: rgba(var(--colors-primary-600));
                 }
             }
         }
