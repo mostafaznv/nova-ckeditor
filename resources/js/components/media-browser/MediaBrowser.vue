@@ -211,7 +211,7 @@ init()
 
 <style lang="scss" scoped>
 .media-browser {
-    z-index: 99999999;
+    z-index: 9999;
 
     &__list {
         overflow-x: hidden;
