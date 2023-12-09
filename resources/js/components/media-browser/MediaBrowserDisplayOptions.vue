@@ -15,7 +15,7 @@
                         @change="onOrderByChange"
                         class="w-full"
                         :options="orderByItems"
-                        selected=""
+                        :selected="orderBy"
                         :aria-label="__('Order By')"
                     >
                         <option value="" disabled selected>{{ __('Order By') }}</option>
@@ -25,7 +25,7 @@
                         <radio-input
                             @change="onOrderByDirectionChange"
                             name="orderByDirection"
-                            checked="desc"
+                            :checked="orderByDirection"
                             :options="orderByDirectionItems"
                         />
                     </div>
