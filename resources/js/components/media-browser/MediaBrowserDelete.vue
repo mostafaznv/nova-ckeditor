@@ -33,10 +33,6 @@
             </basic-button>
         </template>
     </modal>
-
-    <transition name="fade">
-        <div v-if="modalStatus" class="overlay" />
-    </transition>
 </template>
 
 <script setup>
@@ -122,23 +118,11 @@ function submit() {
 </script>
 
 <style lang="scss" scoped>
-.delete-modal {
-    z-index: 99999;
+::v-deep(.delete-modal) {
     max-width: 400px;
-    height: 180px;
-    top: calc(50% - 90px);
-    left: calc(50% - 200px);
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    margin: 0 !important;
+    height: 180px !important;
+    top: calc(50% - 90px) !important;
+    left: calc(50% - 200px) !important;
 }
 
 .bg-red-500 {

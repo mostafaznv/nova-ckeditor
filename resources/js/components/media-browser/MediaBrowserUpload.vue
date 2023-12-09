@@ -73,10 +73,6 @@
             </default-button>
         </template>
     </modal>
-
-    <transition name="fade">
-        <div v-if="modalStatus" class="overlay" />
-    </transition>
 </template>
 
 <script setup>
@@ -372,32 +368,20 @@ function calculateItemUploadedPercent(progressEvent, index) {
     }
 }
 
-.upload-modal {
-    z-index: 99999;
+::v-deep(.upload-modal) {
     max-width: 600px;
-    height: 400px;
-    top: calc(50% - 200px);
-    left: calc(50% - 300px);
+    height: 400px !important;
+    top: calc(50% - 200px) !important;
+    left: calc(50% - 300px) !important;
     overflow: hidden;
 
     &.large {
-        height: 500px;
-        top: calc(50% - 250px);
+        height: 500px !important;
+        top: calc(50% - 250px) !important;
     }
 
-    ::v-deep(.modal-content) {
+    .modal-content {
         overflow-y: auto !important;
     }
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    margin: 0 !important;
 }
 </style>

@@ -30,10 +30,6 @@
             </div>
         </template>
     </modal>
-
-    <transition name="fade">
-        <div v-if="modalStatus" class="overlay" />
-    </transition>
 </template>
 
 <script setup>
@@ -134,34 +130,22 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
-.rename-modal {
-    z-index: 99999999;
+::v-deep(.rename-modal) {
     max-width: 600px;
-    height: 80px;
-    top: calc(50% - 40px);
-    left: calc(50% - 300px);
+    height: 80px !important;
+    top: calc(50% - 40px) !important;
+    left: calc(50% - 300px) !important;
     overflow: hidden;
 
-    &__input {
+    .rename-modal__input {
         outline: none;
         //width: 300px;
         height: 62px;
     }
 
-    ::v-deep(.modal__header) {
+    .modal__header {
         border-bottom: none;
     }
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    margin: 0 !important;
 }
 
 .rename-button {
