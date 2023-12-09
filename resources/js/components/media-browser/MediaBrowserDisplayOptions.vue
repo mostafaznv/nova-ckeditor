@@ -1,7 +1,7 @@
 <template>
     <div v-click-outside="close" class="options relative">
         <div>
-            <button @click.stop="toggle" type="button" class="options__button" :title="__('Display Options')">
+            <button @click.stop="toggle" type="button" class="media-browser-btn" :title="__('Display Options')">
                 <Icon type="adjustments" />
             </button>
         </div>
@@ -175,30 +175,6 @@ function onKeepAspectRatioChange(e) {
         font-size: 14px;
         font-weight: 600;
         color: rgba(var(--colors-gray-600));
-    }
-
-    &__button {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 4px 8px;
-        border-radius: 6px;
-        transition: all 300ms;
-        cursor: pointer;
-
-        svg {
-            color: rgba(var(--colors-primary-600));
-            width: 20px;
-        }
-
-        &:hover:not(:disabled) {
-            background: rgba(var(--colors-gray-100));
-        }
-
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
     }
 }
 </style>

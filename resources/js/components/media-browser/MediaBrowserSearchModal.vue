@@ -1,5 +1,5 @@
 <template>
-    <button @click.stop="modalStatus = true" type="button" class="search-button" :title="__('Search')">
+    <button @click.stop="modalStatus = true" type="button" class="media-browser-btn" :title="__('Search')">
         <Icon type="search" />
     </button>
 
@@ -193,30 +193,6 @@ initHistory()
                 }
             }
         }
-    }
-}
-
-.search-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    transition: all 300ms;
-    cursor: pointer;
-
-    svg {
-        color: rgba(var(--colors-primary-600));
-        width: 20px;
-    }
-
-    &:hover:not(:disabled) {
-        background: rgba(var(--colors-gray-100));
-    }
-
-    &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
     }
 }
 </style>

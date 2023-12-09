@@ -6,7 +6,7 @@
                     <button
                         @click.stop="download"
                         type="button"
-                        class="navbar__button"
+                        class="media-browser-btn"
                         :disabled="!itemSelected"
                     >
                         <Icon type="download" />
@@ -26,7 +26,7 @@
                         :disabled="!itemSelected"
                     />
 
-                    <button @click.stop="copyUrl" type="button" class="navbar__button" :disabled="!itemSelected">
+                    <button @click.stop="copyUrl" type="button" class="media-browser-btn" :disabled="!itemSelected">
                         <Icon type="clipboard" />
                         <span>{{ __('Copy URL') }}</span>
                     </button>
@@ -38,7 +38,7 @@
             <button
                 @click.stop="toggleInfoSidebar"
                 type="button"
-                class="navbar__button"
+                class="media-browser-btn"
                 :title="__('Properties')"
                 :disabled="!itemSelected"
             >
@@ -223,29 +223,5 @@ init()
     justify-content: space-between;
     padding: 0 16px;
     box-shadow: 0 0 6px rgba(46, 49, 56, 0.05);
-
-    &__button {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 4px 8px;
-        border-radius: 6px;
-        transition: all 300ms;
-        cursor: pointer;
-
-        svg {
-            color: rgba(var(--colors-primary-600));
-            width: 20px;
-        }
-
-        &:hover:not(:disabled) {
-            background: rgba(var(--colors-gray-100));
-        }
-
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-    }
 }
 </style>

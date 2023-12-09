@@ -1,5 +1,5 @@
 <template>
-    <button @click.stop="open" type="button" class="delete-button" :disabled="disabled">
+    <button @click.stop="open" type="button" class="media-browser-btn" :disabled="disabled">
         <Icon type="trash" />
         <span>{{ __('Delete') }}</span>
     </button>
@@ -128,30 +128,6 @@ function submit() {
 .bg-red-500 {
     &:hover {
         background: rgba(var(--colors-red-400));
-    }
-}
-
-.delete-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    transition: all 300ms;
-    cursor: pointer;
-
-    svg {
-        color: rgba(var(--colors-primary-600));
-        width: 20px;
-    }
-
-    &:hover:not(:disabled) {
-        background: rgba(var(--colors-gray-100));
-    }
-
-    &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
     }
 }
 </style>

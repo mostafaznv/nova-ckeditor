@@ -104,3 +104,25 @@ input
 
         &::-moz-range-thumb
             box-shadow: 0 0 0 13px rgba(var(--colors-primary-300), 0.5)
+
+
+// media-browser overlay
+.media-browser-btn
+    display: inline-flex
+    align-items: center
+    gap: 4px
+    padding: 4px 8px
+    border-radius: 6px
+    transition: all 300ms
+    cursor: pointer
+
+    svg
+        color: rgba(var(--colors-primary-600))
+        width: 20px
+
+    &:hover:not(:disabled)
+        background: rgba(var(--colors-gray-100))
+
+    &:disabled
+        opacity: 0.5
+        cursor: not-allowed
