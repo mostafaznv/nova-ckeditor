@@ -15,7 +15,7 @@
 <script setup>
 import {ref, computed, watch, defineEmits, defineExpose} from "vue"
 import useResourceRequest from "../../composables/useResourceRequest"
-import defaultProps from "../../utils/picker-props"
+import {paginationProp, sortProp, keepAspectRatioProp, typeProp, gallerySizeProp, selectedItemsProp, loadingProp, keywordProp, hasLaruploadTraitProp, orderByProp} from "../../utils/picker-props"
 import MediaBrowserItem from "./MediaBrowserItem.vue"
 
 
@@ -39,34 +39,23 @@ const {fetchResourceList, pagination} = useResourceRequest(emits)
 
 // variables
 const props = defineProps({
-    ...defaultProps,
-    type: {
-        type: String,
-        required: true,
-        validator(value) {
-            return ['image', 'video', 'audio'].includes(value)
-        }
-    },
-    selectedItems: {
-        type: Array,
-        default: () => []
-    },
-    gallerySize: {
+    keepAspectRatio: keepAspectRatioProp,
+    type: typeProp,
+    gallerySize: gallerySizeProp,
+    selectedItems: selectedItemsProp,
+    loading: loadingProp,
+    keyword: keywordProp,
+    hasLaruploadTrait: hasLaruploadTraitProp,
+    orderBy: orderByProp,
+    sort: sortProp,
+    pagination: paginationProp,
+    page: {
         type: Number,
-        default: 180
-    },
-    keepAspectRatio: {
-        type: Boolean,
-        default: false
-    },
-    loading: {
-        type: Boolean,
-        default: false
+        default: 1
     }
 })
 
 const items = ref([])
-
 
 
 // computed properties
@@ -88,7 +77,6 @@ const filters = computed(() => {
         orderByDirection: props.sort
     }
 })
-
 
 
 // watchers

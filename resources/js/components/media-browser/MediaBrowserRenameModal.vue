@@ -36,6 +36,7 @@
 import {ref, computed, watch, defineEmits, nextTick} from "vue"
 import modal from "../modal"
 import {useLocalization} from 'laravel-nova'
+import {selectedItemsProp, typeProp} from "../../utils/picker-props"
 
 
 // emits
@@ -50,20 +51,11 @@ const {__} = useLocalization()
 
 // variables
 const props = defineProps({
+    selectedItems: selectedItemsProp,
+    type: typeProp,
     modelValue: {
         type: String,
         default: ''
-    },
-    selectedItems: {
-        type: Array,
-        default: () => []
-    },
-    type: {
-        type: String,
-        required: true,
-        validator(value) {
-            return ['image', 'video', 'audio'].includes(value)
-        }
     },
     disabled: {
         type: Boolean,

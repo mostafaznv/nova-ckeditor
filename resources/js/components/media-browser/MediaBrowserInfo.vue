@@ -59,6 +59,7 @@
 import {computed, defineEmits} from 'vue'
 import {useLocalization} from 'laravel-nova'
 import {useClipboard} from "../../composables/useClipboard"
+import {selectedItemsProp, typeProp} from "../../utils/picker-props"
 
 
 // emits
@@ -74,20 +75,11 @@ const {copyToClipboard} = useClipboard()
 
 // variables
 const props = defineProps({
+    selectedItems: selectedItemsProp,
+    type: typeProp,
     modelValue: {
         type: Boolean,
         default: false
-    },
-    selectedItems: {
-        type: Array,
-        default: () => []
-    },
-    type: {
-        type: String,
-        required: true,
-        validator(value) {
-            return ['image', 'video', 'audio'].includes(value)
-        }
     }
 })
 

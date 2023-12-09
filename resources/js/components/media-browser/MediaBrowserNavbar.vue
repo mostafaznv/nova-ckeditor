@@ -69,10 +69,11 @@
 import {ref, computed, defineEmits, watch} from "vue"
 import MediaBrowserUpload from "./MediaBrowserUpload.vue"
 import {useClipboard} from "../../composables/useClipboard"
-import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue";
-import MediaBrowserSearchModal from "./MediaBrowserSearchModal.vue";
-import MediaBrowserDelete from "./MediaBrowserDelete.vue";
-import MediaBrowserRenameModal from "./MediaBrowserRenameModal.vue";
+import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue"
+import MediaBrowserSearchModal from "./MediaBrowserSearchModal.vue"
+import MediaBrowserDelete from "./MediaBrowserDelete.vue"
+import MediaBrowserRenameModal from "./MediaBrowserRenameModal.vue"
+import {hasLaruploadTraitProp, selectedItemsProp, typeProp, keywordProp, sortProp, paginationProp} from "../../utils/picker-props"
 
 
 // composables
@@ -91,28 +92,15 @@ const emit = defineEmits([
 
 // variables
 const props = defineProps({
-    selectedItems: {
-        type: Array,
-        default: () => []
-    },
-    keyword: {
-        type: String,
-        default: ''
-    },
+    hasLaruploadTrait: hasLaruploadTraitProp,
+    selectedItems: selectedItemsProp,
+    type: typeProp,
+    keyword: keywordProp,
+    sort: sortProp,
+    pagination: paginationProp,
     showInfoSidebar: {
         type: Boolean,
         default: false
-    },
-    hasLaruploadTrait: {
-        type: Boolean,
-        required: true
-    },
-    type: {
-        type: String,
-        required: true,
-        validator(value) {
-            return ['image', 'video', 'audio'].includes(value)
-        }
     },
     displayOptions: {
         type: Object,

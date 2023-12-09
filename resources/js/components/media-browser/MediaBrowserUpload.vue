@@ -80,8 +80,9 @@ import {ref, computed, watch, defineProps, defineEmits} from "vue"
 import Modal from "../modal.vue"
 import axios from "axios"
 import {useLocalization} from 'laravel-nova'
-import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue";
-import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue";
+import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue"
+import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue"
+import {hasLaruploadTraitProp, typeProp} from "../../utils/picker-props"
 
 
 // emits
@@ -96,17 +97,8 @@ const {__} = useLocalization()
 
 // variables
 const props = defineProps({
-    hasLaruploadTrait: {
-        type: Boolean,
-        default: false
-    },
-    type: {
-        type: String,
-        required: true,
-        validator(value) {
-            return ['image', 'video', 'audio'].includes(value)
-        }
-    },
+    hasLaruploadTrait: hasLaruploadTraitProp,
+    type: typeProp
 })
 
 const status = ref(false)

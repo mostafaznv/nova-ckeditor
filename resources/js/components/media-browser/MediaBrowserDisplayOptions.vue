@@ -63,6 +63,7 @@ import {ref, defineProps, defineEmits} from "vue"
 import {useLocalization} from 'laravel-nova'
 import SwitchInput from "../SwitchInput.vue"
 import RadioInput from "../RadioInput.vue"
+import {orderByProp, keepAspectRatioProp} from "../../utils/picker-props"
 
 
 // composables
@@ -80,13 +81,8 @@ const emits = defineEmits([
 
 // variables
 const props = defineProps({
-    orderBy: {
-        type: String,
-        default: 'id',
-        validator(value) {
-            return ['id', 'name', 'width', 'height', 'size', 'duration', 'created_at', 'updated_at'].includes(value)
-        }
-    },
+    orderBy: orderByProp,
+    keepAspectRatio: keepAspectRatioProp,
     orderByDirection: {
         type: String,
         default: 'desc',
@@ -97,10 +93,6 @@ const props = defineProps({
     size: {
         type: Number,
         default: 180
-    },
-    keepAspectRatio: {
-        type: Boolean,
-        default: false
     }
 })
 

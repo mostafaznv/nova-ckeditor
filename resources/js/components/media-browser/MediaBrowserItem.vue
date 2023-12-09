@@ -30,6 +30,7 @@
 <script setup>
 import {computed, defineEmits} from "vue"
 import AudioIcon from "../icons/AudioIcon.vue"
+import {typeProp, selectedItemsProp, keepAspectRatioProp, gallerySizeProp} from "../../utils/picker-props"
 
 
 // emits
@@ -41,29 +42,14 @@ const emits = defineEmits([
 
 // variables
 const props = defineProps({
+    type: typeProp,
+    selectedItems: selectedItemsProp,
+    keepAspectRatio: keepAspectRatioProp,
+    gallerySize: gallerySizeProp,
     item: {
         type: Object,
         required: true
-    },
-    type: {
-        type: String,
-        required: true,
-        validator(value) {
-            return ['image', 'video', 'audio'].includes(value)
-        }
-    },
-    selectedItems: {
-        type: Array,
-        default: () => []
-    },
-    gallerySize: {
-        type: Number,
-        default: 180
-    },
-    keepAspectRatio: {
-        type: Boolean,
-        default: false
-    },
+    }
 })
 
 
@@ -96,7 +82,7 @@ const isSelected = computed(() => {
     return props.selectedItems.findIndex(item => item.id === props.item.id) !== -1
 })
 
-const gallerySize = computed(() => {
+const gallerySizePx = computed(() => {
     return props.gallerySize + 'px'
 })
 
@@ -131,7 +117,7 @@ function select(one = false) {
     &__preview {
         position: relative;
         cursor: pointer;
-        height: v-bind(gallerySize);
+        height: v-bind(gallerySizePx);
         margin: 0;
         overflow: hidden;
 
