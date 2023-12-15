@@ -29,6 +29,7 @@
                         <media-browser-list
                             v-if="type === 'image'"
                             ref="browserList"
+                            @play="play"
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
@@ -39,6 +40,7 @@
                         <media-browser-list
                             v-else-if="type === 'video'"
                             ref="browserList"
+                            @play="play"
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
@@ -49,6 +51,7 @@
                         <media-browser-list
                             v-else-if="type === 'audio'"
                             ref="browserList"
+                            @play="play"
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
@@ -68,6 +71,7 @@
             <media-browser-info
                 v-if="withInfo"
                 v-model="withInfo"
+                ref="info"
                 :selected-items="selectedItems"
                 :type="type"
             />
@@ -76,7 +80,7 @@
 </template>
 
 <script setup>
-import {computed, ref, watch} from "vue"
+import {computed, nextTick, ref, watch} from "vue"
 import modal from "../modal"
 import MediaBrowserTypeList from "./MediaBrowserTypeList.vue"
 import MediaBrowserInfo from "./MediaBrowserInfo.vue"
@@ -106,6 +110,7 @@ const props = defineProps({
 })
 
 const type = ref('image')
+const info = ref(null)
 const modalStatus = ref(false)
 const browserList = ref(false)
 const loading = ref(false)
@@ -204,6 +209,14 @@ function reset() {
 
 function refresh() {
     browserList.value?.fetch(page.value)
+}
+
+function play() {
+    withInfo.value = true
+
+    nextTick(() => {
+        info.value?.play()
+    })
 }
 
 init()

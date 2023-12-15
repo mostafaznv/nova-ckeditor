@@ -20,12 +20,14 @@
 
                 <video
                     v-else-if="type === 'video'"
+                    ref="player"
                     :src="item.link"
                     controls
                 />
 
                 <audio
                     v-else-if="type === 'audio'"
+                    ref="player"
                     :src="item.link"
                     controls
                 />
@@ -56,7 +58,7 @@
 </template>
 
 <script setup>
-import {computed, defineEmits} from 'vue'
+import {ref, computed, defineEmits} from 'vue'
 import {useLocalization} from 'laravel-nova'
 import {useClipboard} from "../../composables/useClipboard"
 import {selectedItemsProp, typeProp} from "../../utils/picker-props"
@@ -66,6 +68,12 @@ import {selectedItemsProp, typeProp} from "../../utils/picker-props"
 const emit = defineEmits([
     'update:modelValue'
 ])
+
+
+// exposes
+defineExpose({
+    play
+})
 
 
 // composables
@@ -82,6 +90,9 @@ const props = defineProps({
         default: false
     }
 })
+
+const player = ref(null)
+
 
 // computed properties
 const item = computed(() => {
@@ -177,6 +188,10 @@ function open() {
 
 function close() {
     emit('update:modelValue', false)
+}
+
+function play() {
+    player.value?.play()
 }
 
 function formatFileSize(bytes) {

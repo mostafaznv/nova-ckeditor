@@ -3,6 +3,7 @@
         v-for="item in items"
         @select="selected"
         @select-one="selectedOne"
+        @play="play"
         :type="type"
         :item="item"
         :selected-items="selectedItems"
@@ -29,7 +30,8 @@ defineExpose({
 const emits = defineEmits([
     'update:pagination',
     'update:loading',
-    'update:selectedItems'
+    'update:selectedItems',
+    'play'
 ])
 
 
@@ -133,6 +135,12 @@ function selected(item) {
 
 function selectedOne(item) {
     emits('update:selectedItems', [item])
+}
+
+function play(item) {
+    selectedOne(item)
+
+    emits('play')
 }
 
 

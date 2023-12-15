@@ -21,6 +21,10 @@
                     muted
                 />
             </div>
+
+            <figcaption @click.stop="play" class="item__preview--play">
+                <Icon type="eye" />
+            </figcaption>
         </figure>
 
         <div class="item__details">
@@ -42,7 +46,8 @@ import {typeProp, selectedItemsProp, keepAspectRatioProp, gallerySizeProp} from 
 // emits
 const emits = defineEmits([
     'select',
-    'selectOne'
+    'selectOne',
+    'play'
 ])
 
 
@@ -108,6 +113,13 @@ function select(one = false) {
 
     emits(one === true ? 'selectOne' : 'select', item)
 }
+
+function play() {
+    const item = props.item
+    item.link = src.value
+
+    emits('play', item)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -127,16 +139,34 @@ function select(one = false) {
         margin: 0;
         overflow: hidden;
 
-        &--format {
+        &--format, &--play {
             position: absolute;
             top: 0;
             left: 0;
+            height: 24px;
             background-color: rgb(23, 25, 28);
             color: white;
             font-size: 12px;
             padding: 2px 4px;
             text-transform: uppercase;
             z-index: 1;
+            transition: all 300ms;
+        }
+
+        &--play {
+            left: auto;
+            right: 0;
+            opacity: 0;
+
+            &:hover {
+                background-color: rgb(69, 72, 79);
+            }
+
+            svg {
+                width: 16px;
+                height: 16px;
+                margin-bottom: 2px;
+            }
         }
 
         &--content {
@@ -209,6 +239,10 @@ function select(one = false) {
             .item__details--select {
                 opacity: 1;
             }
+        }
+
+        .item__preview--play {
+            opacity: 1;
         }
     }
 
