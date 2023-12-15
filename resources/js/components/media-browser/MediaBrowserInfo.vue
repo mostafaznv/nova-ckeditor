@@ -1,5 +1,5 @@
 <template>
-    <div v-if="item" class="info h-full">
+    <div v-if="item" class="info h-full nova-ckeditor-mobile-none">
         <div class="flex-grow overflow-y-auto overflow-x-hidden">
             <div class="info__header mb-2">
                 <strong :title="item.name">{{ item.name }}</strong>

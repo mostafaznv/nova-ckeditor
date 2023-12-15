@@ -22,7 +22,7 @@
                 />
             </div>
 
-            <figcaption @click.stop="play" class="item__preview--play">
+            <figcaption @click.stop="play" class="item__preview--play nova-ckeditor-mobile-none">
                 <Icon type="eye" />
             </figcaption>
         </figure>
