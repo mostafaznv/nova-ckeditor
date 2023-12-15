@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute">
+    <div ref="modal" class="absolute">
         <transition name="editorModal" mode="out-in">
             <div
                 v-if="modelValue"
@@ -7,9 +7,10 @@
                 role="dialog"
                 class="modal select-none fixed pin z-50 overflow-x-hidden overflow-y-auto flex flex-col bg-gray-100 dark:bg-gray-700"
                 :class="{
-                'full-screen-modal w-screen h-screen top-0 left-0 w-full': fullscreen,
-                'centered-modal rounded-lg shadow-lg border': !fullscreen
-            }"
+                    'modal-is-active': modelValue,
+                    'full-screen-modal w-screen h-screen top-0 left-0 w-full': fullscreen,
+                    'centered-modal rounded-lg shadow-lg border': !fullscreen
+                }"
             >
                 <div class="modal__header flex-0 flex items-center px-3 py-2 bg-white border-b border-primary-10%">
                     <div v-if="title" class="flex-0 text-gray-400 pl-2">
@@ -82,7 +83,10 @@ export default {
     },
     methods: {
         onKeyDownEsc(event) {
-            if (event.key === "Escape") {
+            const childModals = this.$refs.modal.querySelectorAll('.modal-is-active')
+
+
+            if (event.key === "Escape" && childModals.length === 1) {
                 this.$emit('update:modelValue', false)
             }
         },
