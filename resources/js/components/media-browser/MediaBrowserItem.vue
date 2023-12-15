@@ -10,10 +10,16 @@
                     height="32"
                 />
 
-                <picture v-else-if="cover || src">
+                <picture v-else-if="cover || (type === 'image' && src)">
                     <source :srcset="cover || src">
                     <img alt="onion" :src="cover || src">
                 </picture>
+
+                <video
+                    v-else-if="type === 'video'"
+                    :src="src"
+                    muted
+                />
             </div>
         </figure>
 
@@ -148,10 +154,14 @@ function select(one = false) {
                 height: 100%;
             }
 
-            img {
+            img, video {
                 object-fit: v-bind(objectFit);
                 width: 100%;
                 height: 100%;
+            }
+
+            video {
+                pointer-events: none;
             }
         }
     }
