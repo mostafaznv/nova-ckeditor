@@ -1,37 +1,35 @@
 <template>
     <div class="navbar">
         <div class="inline-flex items-center gap-4">
-            <transition name="fade">
-                <div>
-                    <button
-                        @click.stop="download"
-                        type="button"
-                        class="media-browser-btn"
-                        :disabled="!itemSelected"
-                    >
-                        <Icon type="download" />
-                        <span>{{ __('Download') }}</span>
-                    </button>
+            <div>
+                <button
+                    @click.stop="download"
+                    type="button"
+                    class="media-browser-btn"
+                    :disabled="!itemSelected"
+                >
+                    <Icon type="download" />
+                    <span>{{ __('Download') }}</span>
+                </button>
 
-                    <media-browser-delete
-                        @deleted="$emit('deleted')"
-                        :selected-items="selectedItems"
-                        :type="type"
-                    />
+                <media-browser-delete
+                    @deleted="$emit('deleted')"
+                    :selected-items="selectedItems"
+                    :type="type"
+                />
 
-                    <media-browser-rename-modal
-                        @update:model-value="$emit('updated')"
-                        :selected-items="selectedItems"
-                        :type="type"
-                        :disabled="!itemSelected"
-                    />
+                <media-browser-rename-modal
+                    @update:model-value="$emit('updated')"
+                    :selected-items="selectedItems"
+                    :type="type"
+                    :disabled="!itemSelected"
+                />
 
-                    <button @click.stop="copyUrl" type="button" class="media-browser-btn" :disabled="!itemSelected">
-                        <Icon type="clipboard" />
-                        <span>{{ __('Copy URL') }}</span>
-                    </button>
-                </div>
-            </transition>
+                <button @click.stop="copyUrl" type="button" class="media-browser-btn" :disabled="!itemSelected">
+                    <Icon type="clipboard" />
+                    <span>{{ __('Copy URL') }}</span>
+                </button>
+            </div>
         </div>
 
         <div class="inline-flex items-center gap-4">
