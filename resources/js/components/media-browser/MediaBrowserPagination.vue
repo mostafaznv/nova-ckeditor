@@ -27,6 +27,7 @@
         <form @submit.prevent.stop="onChangeInput">
             <input
                 v-model.number="inputPage"
+                @select.stop.prevent
                 type="number"
                 :title="__('Enter Page Number')"
                 min="1"

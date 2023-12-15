@@ -11,6 +11,7 @@
 
                 <input
                     @keydown.enter.stop.prevent="submit"
+                    @select.stop.prevent
                     v-model="name"
                     ref="input"
                     class="rename-modal__input flex-grow"
