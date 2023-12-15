@@ -128,6 +128,10 @@ function select(item) {
         justify-content: center;
         padding: 8px 16px;
 
+        @media (max-width: 800px) {
+            display: none;
+        }
+
         button {
             padding: 4px 5px 4px 4px;
             border-radius: 4px;
@@ -152,21 +156,23 @@ function select(item) {
     }
 
     &.is-extended {
-        min-width: 200px;
+        @media (min-width: 801px) {
+            min-width: 200px;
 
-        .browser-list__item {
-            justify-content: flex-start;
+            .browser-list__item {
+                justify-content: flex-start;
 
-            & > span {
-                display: block;
+                & > span {
+                    display: block;
+                }
             }
-        }
 
-        .browser-list__toggle-sidebar {
-            justify-content: flex-end;
+            .browser-list__toggle-sidebar {
+                justify-content: flex-end;
 
-            svg {
-                transform: rotate(0);
+                svg {
+                    transform: rotate(0);
+                }
             }
         }
     }

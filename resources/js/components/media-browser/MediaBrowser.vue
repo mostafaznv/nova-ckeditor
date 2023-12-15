@@ -238,6 +238,10 @@ init()
             -webkit-user-select: none;
             user-select: none;
             outline: none;
+
+            @media (max-width: 800px) {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            }
         }
     }
 }

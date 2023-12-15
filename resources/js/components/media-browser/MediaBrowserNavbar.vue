@@ -1,6 +1,6 @@
 <template>
     <div class="navbar">
-        <div class="inline-flex items-center gap-1">
+        <div class="inline-flex items-center gap-1 nova-ckeditor-mobile-none">
             <button
                 @click.stop="download"
                 type="button"
@@ -34,7 +34,7 @@
             <button
                 @click.stop="toggleInfoSidebar"
                 type="button"
-                class="media-browser-btn"
+                class="media-browser-btn nova-ckeditor-mobile-none"
                 :title="__('Properties')"
                 :disabled="!itemSelected"
             >
@@ -43,6 +43,7 @@
 
             <media-browser-search-modal
                 @update:model-value="$emit('update:keyword', $event)"
+                class="nova-ckeditor-mobile-none"
             />
 
             <media-browser-display-options
@@ -50,6 +51,7 @@
                 v-model:order-by-direction="orderByDirection"
                 v-model:size="size"
                 v-model:keep-aspect-ratio="keepAspectRatio"
+                class="nova-ckeditor-mobile-none"
             />
 
             <media-browser-upload
@@ -207,5 +209,9 @@ init()
     justify-content: space-between;
     padding: 0 16px;
     box-shadow: 0 0 6px rgba(46, 49, 56, 0.05);
+
+    @media (max-width: 768px) {
+        justify-content: flex-end;
+    }
 }
 </style>

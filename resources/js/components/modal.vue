@@ -123,6 +123,13 @@ html.modal-open body {
         height: 70%;
         left: 10%;
         top: 15%;
+
+        @media (max-width: 800px) {
+            width: 90%;
+            height: 80%;
+            left: 5%;
+            top: 10%;
+        }
     }
 }
 

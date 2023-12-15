@@ -1,5 +1,5 @@
 <template>
-    <button @click.stop="modalStatus = true" type="button" class="media-browser-btn" :title="__('Search')">
+    <button @click.stop="modalStatus = true" v-bind="$attrs" type="button" class="media-browser-btn" :title="__('Search')">
         <Icon type="search" />
     </button>
 
