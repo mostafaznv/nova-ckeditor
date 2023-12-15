@@ -86,76 +86,62 @@ export default class MediaBrowser {
     /**
      * Write Document Content.
      * @param items {Array}
-     * @param type {'image' | 'video' | 'audio'}
      * @return void
      */
-    writeContent(items, type) {
+    writeContent(items) {
         this.model.change((writer) => {
-            items.forEach(({file, url, urls}, index) => {
-                if (index === 0 && this.hasSelectedWidget(type)) {
-                    if (urls) {
-                        if (urls.image) {
-                            url = urls.image
-                        }
-                        else if (urls.video) {
-                            url = urls.video
-                        }
-                    }
+            items.forEach((item, index) => {
+                let blockName = ''
+                let payload = {}
 
+                switch (item.type) {
+                    case 'image':
+                        blockName = 'imageBlock'
+                        payload = {
+                            src: item.src,
+                            alt: item.name,
+                            imageCaption: item.name
+                        }
+
+                        break;
+
+                    case 'video':
+                        blockName = 'videoBlock'
+                        payload = {
+                            src: item.src,
+                            poster: item.cover,
+                            controls: 'controls'
+                        }
+
+                        break;
+
+                    case 'audio':
+                        blockName = 'audioBlock'
+                        payload = {
+                            src: item.src,
+                            controls: 'controls'
+                        }
+
+                        break;
+                }
+
+
+
+                if (index === 0 && this.hasSelectedWidget(item.type)) {
                     return writer.setAttributes(
-                        {
-                            src: url,
-                            alt: file,
-                            imageCaption: file
-                        },
+                        payload,
                         this.selected
                     )
                 }
 
-                if (type === 'image') {
-                    if (urls && urls.image) {
-                        url = urls.image
-                    }
-
+                if (blockName) {
                     return this.model.insertContent(
                         writer.createElement(
-                            'imageBlock',
-                            {
-                                src: url,
-                                alt: file,
-                                imageCaption: file
-                            }
+                            blockName,
+                            payload
                         ),
 
-                        this.model.document.selection.getLastPosition()
-                    )
-                }
-                else if (type === 'video') {
-                    return this.model.insertContent(
-                        writer.createElement(
-                            'videoBlock',
-                            {
-                                src: urls.video,
-                                poster: urls.cover,
-                                controls: 'controls'
-                            }
-                        ),
-
-                        // modelFragment,
-                        this.model.document.selection.getLastPosition()
-                    )
-                }
-                else if (type === 'audio') {
-                    return this.model.insertContent(
-                        writer.createElement(
-                            'audioBlock',
-                            {
-                                src: url,
-                                controls: 'controls'
-                            }
-                        ),
-
-                        // modelFragment,
+                        // modelFragment
                         this.model.document.selection.getLastPosition()
                     )
                 }

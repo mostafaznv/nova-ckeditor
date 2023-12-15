@@ -8,6 +8,7 @@
         <button
             @click="updatePage(1)"
             type="button"
+            class="pagination__button"
             :title="__('First Page')"
             :disabled="total === 1 || modelValue === 1"
         >
@@ -17,6 +18,7 @@
         <button
             @click="updatePage(modelValue - 1)"
             type="button"
+            class="pagination__button"
             :title="__('Previous Page')"
             :disabled="modelValue === 1"
         >
@@ -41,6 +43,7 @@
         <button
             @click="updatePage(modelValue + 1)"
             type="button"
+            class="pagination__button"
             :title="__('Next Page')"
             :disabled="modelValue === total"
         >
@@ -50,19 +53,35 @@
         <button
             @click="updatePage(total)"
             type="button"
+            class="pagination__button"
             :title="__('Last Page')"
             :disabled="total === 1 || modelValue === total"
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.59 7.41 10.18 12l-4.59 4.59L7 18l6-6-6-6-1.41 1.41zM16 6h2v12h-2V6z"></path></svg>
         </button>
+
+
+        <default-button
+            @click.stop="pick"
+            type="button"
+            class="select-btn flex align-middle gap-2"
+            size="sm"
+            :class="{'opacity-50': selectedItems.length === 0}"
+            :disabled="selectedItems.length === 0"
+        >
+            <Icon type="check" width="20" height="20" />
+            <span>{{ __('Choose') }}</span>
+        </default-button>
     </div>
 </template>
 
 <script setup>
 import {defineEmits, ref, watch} from 'vue'
+import {selectedItemsProp} from "../../utils/picker-props"
 
 const emit = defineEmits([
-    'update:modelValue'
+    'update:modelValue',
+    'pick'
 ])
 
 
@@ -79,7 +98,8 @@ const props = defineProps({
     loading: {
         type: Boolean,
         required: false
-    }
+    },
+    selectedItems: selectedItemsProp
 })
 
 const inputPage = ref(props.modelValue)
@@ -104,6 +124,10 @@ function onChangeInput() {
 function updatePage(value) {
     emit('update:modelValue', parseInt(value))
 }
+
+function pick() {
+    emit('pick')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -117,7 +141,7 @@ function updatePage(value) {
     box-shadow: 0 0 6px rgba(46, 49, 56, 0.05);
     z-index: 100;
 
-    button {
+    &__button {
         padding: 4px;
         border-radius: 4px;
         transition: all 300ms;
@@ -210,6 +234,17 @@ function updatePage(value) {
                 left: 100%;
                 width: 10%;
             }
+        }
+    }
+
+    .select-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        transition: all 300ms;
+
+        @media (max-width: 800px) {
+            display: none;
         }
     }
 }

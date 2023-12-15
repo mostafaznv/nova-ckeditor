@@ -15,6 +15,12 @@
         :keep-aspect-ratio="keepAspectRatio"
         :key="item.id"
     />
+
+    <transition name="fade">
+        <div v-if="selectedItems.length" class="selected-items">
+            {{ __(':count file selected', {count: selectedItems.length}) }}
+        </div>
+    </transition>
 </template>
 
 <script setup>
@@ -160,5 +166,17 @@ fetch(props.page)
     height: 100%;
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 10;
+}
+
+.selected-items {
+    position: absolute;
+    bottom: 46px;
+    left: 0;
+    background-color: rgba(23, 25, 28, 0.85);
+    color: white;
+    font-size: 14px;
+    padding: 4px 8px;
+    z-index: 5;
+    transition: all 300ms;
 }
 </style>

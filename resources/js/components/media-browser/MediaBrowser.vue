@@ -6,7 +6,11 @@
 
 
         <div class="flex h-full">
-            <media-browser-type-list v-model="type" />
+            <media-browser-type-list
+                v-model="type"
+                @pick="pickItems"
+                :selected-items="selectedItems"
+            />
 
             <div class="relative flex-grow flex flex-col justify-between">
                 <media-browser-navbar
@@ -63,7 +67,9 @@
 
                 <media-browser-pagination
                     v-model="page"
+                    @pick="pickItems"
                     :total="pagination.totalPages"
+                    :selected-items="selectedItems"
                     :loading="loading"
                 />
             </div>
@@ -93,7 +99,7 @@ import MediaBrowserNavbar from "./MediaBrowserNavbar.vue";
 const props = defineProps({
     title: {
         type: String,
-        required: true
+        default: ''
     },
     imageHasLaruploadTrait: {
         type: Boolean,
@@ -217,6 +223,26 @@ function play() {
     nextTick(() => {
         info.value?.play()
     })
+}
+
+function pickItems(item = null) {
+    let items = item ? [item] : selectedItems.value
+
+    if (items.length) {
+        items = items.map(item => {
+            return {
+                type: type.value,
+                src: item.link,
+                cover: item.file?.cover ?? null,
+                name: item.name ?? (item.file?.meta?.name ?? null),
+            }
+        })
+
+        Nova.$emit(`${event.value}:write`, items)
+
+        selectedItems.value = []
+        closeModal()
+    }
 }
 
 init()

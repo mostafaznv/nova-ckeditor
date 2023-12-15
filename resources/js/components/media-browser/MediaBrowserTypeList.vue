@@ -40,6 +40,19 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.59 18 19 16.59 14.42 12 19 7.41 17.59 6l-6 6z"></path><path d="m11 18 1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z"></path></svg>
             </button>
         </div>
+
+        <div class="browser-list__pick">
+            <default-button
+                @click.stop="pick"
+                type="button"
+                class="flex align-middle gap-2"
+                size="sm"
+                :class="{'opacity-50': selectedItems.length === 0}"
+                :disabled="selectedItems.length === 0"
+            >
+                <Icon type="check" width="20" height="20" />
+            </default-button>
+        </div>
     </div>
 </template>
 
@@ -47,10 +60,12 @@
 import {defineEmits, ref} from 'vue'
 import AudioIcon from "../icons/AudioIcon.vue"
 import VideoIcon from "../icons/VideoIcon.vue"
+import {selectedItemsProp} from "../../utils/picker-props"
 
 
 const emit = defineEmits([
-    'update:modelValue'
+    'update:modelValue',
+    'pick'
 ])
 
 
@@ -59,7 +74,8 @@ const props = defineProps({
     modelValue: {
         type: String,
         default: 'image'
-    }
+    },
+    selectedItems: selectedItemsProp
 })
 
 const localStorageKey = 'nova-ckeditor.left-sidebar-status'
@@ -75,6 +91,10 @@ function toggle() {
 
 function select(item) {
     emit('update:modelValue', item)
+}
+
+function pick() {
+    emit('pick')
 }
 </script>
 
@@ -152,6 +172,16 @@ function select(item) {
                     fill: rgba(var(--colors-gray-800));
                 }
             }
+        }
+    }
+
+    &__pick {
+        display: none;
+
+        @media (max-width: 800px) {
+            display: block;
+            text-align: center;
+            padding-bottom: 4px;
         }
     }
 
