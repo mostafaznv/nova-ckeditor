@@ -2,7 +2,7 @@
     <div v-if="item" class="info h-full">
         <div class="flex-grow overflow-y-auto overflow-x-hidden">
             <div class="info__header mb-2">
-                <strong>{{ item.name }}</strong>
+                <strong :title="item.name">{{ item.name }}</strong>
 
                 <button @click="close" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -233,6 +233,10 @@ function secondsToHms(seconds) {
             font-size: 18px;
             font-weight: 600;
             color: rgba(var(--colors-gray-500));
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 10px;
         }
 
         button {
