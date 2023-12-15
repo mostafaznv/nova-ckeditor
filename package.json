@@ -52,6 +52,8 @@
         "webpack": "^5.88.0"
     },
     "dependencies": {
+        "@vueuse/components": "^10.7.0",
+        "@vueuse/core": "^10.7.0",
         "lodash": "^4.17.21",
         "postcss-scss": "^4.0.6",
         "regex-parser": "^2.2.11",

@@ -1,5 +1,5 @@
 <template>
-    <div v-click-outside="close" class="options relative">
+    <div v-on-click-outside="close" class="options relative">
         <div>
             <button @click.stop="toggle" type="button" class="media-browser-btn" :title="__('Display Options')">
                 <Icon type="adjustments" />
@@ -64,6 +64,7 @@ import {useLocalization} from 'laravel-nova'
 import SwitchInput from "../SwitchInput.vue"
 import RadioInput from "../RadioInput.vue"
 import {orderByProp, keepAspectRatioProp} from "../../utils/picker-props"
+import {vOnClickOutside} from "@vueuse/components"
 
 
 // composables

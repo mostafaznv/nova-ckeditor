@@ -1,5 +1,5 @@
 <template>
-    <div v-click-outside="close" class="upload relative">
+    <div v-on-click-outside="close" class="upload relative">
         <div>
             <default-button @click.stop="pick" type="button" class="upload__button flex align-middle gap-2" size="sm" :class="{'with-menu': hasLaruploadTrait}">
                 <Icon type="upload" width="20" height="20" />
@@ -83,6 +83,7 @@ import {useLocalization} from 'laravel-nova'
 import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue"
 import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue"
 import {hasLaruploadTraitProp, typeProp} from "../../utils/picker-props"
+import {vOnClickOutside} from "@vueuse/components"
 
 
 // emits
