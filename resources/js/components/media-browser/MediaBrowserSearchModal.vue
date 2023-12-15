@@ -10,6 +10,7 @@
 
                 <input
                     @keydown.enter.stop.prevent="submit"
+                    @select.stop.prevent
                     v-model="keyword"
                     class="search-modal__input flex-grow"
                     :placeholder="__('Search assets')"
