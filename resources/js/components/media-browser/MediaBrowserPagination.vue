@@ -115,6 +115,7 @@ function updatePage(value) {
     background: white;
     height: 50px;
     box-shadow: 0 0 6px rgba(46, 49, 56, 0.05);
+    z-index: 100;
 
     button {
         padding: 4px;
