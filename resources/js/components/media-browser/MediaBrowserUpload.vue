@@ -216,21 +216,30 @@ async function onSelectFiles(e) {
     uploadWithCover.value = false
     counter.value += 1
 
+    let uploadCount = 0
+
     if (e.target?.files?.length) {
         const files = Array.from(e.target.files)
 
         prepareFiles(files)
 
         for (let i = 0; i < files.length; i++) {
-            await upload(files[i], i)
+            const res = await upload(files[i], i)
+
+            if (res) {
+                uploadCount += 1
+            }
         }
     }
 
     uploading.value = false
     modalStatus.value = false
 
-    Nova.success(__('Uploading process has been completed.'))
-    emit('uploaded')
+    if (uploadCount > 0) {
+        Nova.success(__(':count file(s) uploaded successfully.', {count: uploadCount}))
+
+        emit('uploaded')
+    }
 }
 
 async function upload(file, index) {
@@ -249,11 +258,15 @@ async function upload(file, index) {
                 }
             }
         )
+
+        return true
     }
     catch (e) {
         Nova.error(
             e?.message ?? __(`Something went wrong while uploading the file[${file.name}].`)
         )
+
+        return false
     }
 }
 
