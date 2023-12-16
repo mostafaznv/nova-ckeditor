@@ -4,6 +4,7 @@ namespace App\Nova\Resources;
 
 use App\Nova\Resource;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Text;
 use Mostafaznv\NovaCkEditor\ImageUpload;
 use App\Models\Image as ImageModel;
@@ -46,6 +47,12 @@ class Image extends Resource
             Text::make(trans('Height'), 'height')
                 ->exceptOnForms()
                 ->sortable(),
+
+            DateTime::make(trans('Created At'), 'created_at')
+                ->readonly(),
+
+            DateTime::make(trans('Updated At'), 'updated_at')
+                ->readonly()
         ];
     }
 
