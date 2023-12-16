@@ -219,6 +219,7 @@ function closeModal() {
 function reset(resetOrderBy = false) {
     selectedItems.value = []
     page.value = 1
+    keyword.value = ''
     pagination.value = {
         total: null,
         totalPages: 1,

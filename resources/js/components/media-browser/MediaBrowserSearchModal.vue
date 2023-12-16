@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import {ref, computed} from "vue"
+import {ref, computed, watch} from "vue"
 import modal from "../modal"
 
 
@@ -62,7 +62,7 @@ const props = defineProps({
 })
 
 const modalStatus = ref(false)
-const keyword = ref(props.modelValue)
+const keyword = ref('')
 const history = ref([])
 const storageKey = 'nova-ckeditor.keyword'
 
@@ -71,6 +71,16 @@ const storageKey = 'nova-ckeditor.keyword'
 const reverseHistory = computed(() => {
     return history.value.slice().reverse()
 })
+
+
+// watchers
+watch(
+    () => props.modelValue,
+    (value) => {
+        keyword.value = value
+    },
+    {immediate: true}
+)
 
 
 

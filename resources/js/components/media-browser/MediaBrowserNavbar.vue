@@ -43,6 +43,7 @@
 
             <media-browser-search-modal
                 @update:model-value="$emit('update:keyword', $event)"
+                :model-value="keyword"
                 class="nova-ckeditor-mobile-none"
             />
 
