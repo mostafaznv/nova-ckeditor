@@ -19,7 +19,7 @@
             </span>
 
             <span v-else>
-                {{ __('Are you sure you want to delete ":name" file?', {name: selectedItems[0].name}) }}
+                {{ __('Are you sure you want to delete ":name" file?', {name: selectedItems[0]?.name}) }}
             </span>
         </div>
 

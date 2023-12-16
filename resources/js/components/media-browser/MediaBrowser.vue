@@ -217,6 +217,8 @@ function reset() {
 }
 
 function refresh() {
+    selectedItems.value = []
+
     browserList.value?.fetch(page.value)
 }
 
