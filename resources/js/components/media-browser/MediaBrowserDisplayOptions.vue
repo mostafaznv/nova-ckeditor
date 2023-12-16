@@ -115,6 +115,8 @@ const orderByItems = computed(() => {
         {value: 'name', label: __('Name'), type: null},
         {value: 'file_file_width', label: __('Width'), type: ['image', 'video']},
         {value: 'file_file_height', label: __('Height'), type: ['image', 'video']},
+        {value: 'width', label: __('Width'), type: ['image', 'video']},
+        {value: 'height', label: __('Height'), type: ['image', 'video']},
         {value: 'file_file_size', label: __('Size'), type: null},
         {value: 'size', label: __('Size'), type: null},
         {value: 'file_file_duration', label: __('Duration'), type: ['video', 'audio']},
