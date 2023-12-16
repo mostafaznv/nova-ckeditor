@@ -262,9 +262,11 @@ async function upload(file, index) {
         return true
     }
     catch (e) {
-        Nova.error(
-            e?.message ?? __(`Something went wrong while uploading the file[${file.name}].`)
-        )
+        const msg = e?.response?.data?.errors?.[uploadFileKey.value]?.[0]
+            ?? e?.message
+            ?? __(`Something went wrong while uploading the file[${file.name}].`)
+
+        Nova.error(msg)
 
         return false
     }
