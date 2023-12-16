@@ -82,7 +82,7 @@ import axios from "axios"
 import {useLocalization} from 'laravel-nova'
 import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue"
 import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue"
-import {hasLaruploadTraitProp, typeProp} from "../../utils/picker-props"
+import {hasLaruploadTraitProp, novaVideoIsLegacyProp, typeProp} from "../../utils/picker-props"
 import {vOnClickOutside} from "@vueuse/components"
 
 
@@ -99,6 +99,7 @@ const {__} = useLocalization()
 // variables
 const props = defineProps({
     hasLaruploadTrait: hasLaruploadTraitProp,
+    novaVideoIsLegacy: novaVideoIsLegacyProp,
     type: typeProp
 })
 
@@ -149,11 +150,23 @@ const resourceKey = computed(() => {
     return 'audio'
 })
 
+const uploadFileKey = computed(() => {
+    if (props.type === 'video' && props.hasLaruploadTrait && props.novaVideoIsLegacy) {
+        return 'file_field'
+    }
+
+    return props.hasLaruploadTrait ? 'file[original]' : 'file'
+})
+
 const uploadApiUrl = computed(() => {
     return `/nova-api/${resourceKey.value}`
 })
 
 const uploadWithCoverIsDisabled = computed(() => {
+    if (props.type === 'video' && props.hasLaruploadTrait && props.novaVideoIsLegacy) {
+        return true
+    }
+
     return !props.hasLaruploadTrait || !fileWithCover.value.isValid || uploading.value
 })
 
@@ -224,10 +237,7 @@ async function upload(file, index) {
     const data = new FormData()
 
     data.append('name', file.name.split('.').slice(0, -1).join('.'))
-    data.append(
-        props.hasLaruploadTrait ? 'file[original]' : 'file',
-        file
-    )
+    data.append(uploadFileKey.value, file)
 
     try {
         await axios.post(

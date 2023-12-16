@@ -22,6 +22,7 @@
                     :selected-items="selectedItems"
                     :type="type"
                     :has-larupload-trait="hasLaruploadTrait"
+                    :nova-video-is-legacy="novaVideoIsLegacy"
                 />
 
                 <div class="media-browser__list p-4">
@@ -96,10 +97,12 @@ import MediaBrowserInfo from "./MediaBrowserInfo.vue"
 import MediaBrowserList from "./MediaBrowserList.vue"
 import MediaBrowserPagination from "./MediaBrowserPagination.vue"
 import MediaBrowserNavbar from "./MediaBrowserNavbar.vue";
+import {novaVideoIsLegacyProp} from "../../utils/picker-props"
 
 
 // variables
 const props = defineProps({
+    novaVideoIsLegacy: novaVideoIsLegacyProp,
     title: {
         type: String,
         default: ''

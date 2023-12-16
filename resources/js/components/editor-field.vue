@@ -10,6 +10,7 @@
                 :field-key="$options[editorUUID] + '-media-browser'"
                 :image-has-larupload-trait="currentField.imageHasLaruploadTrait"
                 :video-has-larupload-trait="currentField.videoHasLaruploadTrait"
+                :nova-video-is-legacy="currentField.novaVideoIsLegacy"
                 :multiple="true"
             />
 
