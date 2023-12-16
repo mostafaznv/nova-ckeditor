@@ -263,7 +263,9 @@ async function upload(file, index) {
         return true
     }
     catch (e) {
-        const msg = e?.response?.data?.errors?.[uploadFileKey.value]?.[0]
+        const msg = e?.response?.data?.errors?.['file']?.[0]
+            ?? e?.response?.data?.errors?.['file.original']?.[0]
+            ?? e?.response?.data?.errors?.['file_field']?.[0]
             ?? e?.message
             ?? __(`Something went wrong while uploading the file[${file.name}].`)
 
