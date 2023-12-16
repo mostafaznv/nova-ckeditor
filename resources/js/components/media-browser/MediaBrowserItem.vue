@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import {computed, defineEmits} from "vue"
+import {computed} from "vue"
 import AudioIcon from "../icons/AudioIcon.vue"
 import {typeProp, selectedItemsProp, keepAspectRatioProp, gallerySizeProp} from "../../utils/picker-props"
 

@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import {ref, defineEmits} from 'vue'
+import {ref} from 'vue'
 
 // emits
 const emit = defineEmits([

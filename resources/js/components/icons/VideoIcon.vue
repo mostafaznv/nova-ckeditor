@@ -5,8 +5,6 @@
 </template>
 
 <script lang="js" setup>
-import {defineProps} from 'vue'
-
 const props = defineProps({
     width: {
         type: [Number, String],

@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import {ref, computed, watch, defineEmits, nextTick} from "vue"
+import {ref, computed, watch, nextTick} from "vue"
 import modal from "../modal"
 import {useLocalization} from 'laravel-nova'
 import {selectedItemsProp, typeProp} from "../../utils/picker-props"

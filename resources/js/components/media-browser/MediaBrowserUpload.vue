@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import {ref, computed, watch, defineProps, defineEmits} from "vue"
+import {ref, computed, watch} from "vue"
 import Modal from "../modal.vue"
 import axios from "axios"
 import {useLocalization} from 'laravel-nova'

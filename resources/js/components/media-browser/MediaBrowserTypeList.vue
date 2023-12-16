@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import {defineEmits, ref} from 'vue'
+import {ref} from 'vue'
 import AudioIcon from "../icons/AudioIcon.vue"
 import VideoIcon from "../icons/VideoIcon.vue"
 import {selectedItemsProp} from "../../utils/picker-props"

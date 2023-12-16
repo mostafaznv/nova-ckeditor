@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import {ref, defineProps, defineEmits} from "vue"
+import {ref} from "vue"
 import {useLocalization} from 'laravel-nova'
 import SwitchInput from "../SwitchInput.vue"
 import RadioInput from "../RadioInput.vue"

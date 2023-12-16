@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import {ref, computed, defineEmits, watch} from "vue"
+import {ref, computed, watch} from "vue"
 import MediaBrowserUpload from "./MediaBrowserUpload.vue"
 import {useClipboard} from "../../composables/useClipboard"
 import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue"

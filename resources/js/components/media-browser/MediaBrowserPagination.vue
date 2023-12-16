@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import {defineEmits, ref, watch} from 'vue'
+import {ref, watch} from 'vue'
 import {selectedItemsProp} from "../../utils/picker-props"
 
 const emit = defineEmits([

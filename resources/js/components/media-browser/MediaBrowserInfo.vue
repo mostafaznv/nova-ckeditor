@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import {ref, computed, defineEmits} from 'vue'
+import {ref, computed} from 'vue'
 import {useLocalization} from 'laravel-nova'
 import {useClipboard} from "../../composables/useClipboard"
 import {selectedItemsProp, typeProp} from "../../utils/picker-props"

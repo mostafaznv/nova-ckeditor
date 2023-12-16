@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import {ref, computed, watch, defineEmits, defineExpose} from "vue"
+import {ref, computed, watch} from "vue"
 import useResourceRequest from "../../composables/useResourceRequest"
 import {paginationProp, sortProp, keepAspectRatioProp, typeProp, gallerySizeProp, selectedItemsProp, loadingProp, keywordProp, hasLaruploadTraitProp, orderByProp} from "../../utils/picker-props"
 import MediaBrowserItem from "./MediaBrowserItem.vue"

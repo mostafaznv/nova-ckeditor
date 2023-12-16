@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import {ref, watch, computed, defineEmits, defineExpose} from "vue"
+import {ref, watch, computed} from "vue"
 import {useLocalization} from 'laravel-nova'
 import FileInput from "../FileInput.vue"
 import axios from "axios"

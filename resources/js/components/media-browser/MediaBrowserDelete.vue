@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import {ref, computed, defineEmits} from "vue"
+import {ref, computed} from "vue"
 import modal from "../modal"
 import {useLocalization} from 'laravel-nova'
 import {selectedItemsProp, typeProp} from "../../utils/picker-props"

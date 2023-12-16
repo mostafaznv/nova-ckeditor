@@ -19,9 +19,6 @@
 </template>
 
 <script setup>
-import {defineProps} from "vue"
-
-
 // variables
 const props = defineProps({
     item: {
