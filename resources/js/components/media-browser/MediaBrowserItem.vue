@@ -1,5 +1,5 @@
 <template>
-    <div @click="select(true)" class="item" :class="{selected: isSelected}">
+    <div @dblclick.stop="pick" @click.stop="select(true)" class="item" :class="{selected: isSelected}">
         <figure class="item__preview">
             <figcaption class="item__preview--format">{{ format }}</figcaption>
 
@@ -47,6 +47,7 @@ import {typeProp, selectedItemsProp, keepAspectRatioProp, gallerySizeProp} from 
 const emits = defineEmits([
     'select',
     'selectOne',
+    'pick',
     'play'
 ])
 
@@ -112,6 +113,13 @@ function select(one = false) {
     item.link = src.value
 
     emits(one === true ? 'selectOne' : 'select', item)
+}
+
+function pick() {
+    const item = props.item
+    item.link = src.value
+
+    emits('pick', item)
 }
 
 function play() {

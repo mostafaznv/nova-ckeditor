@@ -7,6 +7,7 @@
         v-for="item in items"
         @select="selected"
         @select-one="selectedOne"
+        @pick="pick"
         @play="play"
         :type="type"
         :item="item"
@@ -41,6 +42,7 @@ const emits = defineEmits([
     'update:pagination',
     'update:loading',
     'update:selectedItems',
+    'pick',
     'play'
 ])
 
@@ -145,6 +147,10 @@ function selected(item) {
 
 function selectedOne(item) {
     emits('update:selectedItems', [item])
+}
+
+function pick(item) {
+    emits('pick', item)
 }
 
 function play(item) {

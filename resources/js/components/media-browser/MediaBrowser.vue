@@ -33,6 +33,7 @@
                         <media-browser-list
                             v-if="type === 'image'"
                             ref="browserList"
+                            @pick="pickItems"
                             @play="play"
                             v-model:pagination="pagination"
                             v-model:loading="loading"
@@ -44,6 +45,7 @@
                         <media-browser-list
                             v-else-if="type === 'video'"
                             ref="browserList"
+                            @pick="pickItems"
                             @play="play"
                             v-model:pagination="pagination"
                             v-model:loading="loading"
@@ -55,6 +57,7 @@
                         <media-browser-list
                             v-else-if="type === 'audio'"
                             ref="browserList"
+                            @pick="pickItems"
                             @play="play"
                             v-model:pagination="pagination"
                             v-model:loading="loading"
