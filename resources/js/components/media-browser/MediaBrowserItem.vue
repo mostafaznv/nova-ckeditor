@@ -11,8 +11,15 @@
                 />
 
                 <picture v-else-if="cover || (type === 'image' && src)">
-                    <source :srcset="cover || src">
-                    <img alt="onion" :src="cover || src">
+                    <template v-if="item.file?.meta?.format === 'gif'">
+                        <source :srcset="src">
+                        <img alt="onion" :src="src">
+                    </template>
+
+                    <template v-else>
+                        <source :srcset="cover || src">
+                        <img alt="onion" :src="cover || src">
+                    </template>
                 </picture>
 
                 <video
