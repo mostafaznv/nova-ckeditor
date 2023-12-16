@@ -51,6 +51,8 @@
                 v-model:order-by-direction="orderByDirection"
                 v-model:size="size"
                 v-model:keep-aspect-ratio="keepAspectRatio"
+                :type="type"
+                :columns="columns"
                 class="nova-ckeditor-mobile-none"
             />
 
@@ -72,7 +74,7 @@ import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue"
 import MediaBrowserSearchModal from "./MediaBrowserSearchModal.vue"
 import MediaBrowserDelete from "./MediaBrowserDelete.vue"
 import MediaBrowserRenameModal from "./MediaBrowserRenameModal.vue"
-import {hasLaruploadTraitProp, selectedItemsProp, typeProp, keywordProp, sortProp, paginationProp, novaVideoIsLegacyProp} from "../../utils/picker-props"
+import {hasLaruploadTraitProp, selectedItemsProp, typeProp, keywordProp, sortProp, paginationProp, novaVideoIsLegacyProp, columnsProp} from "../../utils/picker-props"
 
 
 // composables
@@ -98,6 +100,7 @@ const props = defineProps({
     keyword: keywordProp,
     sort: sortProp,
     pagination: paginationProp,
+    columns: columnsProp,
     showInfoSidebar: {
         type: Boolean,
         default: false
@@ -139,6 +142,17 @@ const displayOptionsComputed = computed(() => {
 
 
 // watchers
+watch(
+    () => props.displayOptions,
+    (value, oldValue) => {
+        if (value.orderBy === 'id' && value.orderBy === oldValue.orderBy) {
+            orderBy.value = value.orderBy
+        }
+    },
+    {deep: true}
+)
+
+
 watch(
     () => displayOptionsComputed.value,
     () => {

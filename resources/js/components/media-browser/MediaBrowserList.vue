@@ -27,7 +27,7 @@
 <script setup>
 import {ref, computed, watch} from "vue"
 import useResourceRequest from "../../composables/useResourceRequest"
-import {paginationProp, sortProp, keepAspectRatioProp, typeProp, gallerySizeProp, selectedItemsProp, loadingProp, keywordProp, hasLaruploadTraitProp, orderByProp} from "../../utils/picker-props"
+import {paginationProp, sortProp, keepAspectRatioProp, typeProp, gallerySizeProp, selectedItemsProp, loadingProp, keywordProp, hasLaruploadTraitProp, orderByProp, columnsProp} from "../../utils/picker-props"
 import MediaBrowserItem from "./MediaBrowserItem.vue"
 
 
@@ -42,6 +42,7 @@ const emits = defineEmits([
     'update:pagination',
     'update:loading',
     'update:selectedItems',
+    'update:columns',
     'pick',
     'play'
 ])
@@ -63,6 +64,7 @@ const props = defineProps({
     orderBy: orderByProp,
     sort: sortProp,
     pagination: paginationProp,
+    columns: columnsProp,
     page: {
         type: Number,
         default: 1
@@ -124,6 +126,12 @@ async function fetch(page = 1) {
     return await fetchResourceList(resourceKey.value, params)
         .then((entities) => {
             items.value = entities
+
+
+            emits(
+                'update:columns',
+                items.value.length ? Object.keys(items.value[0]) : []
+            )
         })
         .finally(() => {
             emits('update:loading', false)

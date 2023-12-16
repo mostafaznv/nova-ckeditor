@@ -59,11 +59,11 @@
 </template>
 
 <script setup>
-import {ref} from "vue"
+import {ref, computed} from "vue"
 import {useLocalization} from 'laravel-nova'
 import SwitchInput from "../SwitchInput.vue"
 import RadioInput from "../RadioInput.vue"
-import {orderByProp, keepAspectRatioProp} from "../../utils/picker-props"
+import {orderByProp, keepAspectRatioProp, columnsProp, typeProp} from "../../utils/picker-props"
 import {vOnClickOutside} from "@vueuse/components"
 
 
@@ -84,6 +84,8 @@ const emits = defineEmits([
 const props = defineProps({
     orderBy: orderByProp,
     keepAspectRatio: keepAspectRatioProp,
+    type: typeProp,
+    columns: columnsProp,
     orderByDirection: {
         type: String,
         default: 'desc',
@@ -105,17 +107,31 @@ const orderByDirectionItems = ref([
     {value: 'desc', label: __('Descending')}
 ])
 
-const orderByItems = [
-    // todo - some of these should be disabled on different types of picker
-    {value: 'id', label: __('ID')},
-    {value: 'name', label: __('Name')},
-    {value: 'width', label: __('Width')},
-    {value: 'height', label: __('Height')},
-    {value: 'size', label: __('Size')},
-    {value: 'duration', label: __('Duration')},
-    {value: 'created_at', label: __('Created At')},
-    {value: 'updated_at', label: __('Updated At')},
-]
+
+// computed properties
+const orderByItems = computed(() => {
+    const items = [
+        {value: 'id', label: __('ID'), type: null},
+        {value: 'name', label: __('Name'), type: null},
+        {value: 'file_file_width', label: __('Width'), type: ['image', 'video']},
+        {value: 'file_file_height', label: __('Height'), type: ['image', 'video']},
+        {value: 'file_file_size', label: __('Size'), type: null},
+        {value: 'size', label: __('Size'), type: null},
+        {value: 'file_file_duration', label: __('Duration'), type: ['video', 'audio']},
+        {value: 'created_at', label: __('Created At'), type: null},
+        {value: 'updated_at', label: __('Updated At'), type: null},
+    ]
+
+    return items.filter(item => {
+        const exists = props.columns.includes(item.value)
+
+        if (item.type === null) {
+            return exists
+        }
+
+        return item.type.includes(props.type) && exists
+    })
+})
 
 
 // methods

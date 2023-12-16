@@ -19,8 +19,9 @@
                     v-model:show-info-sidebar="withInfo"
                     @deleted="refresh"
                     @updated="refresh"
-                    :selected-items="selectedItems"
                     :type="type"
+                    :selected-items="selectedItems"
+                    :columns="columns"
                     :has-larupload-trait="hasLaruploadTrait"
                     :nova-video-is-legacy="novaVideoIsLegacy"
                 />
@@ -39,6 +40,7 @@
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
+                            v-model:columns="columns"
                             v-bind="listComponentProps"
                             type="image"
                         />
@@ -51,6 +53,7 @@
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
+                            v-model:columns="columns"
                             v-bind="listComponentProps"
                             type="video"
                         />
@@ -63,6 +66,7 @@
                             v-model:pagination="pagination"
                             v-model:loading="loading"
                             v-model:selected-items="selectedItems"
+                            v-model:columns="columns"
                             v-bind="listComponentProps"
                             type="audio"
                         />
@@ -131,6 +135,7 @@ const keyword = ref('')
 const displayOptions = ref({})
 const page = ref(1)
 const selectedItems = ref([])
+const columns = ref([])
 const pagination = ref({
     total: null,
     totalPages: 1,
@@ -179,7 +184,12 @@ const listComponentProps = computed(() => {
 
 
 // watchers
-watch(() => type.value, reset)
+watch(
+    () => type.value,
+    () => {
+        reset(true)
+    }
+)
 
 watch(
     () => displayOptions.value,
@@ -206,7 +216,7 @@ function closeModal() {
     modalStatus.value = false
 }
 
-function reset() {
+function reset(resetOrderBy = false) {
     selectedItems.value = []
     page.value = 1
     pagination.value = {
@@ -216,6 +226,10 @@ function reset() {
         perPageOptions: [],
         hasNextPage: false,
         hasPrevPage: false
+    }
+
+    if (resetOrderBy) {
+        displayOptions.value.orderBy = 'id'
     }
 }
 

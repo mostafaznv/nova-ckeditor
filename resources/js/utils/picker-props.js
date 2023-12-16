@@ -34,6 +34,11 @@ export const paginationProp = {
     default: {}
 }
 
+export const columnsProp = {
+    type: Array,
+    default: () => []
+}
+
 export const keepAspectRatioProp = {
     type: Boolean,
     default: false
