@@ -234,6 +234,7 @@ async function onSelectFiles(e) {
 
     uploading.value = false
     modalStatus.value = false
+    input.value.value = null
 
     if (uploadCount > 0) {
         Nova.success(__(':count file(s) uploaded successfully.', {count: uploadCount}))

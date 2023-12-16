@@ -1,6 +1,7 @@
 <template>
     <div>
         <file-input
+            ref="originalInput"
             @file-changed="onOriginalChange"
             :label="__('Original File')"
             :accepted-types="acceptedTypes"
@@ -9,6 +10,7 @@
 
         <file-input
             @file-changed="onCoverChange"
+            ref="coverInput"
             class="mt-3"
             :label="__('Cover')"
             accepted-types="image/*"
@@ -53,6 +55,8 @@ const props = defineProps({
     }
 })
 
+const originalInput = ref(null)
+const coverInput = ref(null)
 const original = ref(null)
 const cover = ref(null)
 const uploading = ref(false)
@@ -133,6 +137,8 @@ async function upload() {
     }
 
     uploading.value = false
+    originalInput.value?.reset()
+    coverInput.value?.reset()
 
     return result
 }

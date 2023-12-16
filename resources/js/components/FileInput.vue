@@ -31,6 +31,13 @@
 <script setup>
 import {ref} from 'vue'
 
+
+// exposes
+defineExpose({
+    reset
+})
+
+
 // emits
 const emit = defineEmits([
     'fileChanged', 'fileRemoved'
@@ -76,5 +83,11 @@ function handleChange() {
 
     fileName.value = demFiles.value[0]?.name ?? undefined
     fileInput.value.files = null
+}
+
+function reset() {
+    if (fileInput.value) {
+        fileInput.value.value = null
+    }
 }
 </script>
