@@ -78,12 +78,20 @@ const src = computed(() => {
         return props.item.file.original
     }
 
+    if (props.item?.file_field?.original) {
+        return props.item.file_field.original
+    }
+
     return props.item.url ?? null
 })
 
 const cover = computed(() => {
     if (props.item?.file?.cover) {
         return props.item.file.cover
+    }
+
+    if (props.item?.file_field?.cover) {
+        return props.item.file_field.cover
     }
 
     return null
