@@ -24,9 +24,9 @@
 
 <script>
 import CkEditor from '../ckeditor/ckeditor'
-import SnippetBrowser from "./snippet-browser/SnippetBrowser.vue"
-import MediaBrowser from './media-browser/MediaBrowser.vue'
-import HasUUID from "./mixins/hasUUID"
+import SnippetBrowser from "../components/snippet-browser/SnippetBrowser.vue"
+import MediaBrowser from '../components/media-browser/MediaBrowser.vue'
+import HasUUID from "../components/mixins/hasUUID"
 import {DependentFormField, HandlesValidationErrors} from 'laravel-nova'
 import debounce from 'lodash/debounce'
 import RegexParser from 'regex-parser'

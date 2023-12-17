@@ -4,7 +4,9 @@
 
 <script>
 export default {
-    props: ['resourceName', 'field'],
+    props: [
+        'resourceName', 'field'
+    ],
     computed: {
         value() {
             if (this.field.value) {

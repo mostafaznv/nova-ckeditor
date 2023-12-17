@@ -1,6 +1,6 @@
-import EditorIndex from './components/editor-index'
-import EditorDetail from './components/editor-detail'
-import EditorField from './components/editor-field'
+import EditorIndex from './fields/editor-index'
+import EditorDetail from './fields/editor-detail'
+import EditorField from './fields/editor-field'
 
 
 Nova.booting((Vue) => {
