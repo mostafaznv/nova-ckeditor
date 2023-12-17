@@ -3,19 +3,27 @@
         <div v-if="loading" class="loading" />
     </transition>
 
-    <media-browser-item
-        v-for="item in items"
-        @select="selected"
-        @select-one="selectedOne"
-        @pick="pick"
-        @play="play"
-        :type="type"
-        :item="item"
-        :selected-items="selectedItems"
-        :gallery-size="gallerySize"
-        :keep-aspect-ratio="keepAspectRatio"
-        :key="item.id"
-    />
+
+    <template v-if="items.length">
+        <media-browser-item
+            v-for="item in items"
+            @select="selected"
+            @select-one="selectedOne"
+            @pick="pick"
+            @play="play"
+            :type="type"
+            :item="item"
+            :selected-items="selectedItems"
+            :gallery-size="gallerySize"
+            :keep-aspect-ratio="keepAspectRatio"
+            :key="item.id"
+        />
+    </template>
+
+    <div v-else class="flex flex-col items-center justify-center h-full">
+        <p class="text-gray-500 text-center">{{ __('No Results') }}</p>
+    </div>
+
 
     <transition name="fade">
         <div v-if="selectedItems.length" class="selected-items">

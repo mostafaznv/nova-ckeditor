@@ -31,7 +31,11 @@
                         {{ __('Search results for') }} <b>{{ keyword }}:</b>
                     </div>
 
-                    <div class="media-browser__list--main" :style="`--nova-ckeditor-gallery-size:${gallerySize}`">
+                    <div
+                        class="media-browser__list--main"
+                        :class="{'no-result': !pagination.total}"
+                        :style="`--nova-ckeditor-gallery-size:${gallerySize}`"
+                    >
                         <media-browser-list
                             v-if="type === 'image'"
                             ref="browserList"
@@ -295,6 +299,11 @@ init()
             -webkit-user-select: none;
             user-select: none;
             outline: none;
+
+            &.no-result {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+                height: 100%;
+            }
 
             @media (max-width: 800px) {
                 grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
