@@ -10,6 +10,9 @@
                 v-model="type"
                 @pick="pickItems"
                 :selected-items="selectedItems"
+                :has-image-picker="hasImagePicker"
+                :has-video-picker="hasVideoPicker"
+                :has-audio-picker="hasAudioPicker"
             />
 
             <div class="relative flex-grow flex flex-col justify-between">
@@ -126,10 +129,22 @@ const props = defineProps({
     fieldKey: {
         type: String,
         default: 'content'
+    },
+    hasImagePicker: {
+        type: Boolean,
+        default: true
+    },
+    hasVideoPicker: {
+        type: Boolean,
+        default: true
+    },
+    hasAudioPicker: {
+        type: Boolean,
+        default: true
     }
 })
 
-const type = ref('image')
+const type = ref('')
 const info = ref(null)
 const modalStatus = ref(false)
 const browserList = ref(false)
@@ -210,6 +225,16 @@ watch(
 function init() {
     Nova.$on(event.value, openModal)
     Nova.$on('ckeditor:focused', closeModal)
+
+    if (props.hasImagePicker) {
+        type.value = 'image'
+    }
+    else if (props.hasVideoPicker) {
+        type.value = 'video'
+    }
+    else if (props.hasAudioPicker) {
+        type.value = 'audio'
+    }
 }
 
 function openModal() {

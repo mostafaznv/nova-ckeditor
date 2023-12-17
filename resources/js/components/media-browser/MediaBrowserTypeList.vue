@@ -2,6 +2,7 @@
     <div class="browser-list" :class="{'is-extended': extended}">
         <div>
             <div
+                v-if="hasImagePicker"
                 @click="select('image')"
                 class="browser-list__item"
                 :class="{selected: modelValue === 'image'}"
@@ -13,6 +14,7 @@
             </div>
 
             <div
+                v-if="hasVideoPicker"
                 @click="select('video')"
                 class="browser-list__item"
                 :class="{selected: modelValue === 'video'}"
@@ -24,6 +26,7 @@
             </div>
 
             <div
+                v-if="hasAudioPicker"
                 @click="select('audio')"
                 class="browser-list__item"
                 :class="{selected: modelValue === 'audio'}"
@@ -71,11 +74,26 @@ const emit = defineEmits([
 
 // variables
 const props = defineProps({
+    selectedItems: selectedItemsProp,
     modelValue: {
         type: String,
-        default: 'image'
+        required: true,
+        validator(value) {
+            return ['image', 'video', 'audio'].includes(value)
+        }
     },
-    selectedItems: selectedItemsProp
+    hasImagePicker: {
+        type: Boolean,
+        default: true
+    },
+    hasVideoPicker: {
+        type: Boolean,
+        default: true
+    },
+    hasAudioPicker: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const localStorageKey = 'nova-ckeditor.left-sidebar-status'

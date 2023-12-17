@@ -11,6 +11,9 @@
                 :image-has-larupload-trait="currentField.imageHasLaruploadTrait"
                 :video-has-larupload-trait="currentField.videoHasLaruploadTrait"
                 :nova-video-is-legacy="currentField.novaVideoIsLegacy"
+                :has-image-picker="currentField.imageBrowser"
+                :has-video-picker="currentField.videoBrowser"
+                :has-audio-picker="currentField.audioBrowser"
                 :multiple="true"
             />
 
