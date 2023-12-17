@@ -94,7 +94,7 @@
 </template>
 
 <script setup>
-import {computed, nextTick, ref, watch} from "vue"
+import {computed, nextTick, ref, watch, onBeforeUnmount} from "vue"
 import modal from "../modal"
 import MediaBrowserTypeList from "./MediaBrowserTypeList.vue"
 import MediaBrowserInfo from "./MediaBrowserInfo.vue"
@@ -267,6 +267,14 @@ function pickItems(item = null) {
         closeModal()
     }
 }
+
+
+// hooks
+onBeforeUnmount(() => {
+    Nova.$off(event.value, openModal)
+    Nova.$off('ckeditor:focused', closeModal)
+})
+
 
 init()
 </script>

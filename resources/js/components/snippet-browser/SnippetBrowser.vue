@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue"
+import {computed, ref, onBeforeUnmount} from "vue"
 import modal from "../modal"
 import SnippetBrowserTypeList from "./SnippetBrowserTypeList.vue"
 import SnippetBrowserFooter from "./SnippetBrowserFooter.vue"
@@ -81,6 +81,13 @@ function pick() {
         closeModal()
     }
 }
+
+
+// hooks
+onBeforeUnmount(() => {
+    Nova.$off(event.value, openModal)
+    Nova.$off('ckeditor:focused', closeModal)
+})
 
 
 init()
