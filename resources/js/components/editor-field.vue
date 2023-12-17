@@ -14,14 +14,17 @@
                 :multiple="true"
             />
 
-            <snippet-browser :field-key="$options[editorUUID]" :snippets="currentField.snippetBrowser" />
+            <snippet-browser
+                :field-key="$options[editorUUID] + '-snippets-browser'"
+                :snippets="currentField.snippetBrowser"
+            />
         </template>
     </default-field>
 </template>
 
 <script>
 import CkEditor from '../ckeditor/ckeditor'
-import SnippetBrowser from "./snippet-browser"
+import SnippetBrowser from "./snippet-browser/SnippetBrowser.vue"
 import MediaBrowser from './media-browser/MediaBrowser.vue'
 import HasUUID from "./mixins/hasUUID"
 import {DependentFormField, HandlesValidationErrors} from 'laravel-nova'
