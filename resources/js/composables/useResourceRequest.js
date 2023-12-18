@@ -43,7 +43,7 @@ export default function useResourceRequest(emits) {
 
                 pagination.value = {
                     total: data.total,
-                    totalPages: parseInt(data.total / data.per_page) + 1,
+                    totalPages: Math.ceil(data.total / data.per_page),
                     perPage: data.per_page,
                     perPageOptions: data.per_page_options,
                     hasNextPage: !!data.next_page_url,
