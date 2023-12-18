@@ -78,7 +78,6 @@
 <script setup>
 import {ref, computed, watch} from "vue"
 import Modal from "../modal.vue"
-import axios from "axios"
 import {useLocalization} from 'laravel-nova'
 import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue"
 import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue"
@@ -250,15 +249,17 @@ async function upload(file, index) {
     data.append(uploadFileKey.value, file)
 
     try {
-        await axios.post(
-            uploadApiUrl.value, data,
-            {
-                onUploadProgress: (e) => {
-                    calculateItemUploadedPercent(e, index)
-                    calculateTotalUploadedPercent()
+        await Nova.request()
+            .post(
+                uploadApiUrl.value,
+                data,
+                {
+                    onUploadProgress: (e) => {
+                        calculateItemUploadedPercent(e, index)
+                        calculateTotalUploadedPercent()
+                    }
                 }
-            }
-        )
+            )
 
         return true
     }

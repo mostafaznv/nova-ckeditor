@@ -23,7 +23,6 @@
 import {ref, watch, computed} from "vue"
 import {useLocalization} from 'laravel-nova'
 import FileInput from "../FileInput.vue"
-import axios from "axios"
 
 
 // exposes
@@ -110,14 +109,16 @@ async function upload() {
     data.append('file[cover]', file.value.cover)
 
     try {
-        await axios.post(
-            props.uploadApiUrl, data,
-            {
-                onUploadProgress: (e) => {
-                    percent.value = Math.round((e.loaded * 100) / e.total)
+        await Nova.request()
+            .post(
+                props.uploadApiUrl,
+                data,
+                {
+                    onUploadProgress: (e) => {
+                        percent.value = Math.round((e.loaded * 100) / e.total)
+                    }
                 }
-            }
-        )
+            )
 
         Nova.success(__('Uploading process has been completed.'))
         result = true
