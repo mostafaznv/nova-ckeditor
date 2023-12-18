@@ -46,7 +46,11 @@
         </transition>
 
         <transition name="fade">
-            <div v-if="modelValue" class="overlay" />
+            <div
+                v-if="modelValue"
+                @click.stop="$emit('update:modelValue',false)"
+                class="overlay"
+            />
         </transition>
     </div>
 </template>
