@@ -145,6 +145,7 @@ function pick() {
         padding: 4px;
         border-radius: 4px;
         transition: all 300ms;
+        cursor: pointer;
 
         svg {
             width: 24px;
@@ -163,6 +164,7 @@ function pick() {
 
         &:disabled {
             opacity: 0.5;
+            cursor: not-allowed;
         }
     }
 
