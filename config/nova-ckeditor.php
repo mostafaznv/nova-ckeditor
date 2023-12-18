@@ -171,9 +171,7 @@ return [
                 'fontBackgroundColor',
                 '|',
                 'insertTable',
-                'imageBrowser',
-                'videoBrowser',
-                'audioBrowser',
+                'mediaBrowser',
                 'mediaEmbed',
                 'link',
                 'resizeImage',
@@ -447,7 +445,7 @@ return [
                     ],
 
                     'toolbar' => [
-                        'imageBrowser',
+                        'mediaBrowser',
                         '|',
                         'imageStyle:full',
                         'imageStyle:alignLeft',

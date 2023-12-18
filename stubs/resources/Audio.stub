@@ -4,6 +4,7 @@ namespace App\Nova\Resources;
 
 use App\Nova\Resource;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Mostafaznv\NovaCkEditor\AudioUpload;
@@ -40,6 +41,11 @@ class Audio extends Resource
                 ->exceptOnForms()
                 ->sortable(),
 
+            DateTime::make(trans('Created At'), 'created_at')
+                ->readonly(),
+
+            DateTime::make(trans('Updated At'), 'updated_at')
+                ->readonly()
         ];
     }
 

@@ -46,12 +46,13 @@
         "sass": "^1.63.6",
         "sass-loader": "^13.3.2",
         "style-loader": "^3.3.3",
-        "v-lazy-image": "^2.1.1",
         "vue-loader": "^17.2.2",
         "vue-template-compiler": "^2.7.14",
         "webpack": "^5.88.0"
     },
     "dependencies": {
+        "@vueuse/components": "^10.7.0",
+        "@vueuse/core": "^10.7.0",
         "lodash": "^4.17.21",
         "postcss-scss": "^4.0.6",
         "regex-parser": "^2.2.11",

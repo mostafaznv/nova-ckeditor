@@ -6,39 +6,30 @@
             <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
 
             <media-browser
-                @select="$options[editorName].execute('imageBrowser', $event)"
-                type="image"
-                :field-key="$options[editorUUID] + '-image'"
-                :multiple="true"
-                :has-larupload-trait="currentField.imageHasLaruploadTrait"
-            />
-
-            <media-browser
-                @select="$options[editorName].execute('videoBrowser', $event)"
-                type="video"
-                :field-key="$options[editorUUID] + '-video'"
-                :multiple="true"
-                :has-larupload-trait="currentField.videoHasLaruploadTrait"
+                @select="$options[editorName].execute('mediaBrowser', $event)"
+                :field-key="$options[editorUUID] + '-media-browser'"
+                :image-has-larupload-trait="currentField.imageHasLaruploadTrait"
+                :video-has-larupload-trait="currentField.videoHasLaruploadTrait"
                 :nova-video-is-legacy="currentField.novaVideoIsLegacy"
-            />
-
-            <media-browser
-                @select="$options[editorName].execute('audioBrowser', $event)"
-                type="audio"
-                :field-key="$options[editorUUID] + '-audio'"
+                :has-image-picker="currentField.imageBrowser"
+                :has-video-picker="currentField.videoBrowser"
+                :has-audio-picker="currentField.audioBrowser"
                 :multiple="true"
             />
 
-            <snippet-browser :field-key="$options[editorUUID]" :snippets="currentField.snippetBrowser" />
+            <snippet-browser
+                :field-key="$options[editorUUID] + '-snippets-browser'"
+                :snippets="currentField.snippetBrowser"
+            />
         </template>
     </default-field>
 </template>
 
 <script>
 import CkEditor from '../ckeditor/ckeditor'
-import SnippetBrowser from "./snippet-browser"
-import MediaBrowser from "./media-browser"
-import HasUUID from "./mixins/hasUUID"
+import SnippetBrowser from "../components/snippet-browser/SnippetBrowser.vue"
+import MediaBrowser from '../components/media-browser/MediaBrowser.vue'
+import HasUUID from "../components/mixins/hasUUID"
 import {DependentFormField, HandlesValidationErrors} from 'laravel-nova'
 import debounce from 'lodash/debounce'
 import RegexParser from 'regex-parser'
@@ -81,9 +72,7 @@ export default {
 
             const config = {
                 attribute: this.$options[this.editorUUID],
-                imageBrowser: this.currentField.imageBrowser,
-                videoBrowser: this.currentField.videoBrowser,
-                audioBrowser: this.currentField.audioBrowser,
+                mediaBrowser: true,
                 snippetBrowser: this.currentField.snippetBrowser,
                 htmlSupport: this.normalizeHtmlSupportItems(this.currentField.htmlSupport),
                 isReadOnly: this.currentField.readonly,

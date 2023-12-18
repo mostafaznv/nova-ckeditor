@@ -2,7 +2,7 @@
     <panel-item :field="field">
         <template #value>
             <div class="ckeditor_content">
-                <excerpt :content="field.value" :should-show="field.shouldShow" :plain-text="false" />
+                <excerpt :content="field.value" :should-show="field.shouldShow" :plain-text="false"/>
             </div>
         </template>
     </panel-item>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    props: ['resource', 'resourceName', 'resourceId', 'field'],
+    props: ['resource', 'resourceName', 'resourceId', 'field']
 }
 </script>
 
