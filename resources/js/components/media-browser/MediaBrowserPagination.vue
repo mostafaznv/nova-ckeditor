@@ -38,7 +38,7 @@
         </form>
 
 
-        <span class="inline-block mr-2">{{ __('of') }} {{ total }}</span>
+        <span class="pagination__info inline-block mr-2">{{ __('of') }} {{ total }}</span>
 
         <button
             @click="updatePage(modelValue + 1)"
@@ -247,6 +247,26 @@ function pick() {
 
         @media (max-width: 800px) {
             display: none;
+        }
+    }
+}
+
+[dir=rtl] {
+    .pagination {
+        &__button {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+
+        &__info {
+            direction: rtl;
+        }
+
+        .select-btn {
+            right: auto;
+            left: 8px;
+            flex-direction: row-reverse;
         }
     }
 }

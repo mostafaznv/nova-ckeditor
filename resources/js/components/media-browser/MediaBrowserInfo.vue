@@ -314,4 +314,16 @@ function secondsToHms(seconds) {
         }
     }
 }
+
+[dir=rtl] {
+    .info {
+        &__header {
+            button {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+}
 </style>

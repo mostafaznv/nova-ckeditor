@@ -39,4 +39,12 @@ const props = defineProps({
     box-shadow: 0 0 6px rgba(46, 49, 56, 0.05);
     z-index: 100;
 }
+
+[dir=rtl] {
+    .select-btn {
+        right: auto;
+        left: 8px;
+        flex-direction: row-reverse;
+    }
+}
 </style>

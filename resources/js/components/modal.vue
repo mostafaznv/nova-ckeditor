@@ -39,7 +39,7 @@
                     <slot name="default"/>
                 </div>
 
-                <div class="flex-0 w-full bg-logo border-t border-gray-300 p-2" v-if="hasSlot('footer')">
+                <div class="modal-footer flex-0 w-full bg-logo border-t border-gray-300 p-2" v-if="hasSlot('footer')">
                     <slot name="footer"/>
                 </div>
             </div>
@@ -142,5 +142,10 @@ html.modal-open body {
     height: 100%;
     background: rgba(0, 0, 0, 0.85);
     margin: 0 !important;
+}
+
+.modal-footer {
+    flex-direction: row-reverse;
+    display: flex;
 }
 </style>

@@ -405,4 +405,13 @@ function calculateItemUploadedPercent(progressEvent, index) {
         overflow-y: auto !important;
     }
 }
+
+
+[dir=rtl] {
+    .upload {
+        &__button {
+            flex-direction: row-reverse;
+        }
+    }
+}
 </style>

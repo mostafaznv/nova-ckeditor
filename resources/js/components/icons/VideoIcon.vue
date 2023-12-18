@@ -20,3 +20,11 @@ const props = defineProps({
     }
 })
 </script>
+
+<style lang="scss" scoped>
+[dir=rtl] {
+    svg {
+        transform: rotate(180deg);
+    }
+}
+</style>

@@ -201,4 +201,11 @@ fetch(props.page)
     z-index: 5;
     transition: all 300ms;
 }
+
+[dir=rtl] {
+    .selected-items {
+        right: 0;
+        left: auto;
+    }
+}
 </style>
