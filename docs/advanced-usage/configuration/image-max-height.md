@@ -6,7 +6,7 @@ description: max-width
 
 | Property Name | Type | Default |
 | ------------- | ---- | ------- |
-| max-height    | int  | 768     |
+| max-height    | int  | 1080    |
 
 The `max-height` configuration option allows you to specify the maximum height for images within the CKEditor field. This setting determines the maximum allowed height for uploaded images and ensures that they are automatically resized if their height exceeds this limit.
 
