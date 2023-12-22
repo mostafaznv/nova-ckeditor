@@ -316,8 +316,7 @@ class CkEditor extends Field
             'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
             'shouldShow'             => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait' => $this->videoHasLaruploadTrait(),
-            'imageHasLaruploadTrait' => $this->imageHasLaruploadTrait(),
-            'novaVideoIsLegacy'      => $this->isLegacyNovaVideo(),
+            'imageHasLaruploadTrait' => $this->imageHasLaruploadTrait()
         ]);
     }
 
@@ -374,20 +373,6 @@ class CkEditor extends Field
     private function hasLaruploadTrait(string $class): bool
     {
         return class_exists($class) and in_array(Larupload::class, class_uses($class));
-    }
-
-    /**
-     * Check whether NovaVideo is legacy
-     *
-     * @return bool
-     */
-    private function isLegacyNovaVideo(): bool
-    {
-        if (property_exists(Video::class, 'storeWithLarupload')) {
-            return false;
-        }
-
-        return true;
     }
 
     private function prepareToolbar(string $toolbar, array $items = null): void

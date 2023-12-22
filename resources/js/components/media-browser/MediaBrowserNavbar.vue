@@ -61,7 +61,6 @@
                 @uploaded="$emit('updated')"
                 :type="type"
                 :has-larupload-trait="hasLaruploadTrait"
-                :nova-video-is-legacy="novaVideoIsLegacy"
             />
         </div>
     </div>
@@ -75,7 +74,7 @@ import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue"
 import MediaBrowserSearchModal from "./MediaBrowserSearchModal.vue"
 import MediaBrowserDelete from "./MediaBrowserDelete.vue"
 import MediaBrowserRenameModal from "./MediaBrowserRenameModal.vue"
-import {hasLaruploadTraitProp, selectedItemsProp, typeProp, keywordProp, sortProp, paginationProp, novaVideoIsLegacyProp, columnsProp} from "../../utils/picker-props"
+import {hasLaruploadTraitProp, selectedItemsProp, typeProp, keywordProp, sortProp, paginationProp, columnsProp} from "../../utils/picker-props"
 
 
 // composables
@@ -95,7 +94,6 @@ const emit = defineEmits([
 // variables
 const props = defineProps({
     hasLaruploadTrait: hasLaruploadTraitProp,
-    novaVideoIsLegacy: novaVideoIsLegacyProp,
     selectedItems: selectedItemsProp,
     type: typeProp,
     keyword: keywordProp,

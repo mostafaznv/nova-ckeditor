@@ -1,5 +1,23 @@
 # Migration
 
+### **From 6.2.1 to 7.0.0**
+
+We have undertaken significant refactoring efforts to release version <mark style="color:red;">7.0.0</mark>. Despite our best efforts to avoid introducing any breaking changes, it became necessary due to the merging of all types of media pickers (<mark style="color:blue;">audio</mark>, <mark style="color:blue;">video</mark>, and <mark style="color:blue;">image</mark>).
+
+
+
+If you are migrating from version <mark style="color:red;">6.\*</mark> to <mark style="color:red;">7.\*</mark>, please be aware that you need to replace `imageBrowser`, `videoBrowser`, and `audioBrowser` with <mark style="color:red;">`mediaBrowser`</mark> in the nova-ckeditor's configuration file, locate it in <mark style="color:red;">`toolbars.toolbar-1.items`</mark>.
+
+Additionally, update `imageBrowser` to <mark style="color:red;">`mediaBrowser`</mark> in <mark style="color:red;">`toolbars.toolbar-1.options.image.toolbar`</mark>.
+
+
+
+We have discontinued support for both `"intervention/image": "^2.5"` as well `"mostafaznv/nova-video": "^4.0|^5.0"`. If you are using these packages in your projects, please be aware that you need to upgrade them to `"intervention/image": "^3.1.0"` and `"mostafaznv/nova-video": "^6.1.0"` before proceeding.
+
+
+
+
+
 ### **From 5.3.0 to 5.4.0**
 
 The `AudioPicker` feature has been introduced to the ckeditor field.
