@@ -3,11 +3,6 @@ export const hasLaruploadTraitProp = {
     required: true
 }
 
-export const novaVideoIsLegacyProp = {
-    type: Boolean,
-    required: true
-}
-
 export const keywordProp = {
     type: String,
     default: ''

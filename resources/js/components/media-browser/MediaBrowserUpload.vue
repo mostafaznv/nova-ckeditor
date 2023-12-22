@@ -81,7 +81,7 @@ import Modal from "../modal.vue"
 import {useLocalization} from 'laravel-nova'
 import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue"
 import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue"
-import {hasLaruploadTraitProp, novaVideoIsLegacyProp, typeProp} from "../../utils/picker-props"
+import {hasLaruploadTraitProp, typeProp} from "../../utils/picker-props"
 import {vOnClickOutside} from "@vueuse/components"
 
 
@@ -98,7 +98,6 @@ const {__} = useLocalization()
 // variables
 const props = defineProps({
     hasLaruploadTrait: hasLaruploadTraitProp,
-    novaVideoIsLegacy: novaVideoIsLegacyProp,
     type: typeProp
 })
 
@@ -150,10 +149,6 @@ const resourceKey = computed(() => {
 })
 
 const uploadFileKey = computed(() => {
-    if (props.type === 'video' && props.hasLaruploadTrait && props.novaVideoIsLegacy) {
-        return 'file_field'
-    }
-
     return props.hasLaruploadTrait ? 'file[original]' : 'file'
 })
 
@@ -162,10 +157,6 @@ const uploadApiUrl = computed(() => {
 })
 
 const uploadWithCoverIsDisabled = computed(() => {
-    if (props.type === 'video' && props.hasLaruploadTrait && props.novaVideoIsLegacy) {
-        return true
-    }
-
     return !props.hasLaruploadTrait || !fileWithCover.value.isValid || uploading.value
 })
 
@@ -266,7 +257,6 @@ async function upload(file, index) {
     catch (e) {
         const msg = e?.response?.data?.errors?.['file']?.[0]
             ?? e?.response?.data?.errors?.['file.original']?.[0]
-            ?? e?.response?.data?.errors?.['file_field']?.[0]
             ?? e?.message
             ?? __(`Something went wrong while uploading the file[${file.name}].`)
 

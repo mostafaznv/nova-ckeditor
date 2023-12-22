@@ -2,7 +2,6 @@
 
 namespace Mostafaznv\NovaCkEditor;
 
-use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Route;
 use Laravel\Nova\Nova;
 use Illuminate\Support\Facades\App;
@@ -53,8 +52,6 @@ class FieldServiceProvider extends ServiceProvider
 
     protected function publish(): void
     {
-        $videoStub = $this->isLegacy() ? 'Video.legacy.stub' : 'Video.stub';
-
         $this->publishes([
             __DIR__ . '/../config/nova-ckeditor.php' => config_path('nova-ckeditor.php')
         ], 'nova-ckeditor-config');
@@ -70,8 +67,8 @@ class FieldServiceProvider extends ServiceProvider
 
             # models
             __DIR__ . '/../stubs/models/Image.stub' => app_path('Models/Image.php'),
-            __DIR__ . "/../stubs/models/$videoStub" => app_path('Models/Video.php'),
-            __DIR__ . "/../stubs/models/Audio.stub" => app_path('Models/Audio.php'),
+            __DIR__ . '/../stubs/models/Video.stub' => app_path('Models/Video.php'),
+            __DIR__ . '/../stubs/models/Audio.stub' => app_path('Models/Audio.php'),
 
             # resources
             __DIR__ . '/../stubs/resources/Image.stub' => app_path('Nova/Resources/Image.php'),
@@ -106,12 +103,5 @@ class FieldServiceProvider extends ServiceProvider
         foreach ($scripts as $script) {
             Nova::script('ckeditor-lang', $script);
         }
-    }
-
-    private function isLegacy(): bool
-    {
-        $larupload = InstalledVersions::getVersion('mostafaznv/larupload');
-
-        return version_compare($larupload, '1.0.0', '<');
     }
 }
