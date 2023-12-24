@@ -35,7 +35,7 @@
 
                     <div
                         class="media-browser__list--main"
-                        :class="{'no-result': !pagination.total}"
+                        :class="{'no-result': !pagination.total && !loading}"
                         :style="`--nova-ckeditor-gallery-size:${gallerySize}`"
                     >
                         <media-browser-list
