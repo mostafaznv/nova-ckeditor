@@ -106,7 +106,7 @@ import MediaBrowserTypeList from "./MediaBrowserTypeList.vue"
 import MediaBrowserInfo from "./MediaBrowserInfo.vue"
 import MediaBrowserList from "./MediaBrowserList.vue"
 import MediaBrowserPagination from "./MediaBrowserPagination.vue"
-import MediaBrowserNavbar from "./MediaBrowserNavbar.vue";
+import MediaBrowserNavbar from "./MediaBrowserNavbar.vue"
 
 
 // variables

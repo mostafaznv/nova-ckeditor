@@ -126,10 +126,6 @@ const itemSelected = computed(() => {
     return props.selectedItems.length === 1
 })
 
-const multipleItemsSelected = computed(() => {
-    return props.selectedItems.length > 1
-})
-
 const displayOptionsComputed = computed(() => {
     return {
         orderBy: orderBy.value,
