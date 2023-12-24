@@ -27,9 +27,17 @@ class ImageStorage extends Storage
     {
         $attributes = $this->resize($file);
 
+        $file = new UploadedFile(
+            path: $attributes['path'],
+            originalName: $attributes['file'],
+            mimeType: $attributes['mime']
+        );
+
         $file->storePubliclyAs('', $attributes['file'], [
             'disk' => $this->disk
         ]);
+
+        unset($attributes['path']);
 
         return $attributes;
     }
@@ -50,6 +58,7 @@ class ImageStorage extends Storage
 
         return [
             'file'   => $fileName,
+            'path'   => $filePath,
             //'name'   => '$hash',
             'disk'   => $this->disk,
             'mime'   => $image->mime(),
