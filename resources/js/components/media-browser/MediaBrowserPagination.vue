@@ -38,7 +38,9 @@
         </form>
 
 
-        <span class="pagination__info inline-block mr-2">{{ __('of') }} {{ total }}</span>
+        <span class="pagination__info inline-block mr-2">
+            {{ __('of') }} {{ total > 0 ? total : 1 }}
+        </span>
 
         <button
             @click="updatePage(modelValue + 1)"

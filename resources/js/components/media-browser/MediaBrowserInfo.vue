@@ -280,6 +280,7 @@ function secondsToHms(seconds) {
         display: flex;
         flex-direction: column;
         margin-top: 16px;
+        padding-bottom: 16px;
 
         &--item {
             display: flex;
