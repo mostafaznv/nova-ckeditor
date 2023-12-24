@@ -2,9 +2,10 @@
 
 ### Requirements
 
-* PHP 8.0.2 or higher
+* PHP 8.1 or higher
 * Laravel 9.\* or higher
 * Nova 4
+* GD or Imagick
 * FFMPEG (required for larupload usage)
 
 \
