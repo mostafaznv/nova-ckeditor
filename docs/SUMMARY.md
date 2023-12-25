@@ -6,6 +6,7 @@
 * [Installation](getting-started/installation.md)
 * [Support Us](getting-started/support-us.md)
 * [License](getting-started/license.md)
+* [Demo](getting-started/license-1.md)
 
 ## 🚀 Basic Usage
 
