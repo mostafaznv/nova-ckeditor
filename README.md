@@ -28,3 +28,12 @@ With "Nova Ckeditor," you can seamlessly integrate CKEditor 5 into Laravel Nova 
 
 ### Documentation
 You can find installation instructions and detailed instructions on how to use this package at the [dedicated documentation site](https://mostafaznv.gitbook.io/nova-ckeditor/).
+
+<br/>
+
+----
+
+### Demo
+
+https://github.com/mostafaznv/nova-ckeditor/assets/7619687/c7a1dcde-1d02-422c-8594-1955e213fdbb
+
