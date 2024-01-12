@@ -6,7 +6,7 @@ I believe in open source software and its power to change the world for the bett
 
 Your contribution, no matter how small, is deeply appreciated.&#x20;
 
-Thank you for your support!
+Thank you for your support
 
 
 
