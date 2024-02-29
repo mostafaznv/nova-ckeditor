@@ -1,7 +1,6 @@
 <template>
     <default-field :field="currentField" :errors="errors" :full-width-content="true">
         <template #field>
-            <button @click="saveSource" type="button">Save</button>
             <textarea ref="editor" class="hidden" :id="currentField.attribute" :class="errorClasses" :value="value" />
 
             <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
