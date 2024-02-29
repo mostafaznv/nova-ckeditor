@@ -7,11 +7,9 @@
 The **Nova Ckeditor** package combines the power of Laravel Nova with the advanced features of **CKEditor 5**, a modern and versatile text editor. It aims to bring CKEditor 5 integration to Laravel Nova, providing you with an enhanced content creation experience within your Laravel applications.\
 With "Nova Ckeditor," you can seamlessly integrate CKEditor 5 into Laravel Nova and unlock advanced text editing capabilities within your Laravel applications. Whether you're building a blog, a content management system, or any other application that requires rich text editing, "Nova Ckeditor" provides the tools and features you need for a seamless content creation experience.
 
-<div align="left">
 
-<figure><img src="https://mostafaznv.github.io/donate/donate.svg" alt="" width="188"><figcaption></figcaption></figure>
 
-</div>
+[![Donate](https://mostafaznv.github.io/donate/donate.svg)](https://mostafaznv.github.io/donate)
 
 
 
