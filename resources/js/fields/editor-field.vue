@@ -1,6 +1,7 @@
 <template>
     <default-field :field="currentField" :errors="errors" :full-width-content="true">
         <template #field>
+            <button @click="saveSource" type="button">Save</button>
             <textarea ref="editor" class="hidden" :id="currentField.attribute" :class="errorClasses" :value="value" />
 
             <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
@@ -122,6 +123,7 @@ export default {
                         this.editorResizeFix(editor, writer)
                     });
 
+                    this.syncDataOnSourceEditing()
 
                     if (this.currentField.readonly) {
                         editor.enableReadOnlyMode(this.$options[this.editorUUID]);
@@ -232,6 +234,27 @@ export default {
             }
 
             return string
+        },
+
+        syncDataOnSourceEditing() {
+            const editor = this.$options[this.editorName]
+            const sourceEditing = editor.plugins.get('SourceEditing')
+
+
+            sourceEditing.on('change:isSourceEditingMode', (_eventInfo, _name, value) => {
+                if (value) {
+                    const sourceEditingTextarea = editor.editing.view.getDomRoot()?.nextSibling?.firstChild
+
+                    if (!sourceEditingTextarea) {
+                        throw new Error('This should not be possible')
+                    }
+
+
+                    sourceEditingTextarea.addEventListener('input', debounce(() => {
+                        sourceEditing.updateEditorData()
+                    }, 500))
+                }
+            })
         },
 
         fill(formData) {
