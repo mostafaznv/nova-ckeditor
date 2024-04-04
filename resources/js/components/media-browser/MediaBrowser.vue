@@ -13,6 +13,7 @@
                 :has-image-picker="hasImagePicker"
                 :has-video-picker="hasVideoPicker"
                 :has-audio-picker="hasAudioPicker"
+                :has-file-picker="hasFilePicker"
             />
 
             <div class="relative flex-grow flex flex-col justify-between">
@@ -76,6 +77,19 @@
                             v-bind="listComponentProps"
                             type="audio"
                         />
+
+                        <media-browser-list
+                            v-else-if="type === 'file'"
+                            ref="browserList"
+                            @pick="pickItems"
+                            @play="play"
+                            v-model:pagination="pagination"
+                            v-model:loading="loading"
+                            v-model:selected-items="selectedItems"
+                            v-model:columns="columns"
+                            v-bind="listComponentProps"
+                            type="file"
+                        />
                     </div>
                 </div>
 
@@ -138,6 +152,10 @@ const props = defineProps({
     hasAudioPicker: {
         type: Boolean,
         default: true
+    },
+    hasFilePicker: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -231,6 +249,9 @@ function init() {
     }
     else if (props.hasAudioPicker) {
         type.value = 'audio'
+    }
+    else if (props.hasFilePicker) {
+        type.value = 'file'
     }
 }
 

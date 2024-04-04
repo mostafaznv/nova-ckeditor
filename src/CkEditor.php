@@ -114,6 +114,13 @@ class CkEditor extends Field
     public bool $audioBrowser;
 
     /**
+     * Indicates whether the file browser should be available
+     *
+     * @var bool $fileBrowser
+     */
+    public bool $fileBrowser;
+
+    /**
      * The snippets to be displayed in the snippet browser
      *
      * @var array
@@ -280,6 +287,19 @@ class CkEditor extends Field
     }
 
     /**
+     * Enable/Disable File Browser
+     *
+     * @param bool $enabled
+     * @return $this
+     */
+    public function fileBrowser(bool $enabled = true): self
+    {
+        $this->fileBrowser = $enabled;
+
+        return $this;
+    }
+
+    /**
      * Enable Snippets Browser
      *
      * @param array $snippets
@@ -305,6 +325,7 @@ class CkEditor extends Field
             'imageBrowser'           => $this->imageBrowser,
             'videoBrowser'           => $this->videoBrowser,
             'audioBrowser'           => $this->audioBrowser,
+            'fileBrowser'            => $this->fileBrowser,
             'toolbar'                => $this->toolbar,
             'toolbarOptions'         => $this->toolbarOptions,
             'height'                 => $this->height,
@@ -397,6 +418,7 @@ class CkEditor extends Field
         $this->imageBrowser = $toolbar['browser']['image'];
         $this->videoBrowser = $toolbar['browser']['video'];
         $this->audioBrowser = $toolbar['browser']['audio'] ?? true;
+        $this->fileBrowser = $toolbar['browser']['file'] ?? false;
         $this->snippetBrowser = $this->prepareSnippets($toolbar['snippets']);
         $this->contentLanguage = $toolbar['content-lang'];
         $this->textPartLanguage = $toolbar['text-part-language'] ?? $defaultTextPartLanguage;

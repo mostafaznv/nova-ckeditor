@@ -174,6 +174,13 @@ const info = computed(() => {
                 value: item.value.height
             })
         }
+
+        if (item.value.mime) {
+            info.push({
+                label: 'MimeType',
+                value: item.value.mime
+            })
+        }
     }
 
     return info

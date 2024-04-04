@@ -11,6 +11,7 @@ final class UpdateNameRequest extends FormRequest
     protected string $image;
     protected string $video;
     protected string $audio;
+    protected string $file;
 
 
     public function rules(): array
@@ -21,7 +22,7 @@ final class UpdateNameRequest extends FormRequest
             ],
 
             'type' => [
-                'required', 'string', 'in:image,audio,video'
+                'required', 'string', 'in:image,audio,video,file'
             ],
 
             'resource' => [
@@ -29,7 +30,8 @@ final class UpdateNameRequest extends FormRequest
                 Rule::in([
                     $this->image,
                     $this->video,
-                    $this->audio
+                    $this->audio,
+                    $this->file,
                 ])
             ],
 
@@ -46,6 +48,7 @@ final class UpdateNameRequest extends FormRequest
         $this->image = 'App\Nova\Resources\Image';
         $this->video = 'App\Nova\Resources\Video';
         $this->audio = 'App\Nova\Resources\Audio';
+        $this->file = 'App\Nova\Resources\File';
 
         switch ($this->input('type')) {
             case 'image':
@@ -58,6 +61,10 @@ final class UpdateNameRequest extends FormRequest
 
             case 'audio':
                 $resource = $this->audio;
+                break;
+
+            case 'file':
+                $resource = $this->file;
                 break;
         }
 

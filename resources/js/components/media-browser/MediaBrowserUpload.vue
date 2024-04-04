@@ -133,8 +133,11 @@ const acceptedMimeTypes = computed(() => {
     if (props.type === 'video') {
         return 'video/*'
     }
+    if (props.type === 'audio') {
+        return 'audio/*'
+    }
 
-    return 'audio/*'
+    return undefined
 })
 
 const resourceKey = computed(() => {
@@ -144,8 +147,11 @@ const resourceKey = computed(() => {
     else if (props.type === 'video') {
         return 'videos'
     }
+    else if (props.type === 'audio') {
+        return 'audio'
+    }
 
-    return 'audio'
+    return 'files'
 })
 
 const uploadFileKey = computed(() => {

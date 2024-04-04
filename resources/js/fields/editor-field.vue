@@ -13,6 +13,7 @@
                 :has-image-picker="currentField.imageBrowser"
                 :has-video-picker="currentField.videoBrowser"
                 :has-audio-picker="currentField.audioBrowser"
+                :has-file-picker="currentField.fileBrowser"
                 :multiple="true"
             />
 

@@ -90,6 +90,9 @@ const resourceKey = computed(() => {
     else if (props.type === 'video') {
         return 'videos'
     }
+    else if (props.type === 'file') {
+        return 'files'
+    }
 
     return 'audio'
 })
