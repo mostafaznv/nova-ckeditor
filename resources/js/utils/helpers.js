@@ -41,3 +41,18 @@ export const resourceToObject = ({fields, id}) => {
         return obj
     }, {})
 }
+
+
+export const guessResourceKey = (type) => {
+    if (type === 'image') {
+        return 'images'
+    }
+    else if (type === 'video') {
+        return 'videos'
+    }
+    else if (type === 'file') {
+        return 'files'
+    }
+
+    return 'audio'
+}

@@ -27,6 +27,12 @@
                     :src="src"
                     muted
                 />
+
+                <file-icon
+                    v-else-if="type === 'file'"
+                    width="32"
+                    height="32"
+                />
             </div>
 
             <figcaption @click.stop="play" class="item__preview--play nova-ckeditor-mobile-none" :title="__('Preview')">
@@ -47,6 +53,7 @@
 <script setup>
 import {computed} from "vue"
 import AudioIcon from "../icons/AudioIcon.vue"
+import FileIcon from "../icons/FileIcon.vue"
 import {typeProp, selectedItemsProp, keepAspectRatioProp, gallerySizeProp} from "../../utils/picker-props"
 
 

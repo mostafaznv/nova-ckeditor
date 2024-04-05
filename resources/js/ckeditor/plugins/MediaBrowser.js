@@ -123,6 +123,15 @@ export default class MediaBrowser {
                         }
 
                         break;
+
+                    case 'file':
+                        blockName = 'link'
+                        payload = {
+                            linkHref: item.src,
+                            title: item.name
+                        }
+
+                        break;
                 }
 
 
@@ -136,10 +145,9 @@ export default class MediaBrowser {
 
                 if (blockName) {
                     return this.model.insertContent(
-                        writer.createElement(
-                            blockName,
-                            payload
-                        ),
+                        blockName === 'link'
+                            ? writer.createText(payload.title, payload)
+                            : writer.createElement(blockName, payload),
 
                         // modelFragment
                         this.model.document.selection.getLastPosition()

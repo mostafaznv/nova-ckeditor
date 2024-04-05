@@ -36,6 +36,18 @@
 
                 <span>{{ __('Audios') }}</span>
             </div>
+
+            <div
+                v-if="hasFilePicker"
+                @click="select('file')"
+                class="browser-list__item"
+                :class="{selected: modelValue === 'file'}"
+                :title="__('Files')"
+            >
+                <file-icon />
+
+                <span>{{ __('Files') }}</span>
+            </div>
         </div>
 
         <div class="browser-list__toggle-sidebar">
@@ -62,6 +74,7 @@
 <script setup>
 import {ref} from 'vue'
 import AudioIcon from "../icons/AudioIcon.vue"
+import FileIcon from "../icons/FileIcon.vue"
 import VideoIcon from "../icons/VideoIcon.vue"
 import {selectedItemsProp} from "../../utils/picker-props"
 
@@ -79,7 +92,7 @@ const props = defineProps({
         type: String,
         required: true,
         validator(value) {
-            return ['image', 'video', 'audio'].includes(value)
+            return ['image', 'video', 'audio', 'file'].includes(value)
         }
     },
     hasImagePicker: {
@@ -93,6 +106,10 @@ const props = defineProps({
     hasAudioPicker: {
         type: Boolean,
         default: true
+    },
+    hasFilePicker: {
+        type: Boolean,
+        default: false
     }
 })
 

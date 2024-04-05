@@ -21,6 +21,10 @@ class FieldServiceProvider extends ServiceProvider
             $this->app->bind('ckeditor-audio-storage', AudioStorage::class);
         }
 
+        if (!$this->app->bound('ckeditor-file-storage')) {
+            $this->app->bind('ckeditor-file-storage', FileStorage::class);
+        }
+
         if ($this->app->runningInConsole()) {
             $this->publish();
         }
@@ -64,16 +68,19 @@ class FieldServiceProvider extends ServiceProvider
             __DIR__ . '/../stubs/migrations/2021_01_01_000000_create_images_table.stub' => database_path('migrations/2021_01_01_000000_create_images_table.php'),
             __DIR__ . '/../stubs/migrations/2021_01_01_000000_create_videos_table.stub' => database_path('migrations/2021_01_01_000000_create_videos_table.php'),
             __DIR__ . '/../stubs/migrations/2023_09_28_114516_create_audio_table.stub' => database_path('migrations/2023_09_28_114516_create_audio_table.php'),
+            __DIR__ . '/../stubs/migrations/2024_04_03_114516_create_files_table.stub' => database_path('migrations/2024_04_03_114516_create_files_table.php'),
 
             # models
             __DIR__ . '/../stubs/models/Image.stub' => app_path('Models/Image.php'),
             __DIR__ . '/../stubs/models/Video.stub' => app_path('Models/Video.php'),
             __DIR__ . '/../stubs/models/Audio.stub' => app_path('Models/Audio.php'),
+            __DIR__ . '/../stubs/models/File.stub' => app_path('Models/File.php'),
 
             # resources
             __DIR__ . '/../stubs/resources/Image.stub' => app_path('Nova/Resources/Image.php'),
             __DIR__ . '/../stubs/resources/Video.stub' => app_path('Nova/Resources/Video.php'),
-            __DIR__ . '/../stubs/resources/Audio.stub' => app_path('Nova/Resources/Audio.php')
+            __DIR__ . '/../stubs/resources/Audio.stub' => app_path('Nova/Resources/Audio.php'),
+            __DIR__ . '/../stubs/resources/File.stub' => app_path('Nova/Resources/File.php'),
         ], 'nova-ckeditor-stubs');
     }
 

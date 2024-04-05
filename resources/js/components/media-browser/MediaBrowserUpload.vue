@@ -83,6 +83,7 @@ import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue"
 import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue"
 import {hasLaruploadTraitProp, typeProp} from "../../utils/picker-props"
 import {vOnClickOutside} from "@vueuse/components"
+import {guessResourceKey} from "../../utils/helpers"
 
 
 // emits
@@ -133,19 +134,15 @@ const acceptedMimeTypes = computed(() => {
     if (props.type === 'video') {
         return 'video/*'
     }
+    if (props.type === 'audio') {
+        return 'audio/*'
+    }
 
-    return 'audio/*'
+    return undefined
 })
 
 const resourceKey = computed(() => {
-    if (props.type === 'image') {
-        return 'images'
-    }
-    else if (props.type === 'video') {
-        return 'videos'
-    }
-
-    return 'audio'
+    return guessResourceKey(props.type)
 })
 
 const uploadFileKey = computed(() => {
