@@ -22,16 +22,16 @@ class FileUpload extends File
     {
         parent::__construct($name, $attribute ?? 'file', $disk, app('ckeditor-file-storage', compact('disk')));
 
-        $this->thumbnail(function ($value) {
-            if ($value and str_contains($this->resource->mime, 'image')) {
-                return Storage::disk($this->getStorageDisk())->url($value);
+
+
+        $this->preview(function ($value, $disk, $model) {
+            if ($value) {
+                if (request()->query('ckeditor') == 'media' or str_contains($this->resource->mime, 'image')) {
+                    return Storage::disk($this->getStorageDisk())->url($value);
+                }
             }
 
             return null;
-        });
-
-        $this->preview(function ($value, $disk, $model) {
-            return $value ? Storage::disk($this->getStorageDisk())->url($value) : null;
         });
 
         $this->deletable(NovaRequest::capture()->isCreateOrAttachRequest());
