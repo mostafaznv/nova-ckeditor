@@ -6,7 +6,6 @@ You have the option to override the `FileStorage` service by binding your own ex
 use Illuminate\Http\Request;
 use Mostafaznv\NovaCkEditor\FileStorage;
 
-
 class MyFileStorage extends FileStorage
 {
     public function __invoke(Request $request)
