@@ -40,6 +40,7 @@ import {ref, computed} from "vue"
 import modal from "../modal"
 import {useLocalization} from 'laravel-nova'
 import {selectedItemsProp, typeProp} from "../../utils/picker-props"
+import {guessResourceKey} from "../../utils/helpers"
 
 
 // emits
@@ -63,6 +64,10 @@ const modalStatus = ref(false)
 
 
 // computed properties
+const resourceKey = computed(() => {
+    return guessResourceKey(props.type)
+})
+
 const disabled = computed(() => {
     return props.selectedItems.length === 0
 })
@@ -82,14 +87,10 @@ function close() {
 
 function submit() {
     if (!disabled.value) {
-        const payload = {
-            id: props.selectedItems.map(item => item.id),
-            type: props.type
-        }
-
+        const resources = props.selectedItems.map(item => `resources[]=${item.id}`).join('&')
 
         Nova.request()
-            .post('/nova-vendor/nova-ckeditor/delete-assets', payload)
+            .delete(`/nova-api/${resourceKey.value}?${resources}`)
             .then(() => {
                 Nova.success(__('Assets have been deleted successfully.'))
 

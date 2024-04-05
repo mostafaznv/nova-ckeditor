@@ -37,6 +37,7 @@ import {ref, computed, watch} from "vue"
 import useResourceRequest from "../../composables/useResourceRequest"
 import {paginationProp, sortProp, keepAspectRatioProp, typeProp, gallerySizeProp, selectedItemsProp, loadingProp, keywordProp, hasLaruploadTraitProp, orderByProp, columnsProp} from "../../utils/picker-props"
 import MediaBrowserItem from "./MediaBrowserItem.vue"
+import {guessResourceKey} from "../../utils/helpers"
 
 
 // exposes
@@ -84,17 +85,7 @@ const items = ref([])
 
 // computed properties
 const resourceKey = computed(() => {
-    if (props.type === 'image') {
-        return 'images'
-    }
-    else if (props.type === 'video') {
-        return 'videos'
-    }
-    else if (props.type === 'file') {
-        return 'files'
-    }
-
-    return 'audio'
+    return guessResourceKey(props.type)
 })
 
 const filters = computed(() => {
