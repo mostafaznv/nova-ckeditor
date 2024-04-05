@@ -1,5 +1,40 @@
 # Migration
 
+### **From 7.2.1 to 7.3.0**
+
+Starting from v7.3.0, we introduced a <mark style="color:red;">files</mark> section to the <mark style="color:red;">media picker</mark>. However, to prevent users from encountering 500 errors, we've disabled it by <mark style="color:red;">default</mark>. If you wish to enable it, follow these simple steps:
+
+1. Update the `config/nova-ckeditor.php` file and add <mark style="color:red;">file-naming-method</mark> and <mark style="color:red;">toolbars.toolbar-1.browser.file</mark> to it. For further information, please refer the [original config file](https://github.com/mostafaznv/nova-ckeditor/blob/master/config/nova-ckeditor.php).
+2. Add `file` disk to `config/filesystems.php` file:
+
+```php
+'disks' => [
+    'file' => [
+        'driver'     => 'local',
+        'root'       => public_path('uploads/file'),
+        'url'        => env('APP_URL') . '/uploads/file',
+    ]
+]
+```
+
+3. Rerun the publish command to publish the model, nova resource, and migration files for the file picker:
+
+```sh
+php artisan vendor:publish --provider="Mostafaznv\NovaCkEditor\FieldServiceProvider"
+```
+
+4. Migrate&#x20;
+
+```sh
+php artisan migrate
+```
+
+That's it! Your changes should now be applied.
+
+
+
+
+
 ### **From 6.2.1 to 7.0.0**
 
 We have undertaken significant refactoring efforts to release version <mark style="color:red;">7.0.0</mark>. Despite our best efforts to avoid introducing any breaking changes, it became necessary due to the merging of all types of media pickers (<mark style="color:blue;">audio</mark>, <mark style="color:blue;">video</mark>, and <mark style="color:blue;">image</mark>).
