@@ -14,3 +14,9 @@ To disable the file picker within Toolbar 1, update the value of `toolbars.toolb
 
 
 
+{% hint style="info" %}
+This feature was introduced in version <mark style="color:red;">7.3.0</mark> of the NovaCKEditor
+{% endhint %}
+
+
+
