@@ -187,6 +187,7 @@ return [
                 'mediaEmbed',
                 'link',
                 'resizeImage',
+                'insertImage',
                 '|',
                 'bold',
                 'italic',
