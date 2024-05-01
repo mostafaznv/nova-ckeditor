@@ -476,6 +476,8 @@ return [
                         'resizeImage:50',
                         'resizeImage:75',
                         'resizeImage:original',
+                        '|',
+                        'insertImage',
                     ],
 
                     'styles' => [
