@@ -47,7 +47,8 @@ import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed'
 import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed'
 import ImageTextAlternative from '@ckeditor/ckeditor5-image/src/imagetextalternative'
 import {LinkImage} from '@ckeditor/ckeditor5-link'
-import { ImageInsert } from '@ckeditor/ckeditor5-image'
+import {ImageInsert} from '@ckeditor/ckeditor5-image'
+
 
 // Intend
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
