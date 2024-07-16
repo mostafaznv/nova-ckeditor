@@ -37,6 +37,16 @@
         list-style: decimal
         padding-left: 40px
 
+.ck.ck-editor__main,
+.ckeditor_content
+    *:has(>[dir=rtl])
+        direction: rtl
+        text-align: right
+
+    *:has(>[dir=ltr])
+        direction: ltr
+        text-align: left
+
 .w-4\/5
     width: 80%
 
