@@ -2,7 +2,7 @@
 description: toolbars.default
 ---
 
-# Defualt Toolbar
+# Default Toolbar
 
 | Property Name    | Type   | Default                                     |
 | ---------------- | ------ | ------------------------------------------- |
