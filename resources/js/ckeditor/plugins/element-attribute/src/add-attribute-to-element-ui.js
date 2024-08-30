@@ -106,7 +106,7 @@ class ElementAddAttributesUI extends Plugin {
 
         if (!this._isInBalloon) {
             const defaultPositions = BalloonPanelView.defaultPositions;
-            const target = document.querySelector('.element-add-attributes-btn');
+            const target = editor.ui.view.element.querySelector('.element-add-attributes-btn');
 
             this._balloon.add({
                 view: this._form,

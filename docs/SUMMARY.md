@@ -46,7 +46,7 @@
   * [Audio Naming Method](advanced-usage/configuration/audio-naming-method.md)
   * [File Naming Method](advanced-usage/configuration/audio-naming-method-1.md)
   * [Toolbars](advanced-usage/configuration/toolbars/README.md)
-    * [Defualt Toolbar](advanced-usage/configuration/toolbars/defualt-toolbar.md)
+    * [Default Toolbar](advanced-usage/configuration/toolbars/defualt-toolbar.md)
     * [Toolbar 1](advanced-usage/configuration/toolbars/toolbar-1/README.md)
       * [Height](advanced-usage/configuration/toolbars/toolbar-1/height.md)
       * [Items](advanced-usage/configuration/toolbars/toolbar-1/items.md)
