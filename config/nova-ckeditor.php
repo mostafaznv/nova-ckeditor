@@ -206,6 +206,7 @@ return [
                 '|',
                 'codeBlock',
                 'blockQuote',
+                'emoji',
                 'bulletedList',
                 'numberedList',
                 '|',

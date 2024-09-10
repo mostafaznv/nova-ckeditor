@@ -51,6 +51,7 @@
         "webpack": "^5.89.0"
     },
     "dependencies": {
+        "@phudak/ckeditor5-emoji": "^1.1.1",
         "@vueuse/components": "^10.7.0",
         "@vueuse/core": "^10.7.0",
         "lodash": "^4.17.21",
