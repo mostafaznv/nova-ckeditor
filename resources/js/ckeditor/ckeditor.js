@@ -72,6 +72,8 @@ import Audio from "./plugins/audio/audio"
 import {Clipboard} from '@ckeditor/ckeditor5-clipboard'
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting'
 import ElementAddAttributes from './plugins/element-attribute/src/add-attribute-to-element'
+import {Emoji, EmojiActivity, EmojiFlags, EmojiFood, EmojiNature, EmojiObjects, EmojiPeople, EmojiPlaces, EmojiSymbols} from '@phudak/ckeditor5-emoji/src';
+
 
 // Extend the Base Class
 export default class CkEditor extends ClassicEditorBase {
@@ -141,7 +143,16 @@ export default class CkEditor extends ClassicEditorBase {
             IndentBlock,
             ElementAddAttributes,
             Clipboard,
-            SimpleUploadAdapter
+            SimpleUploadAdapter,
+            Emoji,
+            EmojiPeople,
+            EmojiNature,
+            EmojiPlaces,
+            EmojiFood,
+            EmojiActivity,
+            EmojiObjects,
+            EmojiSymbols,
+            EmojiFlags,
         ]
     }
 }
