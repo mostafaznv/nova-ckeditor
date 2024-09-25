@@ -112,6 +112,8 @@ return [
 
             'content-lang' => 'en',
 
+            'force-paste-as-plain-text' => false,
+
             'ui-language' => [
                 'name'   => 'en',
 

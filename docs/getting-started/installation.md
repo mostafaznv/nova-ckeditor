@@ -35,7 +35,7 @@ php artisan vendor:publish --provider="Mostafaznv\NovaCkEditor\FieldServiceProvi
 
 #### 3. Prepare the migration, configurations and models
 
-After publishing stubs, essential `Image`, `Video` and `Audio` classes will be created in the `app/Models` and `app/Nova/Resources` directories respectively. These classes are used for the `media-picker` in the CKEditor field.
+After publishing stubs, essential `Image`, `Video`, `Audio` and `File` classes will be created in the `app/Models` and `app/Nova/Resources` directories respectively. These classes are used for the `media-picker` in the CKEditor field.
 
 {% tabs %}
 {% tab title="Image" %}
@@ -109,8 +109,30 @@ If you wish to modify the disk name, remember to update it in the `App\Nova\Reso
 {% endhint %}
 {% endtab %}
 
+{% tab title="File" %}
+You should create a disk in `config/filesystems.php`:
+
+```php
+'disks' => [
+    'file' => [
+        'driver'     => 'local',
+        'root'       => public_path('uploads/file'),
+        'url'        => env('APP_URL') . '/uploads/file',
+    ]
+]
+```
+
+{% hint style="info" %}
+If you wish to modify the disk name, remember to update it in the `App\Nova\Resources\File` class as well. The third argument of the make function in the FileUpload field corresponds to the disk name.
+{% endhint %}
+
+{% hint style="info" %}
+This feature was introduced in version <mark style="color:red;">7.3.0</mark> of the NovaCKEditor
+{% endhint %}
+{% endtab %}
+
 {% tab title="Migration" %}
-**If you have chosen Larupload**, there is no need to make any changes to the migration file. You can refer to the [nova-video](https://github.com/mostafaznv/nova-video) and [larupload](https://github.com/mostafaznv/larupload) documentations for additional configuration options.
+**If you have chosen Larupload**, there is no need to make any changes to the videos migration file. You can refer to the [nova-video](https://github.com/mostafaznv/nova-video) and [larupload](https://github.com/mostafaznv/larupload) documentations for additional configuration options.
 
 **If you have chosen Laravel's file system**, you must make some changes to the migration file. In the migration file, replace the <mark style="color:red;">upload column</mark> with a <mark style="color:red;">string column</mark>.
 
@@ -134,7 +156,7 @@ class CreateVideosTable extends Migration
 {% endtab %}
 
 {% tab title="Model" %}
-**If you have chosen Larupload**, there is no need to make any changes to the model. You can refer to the [nova-video](https://github.com/mostafaznv/nova-video) and [larupload](https://github.com/mostafaznv/larupload) documentations for additional configuration options.
+**If you have chosen Larupload**, there is no need to make any changes to the `Video` model. You can refer to the [nova-video](https://github.com/mostafaznv/nova-video) and [larupload](https://github.com/mostafaznv/larupload) documentations for additional configuration options.
 
 **If you have chosen Laravel's file system**, you must make some changes to the model. Remove the Larupload <mark style="color:red;">trait</mark> and the <mark style="color:red;">attachments function</mark> from the model.
 
@@ -169,6 +191,10 @@ class Video extends Model
 ```
 {% endtab %}
 {% endtabs %}
+
+
+
+
 
 #### 4. Migrate
 
