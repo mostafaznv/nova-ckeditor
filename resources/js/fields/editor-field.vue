@@ -1,9 +1,9 @@
 <template>
     <default-field :field="currentField" :errors="errors" :full-width-content="true">
         <template #field>
-            <textarea ref="editor" class="hidden" :id="currentField.attribute" :class="errorClasses" :value="value" />
+            <textarea ref="editor" class="hidden" :id="currentField.attribute" :class="errorClasses" :value="value"/>
 
-            <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
+            <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2"/>
 
             <media-browser
                 @select="$options[editorName].execute('mediaBrowser', $event)"
@@ -94,7 +94,7 @@ export default {
 
                     headers: {
                         ...CkEditor.defaultConfig.simpleUpload.headers,
-                        'X-Toolbar':  this.currentField.toolbarName
+                        'X-Toolbar': this.currentField.toolbarName
                     },
                 },
                 ...toolbarOptions
@@ -127,6 +127,20 @@ export default {
 
                     if (this.currentField.readonly) {
                         editor.enableReadOnlyMode(this.$options[this.editorUUID]);
+                    }
+
+
+                    if (this.currentField.forcePasteAsPlainText) {
+                        editor.editing.view.document.on('clipboardInput', (evt, data) => {
+                            evt.stop()
+
+                            editor.model.change(writer => {
+                                writer.insertText(
+                                    data.dataTransfer.getData('text/plain'),
+                                    editor.model.document.selection.getFirstPosition()
+                                )
+                            })
+                        })
                     }
                 })
                 .catch((e) => {
@@ -170,7 +184,7 @@ export default {
                     if (Array.isArray(url)) {
                         const urls = url
 
-                        for (let j = 0; j< urls.length; j++) {
+                        for (let j = 0; j < urls.length; j++) {
                             urls[j] = RegexParser(urls[j])
                         }
 
@@ -320,7 +334,7 @@ export default {
 
 <style lang="sass">
 .ck.ck-reset_all, .ck.ck-reset_all *
-    // direction: ltr !important
+// direction: ltr !important
 
 .ck-content.ck-editor__editable
     resize: vertical

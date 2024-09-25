@@ -65,6 +65,13 @@ class CkEditor extends Field
     public string $contentLanguage;
 
     /**
+     * Force Paste As Plain Text
+     *
+     * @var bool
+     */
+    public bool $forcePasteAsPlainText;
+
+    /**
      * Text Part Language
      *
      * @var array
@@ -209,6 +216,19 @@ class CkEditor extends Field
     }
 
     /**
+     * Set Force Paste As Plain Text
+     *
+     * @param bool $status
+     * @return $this
+     */
+    public function forcePasteAsPlainText(bool $status = true): self
+    {
+        $this->forcePasteAsPlainText = $status;
+
+        return $this;
+    }
+
+    /**
      * Set Text Part Language
      *
      * @param array $languages
@@ -331,6 +351,7 @@ class CkEditor extends Field
             'height'                 => $this->height,
             'indexLimit'             => $this->indexLimit,
             'contentLanguage'        => $this->contentLanguage,
+            'forcePasteAsPlainText'  => $this->forcePasteAsPlainText,
             'textPartLanguage'       => $this->textPartLanguage,
             'htmlSupport'            => $this->htmlSupport,
             'uiLanguage'             => $this->uiLanguage,
@@ -421,6 +442,7 @@ class CkEditor extends Field
         $this->fileBrowser = $toolbar['browser']['file'] ?? false;
         $this->snippetBrowser = $this->prepareSnippets($toolbar['snippets']);
         $this->contentLanguage = $toolbar['content-lang'];
+        $this->forcePasteAsPlainText = $toolbar['force-paste-as-plain-text'] ?? false;
         $this->textPartLanguage = $toolbar['text-part-language'] ?? $defaultTextPartLanguage;
         $this->htmlSupport = $toolbar['html-support'] ?? $defaultHtmlSupport;
         $this->uiLanguage = $toolbar['ui-language']['name'] ?? 'en';
