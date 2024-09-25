@@ -134,12 +134,23 @@ export default {
                         editor.editing.view.document.on('clipboardInput', (evt, data) => {
                             evt.stop()
 
-                            editor.model.change(writer => {
-                                writer.insertText(
-                                    data.dataTransfer.getData('text/plain'),
-                                    editor.model.document.selection.getFirstPosition()
-                                )
-                            })
+                            const model = editor.model
+                            const selection = model.document.selection
+                            const selectedRange = selection.getFirstRange()
+                            const content = data.dataTransfer.getData('text/plain')
+
+                            model.change(writer => {
+                                if (selectedRange.isCollapsed) {
+                                    writer.insertText(
+                                        content, selection.getFirstPosition()
+                                    )
+                                }
+                                else {
+                                    editor.execute('input', {
+                                        text: content
+                                    })
+                                }
+                            });
                         })
                     }
                 })
