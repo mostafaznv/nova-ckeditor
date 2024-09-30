@@ -1,5 +1,5 @@
 <template>
-    <div class="footer px-3">
+    <div class="footer px-3 bg-white dark:bg-gray-800">
         <default-button
             @click.stop="$emit('pick')"
             type="button"
@@ -34,7 +34,6 @@ const props = defineProps({
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    background: white;
     height: 50px;
     box-shadow: 0 0 6px rgba(46, 49, 56, 0.05);
     z-index: 100;

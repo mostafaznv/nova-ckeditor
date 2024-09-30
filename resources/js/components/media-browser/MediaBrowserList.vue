@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div v-if="loading" class="loading" />
+        <div v-if="loading" class="loading bg-white/75 dark:bg-gray-800/75" />
     </transition>
 
 
@@ -180,7 +180,6 @@ fetch(props.page)
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
     z-index: 10;
 }
 

@@ -20,15 +20,17 @@
 
 
         <div class="p-3 overflow-x-hidden">
-            <span class="search-modal__history--label">{{ __('Recent searches') }}:</span>
+            <span class="search-modal__history--label text-gray-500 dark:text-gray-400">
+                {{ __('Recent searches') }}:
+            </span>
 
             <div
                 v-for="(item, index) in reverseHistory"
                 @click.stop="select(index)"
-                class="search-modal__history--item flex items-center justify-between"
+                class="search-modal__history--item flex items-center justify-between hover:bg-gray-200 dark:hover:bg-gray-800"
                 :key="index"
             >
-                <span>{{ item }}</span>
+                <span class="text-gray-500 dark:text-gray-400">{{ item }}</span>
 
                 <button
                     @click.stop="deleteItemFromHistory(index)"
@@ -156,12 +158,12 @@ initHistory()
         outline: none;
         //width: 300px;
         height: 30px;
+        background: transparent;
     }
 
     .search-modal__history {
         &--label {
             display: block;
-            color: rgba(var(--colors-gray-500));
             font-size: 14px;
             margin-bottom: 12px;
         }
@@ -174,7 +176,6 @@ initHistory()
             border-radius: 6px;
 
             & > span {
-                color: rgba(var(--colors-gray-500));
                 font-size: 16px;
                 white-space: nowrap;
                 overflow: hidden;
@@ -197,8 +198,6 @@ initHistory()
             }
 
             &:hover {
-                background: rgba(var(--colors-gray-200));
-
                 & > button {
                     opacity: 1;
                 }

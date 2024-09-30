@@ -1,7 +1,7 @@
 <template>
     <modal v-model="modalStatus" class="media-browser" :title="__(title)" :content-no-overflow="true">
         <template #header>
-            <span>{{ __('Media Browser') }}</span>
+            <span class="">{{ __('Media Browser') }}</span>
         </template>
 
 

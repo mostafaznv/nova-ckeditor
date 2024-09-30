@@ -1,6 +1,6 @@
 <template>
     <div class="radio-container">
-        <label v-for="option in options" class="radio" :key="option.value">
+        <label v-for="option in options" class="radio text-gray-600 dark:text-gray-500" :key="option.value">
             {{ option.label }}
 
             <input
@@ -60,7 +60,6 @@ function onChange(e) {
         cursor: pointer;
         font-size: 14px;
         font-weight: 600;
-        color: rgba(var(--colors-gray-600));
         user-select: none;
 
         input {

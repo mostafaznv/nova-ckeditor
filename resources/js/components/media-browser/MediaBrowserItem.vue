@@ -1,5 +1,5 @@
 <template>
-    <div @dblclick.stop="pick" @click.stop="select(true)" class="item" :class="{selected: isSelected}">
+    <div @dblclick.stop="pick" @click.stop="select(true)" class="item bg-white dark:bg-gray-800" :class="{selected: isSelected}">
         <figure class="item__preview">
             <figcaption class="item__preview--format">{{ format }}</figcaption>
 
@@ -40,7 +40,7 @@
             </figcaption>
         </figure>
 
-        <div class="item__details">
+        <div class="item__details border-t border-gray-200 dark:border-gray-700">
             <span class="item__details--name" :title="item.name">{{ item.name }}</span>
 
             <button @click.stop.prevent="select(false)" type="button" class="item__details--select">
@@ -148,7 +148,6 @@ function play() {
 .item {
     position: relative;
     display: block;
-    background-color: white;
     box-shadow: 0 0 4px 2px rgba(46, 49, 56, 0.15);
     border: 1px solid transparent;
     overflow: hidden;
@@ -219,7 +218,6 @@ function play() {
     }
 
     &__details {
-        border-top: 1px solid rgba(46, 49, 56, 0.15);
         display: flex;
         align-items: center;
         justify-content: space-between;

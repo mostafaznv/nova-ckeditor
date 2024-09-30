@@ -1,5 +1,5 @@
 <template>
-    <div ref="modal" class="absolute">
+    <div ref="modal" class="absolute text-gray-500 dark:text-gray-200">
         <transition name="editorModal" mode="out-in">
             <div
                 v-if="modelValue"
@@ -9,10 +9,10 @@
                 :class="{
                     'modal-is-active': modelValue,
                     'full-screen-modal w-screen h-screen top-0 left-0 w-full': fullscreen,
-                    'centered-modal rounded-lg shadow-lg border': !fullscreen
+                    'centered-modal rounded-lg shadow-lg border border-gray-200 dark:border-gray-600': !fullscreen
                 }"
             >
-                <div class="modal__header flex-0 flex items-center px-3 py-2 bg-white border-b border-primary-10%">
+                <div class="modal__header flex-0 flex items-center px-3 py-2 bg-white dark:bg-gray-800 border-b border-primary-10% dark:border-gray-600">
                     <div v-if="title" class="flex-0 text-gray-400 pl-2">
                         <h2 class="self-center text-primary-600 text-base font-semibold">{{ title }}</h2>
                     </div>
@@ -23,8 +23,8 @@
 
                     <div class="flex-0 flex items-center" :class="{'pr-2': title}">
                         <slot name="header-right">
-                            <button @click.prevent="$emit('update:modelValue',false)" class="h-5 w-5 m-0 cursor-pointer text-primary-400">
-                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-testid="CloseOutlined-icon" class="ckbox-icon ckbox-icon--base ckbox-btn__icon">
+                            <button @click.prevent="$emit('update:modelValue',false)" class="h-5 w-5 m-0 cursor-pointer text-primary-400 text-gray-900 dark:text-gray-400">
+                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" data-testid="CloseOutlined-icon" class="ckbox-icon ckbox-icon--base ckbox-btn__icon">
                                     <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
                                 </svg>
                             </button>
@@ -33,13 +33,13 @@
                 </div>
 
                 <div
-                    class="flex-1 w-full bg-grad-sidebar modal-content"
+                    class="flex-1 w-full bg-grad-sidebar dark:bg-gray-700 modal-content"
                     :style="{'overflow-y': contentNoOverflow ? 'hidden' : 'scroll'}"
                 >
                     <slot name="default"/>
                 </div>
 
-                <div class="modal-footer flex-0 w-full bg-logo border-t border-gray-300 p-2" v-if="hasSlot('footer')">
+                <div class="modal-footer flex-0 w-full bg-logo border-t border-gray-300 dark:border-gray-500 p-2" v-if="hasSlot('footer')">
                     <slot name="footer"/>
                 </div>
             </div>

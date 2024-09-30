@@ -1,5 +1,5 @@
 <template>
-    <div class="pagination">
+    <div class="pagination bg-white dark:bg-gray-800">
         <div v-if="loading" class="loading">
             <div class="indeterminate"></div>
         </div>
@@ -31,6 +31,7 @@
                 v-model.number="inputPage"
                 @select.stop.prevent
                 type="number"
+                class="border-b border-gray-200 dark:border-gray-600"
                 :title="__('Enter Page Number')"
                 min="1"
                 :max="total"
@@ -138,7 +139,6 @@ function pick() {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
     height: 50px;
     box-shadow: 0 0 6px rgba(46, 49, 56, 0.05);
     z-index: 100;
@@ -175,10 +175,9 @@ function pick() {
         text-align: center;
         width: 32px;
         outline: none;
-        border: none;
         appearance: textfield;
-        border-bottom: solid 1px rgba(var(--colors-gray-200));
         margin-bottom: -2px;
+        background: transparent;
 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
