@@ -1,13 +1,13 @@
 <template>
-    <div class="browser-list">
+    <div class="browser-list bg-white dark:bg-gray-800 border-r border-gray-100 dark:border-gray-600">
         <div
             v-for="(snippet, key) in snippets"
             @click="select(key)"
-            class="browser-list__item"
+            class="browser-list__item text-gray-500 dark:text-gray-200"
             :class="{selected: modelValue.name === snippet.name}"
             :key="snippet.name"
         >
-                <span class="browser-list__item--icon">
+                <span class="browser-list__item--icon bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
                     {{ snippet.name.split(' ').map(name => name[0]).join('') }}
                 </span>
 
@@ -62,8 +62,6 @@ function select(key) {
 <style lang="scss" scoped>
 .browser-list {
     min-width: 200px;
-    background: #fff;
-    border-right: solid 1px rgba(var(--colors-gray-100));
 
     &__item {
         display: flex;
@@ -72,7 +70,6 @@ function select(key) {
         gap: 14px;
         height: 48px;
         font-size: 14px;
-        color: rgba(var(--colors-gray-500));
         padding: 0 16px;
         transition: all 300ms, border-left-width 100ms;
         cursor: pointer;
@@ -84,8 +81,6 @@ function select(key) {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: rgba(var(--colors-gray-100));
-            color: rgba(var(--colors-gray-500));
             font-weight: 600;
             transition: all 300ms;
         }

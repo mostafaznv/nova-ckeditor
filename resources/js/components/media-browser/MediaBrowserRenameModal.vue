@@ -14,7 +14,7 @@
                     @select.stop.prevent
                     v-model="name"
                     ref="input"
-                    class="rename-modal__input flex-grow"
+                    class="rename-modal__input flex-grow bg-transparent"
                 />
             </div>
         </template>

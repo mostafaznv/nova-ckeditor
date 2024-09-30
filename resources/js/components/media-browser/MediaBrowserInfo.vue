@@ -1,8 +1,8 @@
 <template>
-    <div v-if="item" class="info h-full nova-ckeditor-mobile-none">
+    <div v-if="item" class="info h-full nova-ckeditor-mobile-none bg-white dark:bg-gray-800 border-l border-gray-100 dark:border-gray-600">
         <div class="flex-grow overflow-y-auto overflow-x-hidden">
             <div class="info__header mb-2">
-                <strong :title="item.name">{{ item.name }}</strong>
+                <strong class="text-gray-500 dark:text-gray-200" :title="item.name">{{ item.name }}</strong>
 
                 <button @click="close" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -34,8 +34,10 @@
             </div>
 
             <div class="info__data">
-                <div v-for="item in info" :key="item.label" class="info__data--item">
-                    <span class="info__data--item-label">{{ __(item.label) }}</span>
+                <div v-for="item in info" :key="item.label" class="info__data--item text-gray-500 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700">
+                    <span class="info__data--item-label text-gray-600 dark:text-gray-500">
+                        {{ __(item.label) }}
+                    </span>
 
                     <div class="info__data--item-value">
                         <template v-if="item.label === 'Dominant Color'">
@@ -243,8 +245,6 @@ function secondsToHms(seconds) {
     justify-content: space-between;
     width: 320px;
     padding: 8px 8px 0;
-    background: #fff;
-    border-left: solid 1px rgba(var(--colors-gray-100));
 
     &__header {
         display: flex;
@@ -254,7 +254,6 @@ function secondsToHms(seconds) {
         strong {
             font-size: 18px;
             font-weight: 600;
-            color: rgba(var(--colors-gray-500));
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -294,13 +293,10 @@ function secondsToHms(seconds) {
             align-items: center;
             justify-content: space-between;
             font-size: 14px;
-            color: rgba(var(--colors-gray-500));
-            border-bottom: solid 1px rgba(var(--colors-gray-100));
             height: 36px;
 
             &-label {
                 font-weight: bold;
-                color: rgba(var(--colors-gray-600));
             }
 
             &-value {

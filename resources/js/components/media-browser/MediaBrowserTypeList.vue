@@ -1,10 +1,10 @@
 <template>
-    <div class="browser-list" :class="{'is-extended': extended}">
+    <div class="browser-list bg-white dark:bg-gray-800 border-r border-gray-100 dark:border-gray-600" :class="{'is-extended': extended}">
         <div>
             <div
                 v-if="hasImagePicker"
                 @click="select('image')"
-                class="browser-list__item"
+                class="browser-list__item text-gray-500 dark:text-gray-200"
                 :class="{selected: modelValue === 'image'}"
                 :title="__('Images')"
             >
@@ -16,7 +16,7 @@
             <div
                 v-if="hasVideoPicker"
                 @click="select('video')"
-                class="browser-list__item"
+                class="browser-list__item text-gray-500 dark:text-gray-200"
                 :class="{selected: modelValue === 'video'}"
                 :title="__('Videos')"
             >
@@ -28,7 +28,7 @@
             <div
                 v-if="hasAudioPicker"
                 @click="select('audio')"
-                class="browser-list__item"
+                class="browser-list__item text-gray-500 dark:text-gray-200"
                 :class="{selected: modelValue === 'audio'}"
                 :title="__('Audios')"
             >
@@ -40,7 +40,7 @@
             <div
                 v-if="hasFilePicker"
                 @click="select('file')"
-                class="browser-list__item"
+                class="browser-list__item text-gray-500 dark:text-gray-200"
                 :class="{selected: modelValue === 'file'}"
                 :title="__('Files')"
             >
@@ -51,7 +51,7 @@
         </div>
 
         <div class="browser-list__toggle-sidebar">
-            <button type="button" @click.stop.prevent="toggle">
+            <button type="button" class="hover:bg-gray-100 dark:hover:bg-gray-700" @click.stop.prevent="toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.59 18 19 16.59 14.42 12 19 7.41 17.59 6l-6 6z"></path><path d="m11 18 1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z"></path></svg>
             </button>
         </div>
@@ -138,8 +138,6 @@ function pick() {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #fff;
-    border-right: solid 1px rgba(var(--colors-gray-100));
 
     &__item {
         display: flex;
@@ -148,7 +146,6 @@ function pick() {
         gap: 14px;
         height: 48px;
         font-size: 14px;
-        color: rgba(var(--colors-gray-500));
         padding: 0 16px;
         transition: all 300ms, border-left-width 100ms;
         cursor: pointer;
@@ -201,8 +198,6 @@ function pick() {
             }
 
             &:hover {
-                background: rgba(var(--colors-gray-100));
-
                 svg {
                     fill: rgba(var(--colors-gray-800));
                 }

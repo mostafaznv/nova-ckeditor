@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar">
+    <div class="navbar bg-white dark:bg-gray-800">
         <div class="inline-flex items-center gap-1 nova-ckeditor-mobile-none">
             <button
                 @click.stop="download"
@@ -214,7 +214,6 @@ init()
     position: relative;
     width: 100%;
     height: 52px;
-    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
