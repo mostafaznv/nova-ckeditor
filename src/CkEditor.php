@@ -72,6 +72,13 @@ class CkEditor extends Field
     public bool $forcePasteAsPlainText;
 
     /**
+     * Alert Before Unsaved Changes
+     *
+     * @var bool
+     */
+    public bool $alertBeforeUnsavedChanges;
+
+    /**
      * Text Part Language
      *
      * @var array
@@ -229,6 +236,19 @@ class CkEditor extends Field
     }
 
     /**
+     * Set Alert Before Unsaved Changes
+     *
+     * @param bool $status
+     * @return $this
+     */
+    public function alertBeforeUnsavedChanges(bool $status = true): self
+    {
+        $this->alertBeforeUnsavedChanges = $status;
+
+        return $this;
+    }
+
+    /**
      * Set Text Part Language
      *
      * @param array $languages
@@ -340,25 +360,26 @@ class CkEditor extends Field
     public function jsonSerialize(): array
     {
         return array_merge(parent::jsonSerialize(), [
-            'toolbarName'            => $this->toolbarName,
-            'snippetBrowser'         => $this->snippetBrowser,
-            'imageBrowser'           => $this->imageBrowser,
-            'videoBrowser'           => $this->videoBrowser,
-            'audioBrowser'           => $this->audioBrowser,
-            'fileBrowser'            => $this->fileBrowser,
-            'toolbar'                => $this->toolbar,
-            'toolbarOptions'         => $this->toolbarOptions,
-            'height'                 => $this->height,
-            'indexLimit'             => $this->indexLimit,
-            'contentLanguage'        => $this->contentLanguage,
-            'forcePasteAsPlainText'  => $this->forcePasteAsPlainText,
-            'textPartLanguage'       => $this->textPartLanguage,
-            'htmlSupport'            => $this->htmlSupport,
-            'uiLanguage'             => $this->uiLanguage,
-            'shouldNotGroupWhenFull' => $this->shouldNotGroupWhenFull,
-            'shouldShow'             => $this->shouldBeExpanded(),
-            'videoHasLaruploadTrait' => $this->videoHasLaruploadTrait(),
-            'imageHasLaruploadTrait' => $this->imageHasLaruploadTrait()
+            'toolbarName'               => $this->toolbarName,
+            'snippetBrowser'            => $this->snippetBrowser,
+            'imageBrowser'              => $this->imageBrowser,
+            'videoBrowser'              => $this->videoBrowser,
+            'audioBrowser'              => $this->audioBrowser,
+            'fileBrowser'               => $this->fileBrowser,
+            'toolbar'                   => $this->toolbar,
+            'toolbarOptions'            => $this->toolbarOptions,
+            'height'                    => $this->height,
+            'indexLimit'                => $this->indexLimit,
+            'contentLanguage'           => $this->contentLanguage,
+            'forcePasteAsPlainText'     => $this->forcePasteAsPlainText,
+            'alertBeforeUnsavedChanges' => $this->alertBeforeUnsavedChanges,
+            'textPartLanguage'          => $this->textPartLanguage,
+            'htmlSupport'               => $this->htmlSupport,
+            'uiLanguage'                => $this->uiLanguage,
+            'shouldNotGroupWhenFull'    => $this->shouldNotGroupWhenFull,
+            'shouldShow'                => $this->shouldBeExpanded(),
+            'videoHasLaruploadTrait'    => $this->videoHasLaruploadTrait(),
+            'imageHasLaruploadTrait'    => $this->imageHasLaruploadTrait()
         ]);
     }
 
@@ -443,6 +464,7 @@ class CkEditor extends Field
         $this->snippetBrowser = $this->prepareSnippets($toolbar['snippets']);
         $this->contentLanguage = $toolbar['content-lang'];
         $this->forcePasteAsPlainText = $toolbar['force-paste-as-plain-text'] ?? false;
+        $this->alertBeforeUnsavedChanges = $toolbar['alert-before-unsaved-changes'] ?? true;
         $this->textPartLanguage = $toolbar['text-part-language'] ?? $defaultTextPartLanguage;
         $this->htmlSupport = $toolbar['html-support'] ?? $defaultHtmlSupport;
         $this->uiLanguage = $toolbar['ui-language']['name'] ?? 'en';

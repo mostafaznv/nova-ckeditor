@@ -40,7 +40,8 @@ export default {
     components: {SnippetBrowser, MediaBrowser},
     data() {
         return {
-            mounted: false
+            mounted: false,
+            fieldHasChanged: false
         }
     },
     computed: {
@@ -112,6 +113,10 @@ export default {
                     // sync model changes to vue-model
                     model.document.on('change', debounce(this.handleEditorSync, 100), {
                         priority: 'lowest'
+                    })
+
+                    model.document.on('change:data', () => {
+                        this.fieldHasChanged = true
                     })
 
                     editor.editing.view.change((writer) => {
@@ -284,6 +289,8 @@ export default {
 
         fill(formData) {
             if (this.currentlyIsVisible) {
+                this.fieldHasChanged = false
+
                 formData.append(this.currentField.attribute, this.value || '')
             }
         },
@@ -323,6 +330,16 @@ export default {
             if (innerEditor?.length) {
                 resizeObserver.observe(innerEditor[0])
             }
+        },
+
+        alertOnUnchangedSaves() {
+            if (this.currentField.alertBeforeUnsavedChanges) {
+                window.addEventListener('beforeunload', (event) => {
+                    if (this.fieldHasChanged) {
+                        event.preventDefault()
+                    }
+                })
+            }
         }
     },
     created() {
@@ -336,6 +353,8 @@ export default {
         }
 
         this.mounted = true
+
+        this.alertOnUnchangedSaves()
     },
     beforeUnmount() {
         this.destroyCkEditor()
