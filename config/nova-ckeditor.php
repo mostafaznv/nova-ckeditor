@@ -114,6 +114,8 @@ return [
 
             'force-paste-as-plain-text' => false,
 
+            'alert-before-unsaved-changes' => true,
+
             'ui-language' => [
                 'name'   => 'en',
 
