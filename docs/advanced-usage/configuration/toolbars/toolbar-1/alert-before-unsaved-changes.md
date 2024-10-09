@@ -13,7 +13,7 @@ if you’d rather disable this behavior, simply set <mark style="color:red;">`to
 
 
 {% hint style="info" %}
-This feature has been available since <mark style="color:red;">v7.6.0</mark>
+This feature has been available since <mark style="color:red;">v7.7.0</mark>
 {% endhint %}
 
 
