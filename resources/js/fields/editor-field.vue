@@ -30,12 +30,12 @@ import CkEditor from '../ckeditor/ckeditor'
 import SnippetBrowser from "../components/snippet-browser/SnippetBrowser.vue"
 import MediaBrowser from '../components/media-browser/MediaBrowser.vue'
 import HasUUID from "../components/mixins/hasUUID"
-import {DependentFormField, HandlesValidationErrors} from 'laravel-nova'
+import {DependentFormField, HandlesValidationErrors, PreventsFormAbandonment} from 'laravel-nova'
 import debounce from 'lodash/debounce'
 import RegexParser from 'regex-parser'
 
 export default {
-    mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
+    mixins: [DependentFormField, HandlesValidationErrors, PreventsFormAbandonment, HasUUID],
     props: ['resourceName', 'resourceId', 'field', 'toolbar', 'formUniqueId'],
     components: {SnippetBrowser, MediaBrowser},
     data() {
@@ -117,6 +117,10 @@ export default {
 
                     model.document.on('change:data', () => {
                         this.fieldHasChanged = true
+
+                        if (this.currentField.alertBeforeUnsavedChanges) {
+                            this.preventLeavingForm()
+                        }
                     })
 
                     editor.editing.view.change((writer) => {
@@ -289,8 +293,6 @@ export default {
 
         fill(formData) {
             if (this.currentlyIsVisible) {
-                this.fieldHasChanged = false
-
                 formData.append(this.currentField.attribute, this.value || '')
             }
         },
@@ -331,16 +333,6 @@ export default {
                 resizeObserver.observe(innerEditor[0])
             }
         },
-
-        alertOnUnchangedSaves() {
-            if (this.currentField.alertBeforeUnsavedChanges) {
-                window.addEventListener('beforeunload', (event) => {
-                    if (this.fieldHasChanged) {
-                        event.preventDefault()
-                    }
-                })
-            }
-        }
     },
     created() {
         this.$options[this.editorUUID] = this.uuid()
@@ -353,8 +345,6 @@ export default {
         }
 
         this.mounted = true
-
-        this.alertOnUnchangedSaves()
     },
     beforeUnmount() {
         this.destroyCkEditor()
