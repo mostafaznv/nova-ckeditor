@@ -30,12 +30,13 @@ import CkEditor from '../ckeditor/ckeditor'
 import SnippetBrowser from "../components/snippet-browser/SnippetBrowser.vue"
 import MediaBrowser from '../components/media-browser/MediaBrowser.vue'
 import HasUUID from "../components/mixins/hasUUID"
-import {DependentFormField, HandlesValidationErrors, PreventsFormAbandonment} from 'laravel-nova'
+import {DependentFormField, HandlesValidationErrors, FormEvents} from 'laravel-nova'
 import debounce from 'lodash/debounce'
 import RegexParser from 'regex-parser'
 
+
 export default {
-    mixins: [DependentFormField, HandlesValidationErrors, PreventsFormAbandonment, HasUUID],
+    mixins: [DependentFormField, HandlesValidationErrors, FormEvents, HasUUID],
     props: ['resourceName', 'resourceId', 'field', 'toolbar', 'formUniqueId'],
     components: {SnippetBrowser, MediaBrowser},
     data() {
@@ -118,9 +119,7 @@ export default {
                     model.document.on('change:data', () => {
                         this.fieldHasChanged = true
 
-                        if (this.currentField.alertBeforeUnsavedChanges) {
-                            this.preventLeavingForm()
-                        }
+                        this.handleChange(this.value ?? '')
                     })
 
                     editor.editing.view.change((writer) => {
@@ -299,6 +298,11 @@ export default {
 
         handleChange(value) {
             this.value = value
+
+            if (this.currentField.alertBeforeUnsavedChanges) {
+                this.emitFieldValueChange(this.currentField.attribute, this.value)
+                this.$emit('field-changed')
+            }
         },
 
         handleEditorEvents(event, data) {
@@ -353,7 +357,7 @@ export default {
 </script>
 
 <style lang="sass">
-.ck.ck-reset_all, .ck.ck-reset_all *
+// .ck.ck-reset_all, .ck.ck-reset_all *
 // direction: ltr !important
 
 .ck-content.ck-editor__editable
