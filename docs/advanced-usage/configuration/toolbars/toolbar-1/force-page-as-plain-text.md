@@ -2,7 +2,7 @@
 description: toolbars.toolbar-1.force-paste-as-plain-text
 ---
 
-# Force Past as Plain Text
+# Force Paste as Plain Text
 
 <table><thead><tr><th width="390">Property Name</th><th width="152.33333333333331">Type</th><th>Default</th></tr></thead><tbody><tr><td>toolbars.toolbar-1.force-paste-as-plain-text</td><td>bool</td><td>false</td></tr></tbody></table>
 

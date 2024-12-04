@@ -54,7 +54,7 @@
       * [Items](advanced-usage/configuration/toolbars/toolbar-1/items.md)
       * [Options](advanced-usage/configuration/toolbars/toolbar-1/options.md)
       * [Content Lang](advanced-usage/configuration/toolbars/toolbar-1/content-lang.md)
-      * [Force Past as Plain Text](advanced-usage/configuration/toolbars/toolbar-1/force-page-as-plain-text.md)
+      * [Force Paste as Plain Text](advanced-usage/configuration/toolbars/toolbar-1/force-page-as-plain-text.md)
       * [Alert Before Unsaved Changes](advanced-usage/configuration/toolbars/toolbar-1/alert-before-unsaved-changes.md)
       * [UI Language](advanced-usage/configuration/toolbars/toolbar-1/ui-language/README.md)
         * [UI Language Name](advanced-usage/configuration/toolbars/toolbar-1/ui-language/ui-language-name.md)
