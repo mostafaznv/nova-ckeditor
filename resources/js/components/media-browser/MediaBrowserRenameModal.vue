@@ -1,13 +1,13 @@
 <template>
     <button @click.stop="open" type="button" class="media-browser-btn" :disabled="disabled">
-        <Icon type="pencil" />
+        <Icon name="pencil" />
         <span>{{ __('Rename') }}</span>
     </button>
 
     <modal v-model="modalStatus" class="rename-modal" :content-no-overflow="true">
         <template #header>
-            <div class="flex items-center gap-1">
-                <Icon type="pencil" :solid="true" />
+            <div class="flex items-center gap-2">
+                <Icon name="pencil" type="mini" />
 
                 <input
                     @keydown.enter.stop.prevent="submit"
@@ -21,13 +21,13 @@
 
         <template #header-right>
             <div class="flex items-center gap-2">
-                <basic-button @click.stop="close" type="button" size="sm">
+                <Button @click.stop="close" type="button" variant="ghost" size="small">
                     {{ __('Cancel') }}
-                </basic-button>
+                </Button>
 
-                <default-button @click.stop="submit" type="button" size="sm">
+                <Button @click.stop="submit" type="button" size="small">
                     {{ __('Submit') }}
-                </default-button>
+                </Button>
             </div>
         </template>
     </modal>
@@ -36,6 +36,7 @@
 <script setup>
 import {ref, computed, watch, nextTick} from "vue"
 import modal from "../modal"
+import {Button, Icon} from 'laravel-nova-ui'
 import {useLocalization} from 'laravel-nova'
 import {selectedItemsProp, typeProp} from "../../utils/picker-props"
 

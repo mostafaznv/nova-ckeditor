@@ -64,23 +64,24 @@
         </button>
 
 
-        <default-button
+        <Button
             @click.stop="pick"
             type="button"
             class="select-btn flex align-middle gap-2"
-            size="sm"
+            size="small"
+            icon="check"
             :class="{'opacity-50': selectedItems.length === 0}"
             :disabled="selectedItems.length === 0"
         >
-            <Icon type="check" width="20" height="20" />
             <span>{{ __('Choose') }}</span>
-        </default-button>
+        </Button>
     </div>
 </template>
 
 <script setup>
 import {ref, watch} from 'vue'
 import {selectedItemsProp} from "../../utils/picker-props"
+import {Button, Icon} from 'laravel-nova-ui'
 
 const emit = defineEmits([
     'update:modelValue',

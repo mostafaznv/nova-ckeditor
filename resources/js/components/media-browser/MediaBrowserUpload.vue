@@ -1,14 +1,14 @@
 <template>
     <div v-on-click-outside="close" class="upload relative">
         <div>
-            <default-button @click.stop="pick" type="button" class="upload__button flex align-middle gap-2" size="sm" :class="{'with-menu': hasLaruploadTrait}">
-                <Icon type="upload" width="20" height="20" />
+            <Button @click.stop="pick" type="button" class="upload__button flex align-middle gap-2" size="small" :class="{'with-menu': hasLaruploadTrait}">
+                <Icon name="arrow-up-tray" type="mini" class="mr-1" />
                 <span>{{ __('Upload') }}</span>
 
                 <div v-if="hasLaruploadTrait" @click.stop="toggle" class="upload__button--menu">
-                    <Icon type="chevron-down" class="-mr-1" width="18" height="18" />
+                    <Icon name="chevron-down" type="mini" class="-mr-1" />
                 </div>
-            </default-button>
+            </Button>
 
 
             <input
@@ -61,16 +61,15 @@
         </div>
 
         <template v-if="hasLaruploadTrait" #footer>
-            <default-button
+            <Button
                 @click.stop="handleUploadWithCover"
                 type="button"
                 class="upload__button flex align-middle gap-2"
-                size="sm"
                 :class="{'opacity-50 disabled:cursor-not-allowed': uploadWithCoverIsDisabled}"
                 :disabled="uploadWithCoverIsDisabled"
             >
                 <span>{{ __('Upload') }}</span>
-            </default-button>
+            </Button>
         </template>
     </modal>
 </template>
@@ -79,6 +78,7 @@
 import {ref, computed, watch} from "vue"
 import Modal from "../modal.vue"
 import {useLocalization} from 'laravel-nova'
+import {Button, Icon} from 'laravel-nova-ui'
 import MediaBrowserUploadProgress from "./MediaBrowserUploadProgress.vue"
 import MediaBrowserUploadWithCover from "./MediaBrowserUploadWithCover.vue"
 import {hasLaruploadTraitProp, typeProp} from "../../utils/picker-props"
@@ -381,8 +381,11 @@ function calculateItemUploadedPercent(progressEvent, index) {
     max-width: 600px;
     height: 400px !important;
     top: calc(50% - 200px) !important;
-    left: calc(50% - 300px) !important;
     overflow: hidden;
+
+    @media (min-width: 801px) {
+        left: calc(50% - 300px) !important;
+    }
 
     &.large {
         height: 500px !important;

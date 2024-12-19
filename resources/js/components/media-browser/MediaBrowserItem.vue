@@ -12,12 +12,12 @@
 
                 <picture v-else-if="cover || (type === 'image' && src)">
                     <template v-if="item.file?.meta?.format === 'gif'">
-                        <source :srcset="src">
+                        <source :src="src" :srcset="src">
                         <img alt="onion" :src="src">
                     </template>
 
                     <template v-else>
-                        <source :srcset="cover || src">
+                        <source :src="src" :srcset="cover || src">
                         <img alt="onion" :src="cover || src">
                     </template>
                 </picture>
@@ -36,7 +36,7 @@
             </div>
 
             <figcaption @click.stop="play" class="item__preview--play nova-ckeditor-mobile-none" :title="__('Preview')">
-                <Icon type="eye" />
+                <Icon name="eye" />
             </figcaption>
         </figure>
 
@@ -44,7 +44,7 @@
             <span class="item__details--name" :title="item.name">{{ item.name }}</span>
 
             <button @click.stop.prevent="select(false)" type="button" class="item__details--select">
-                <Icon type="check" />
+                <Icon name="check" />
             </button>
         </div>
     </div>
@@ -54,6 +54,7 @@
 import {computed} from "vue"
 import AudioIcon from "../icons/AudioIcon.vue"
 import FileIcon from "../icons/FileIcon.vue"
+import {Icon} from 'laravel-nova-ui'
 import {typeProp, selectedItemsProp, keepAspectRatioProp, gallerySizeProp} from "../../utils/picker-props"
 
 

@@ -14,9 +14,9 @@
             <label @click.stop.prevent="handleClick" class="block cursor-pointer p-4 bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-900 border-4 border-dashed hover:border-gray-300 dark:border-gray-700 dark:hover:border-gray-600 rounded-lg">
                 <div class="flex items-center space-x-4 pointer-events-none">
                     <p class="text-center pointer-events-none">
-                        <default-button type="button">
+                        <Button type="button">
                             {{ multiple ? __('Choose Files') : __('Choose File') }}
-                        </default-button>
+                        </Button>
                     </p>
 
                     <p class="pointer-events-none text-center text-sm text-gray-500 dark:text-gray-400 font-semibold">
@@ -29,6 +29,8 @@
 </template>
 
 <script setup>
+import {Button} from 'laravel-nova-ui'
+
 import {ref} from 'vue'
 
 

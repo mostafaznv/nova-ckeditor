@@ -1,12 +1,12 @@
 <template>
     <button @click.stop="modalStatus = true" v-bind="$attrs" type="button" class="media-browser-btn" :title="__('Search')">
-        <Icon type="search" />
+        <Icon name="magnifying-glass" />
     </button>
 
     <modal v-model="modalStatus" class="search-modal" :content-no-overflow="true">
         <template #header>
             <div class="flex items-center gap-1">
-                <Icon type="search" :solid="true" />
+                <Icon name="magnifying-glass" type="mini" :solid="true" />
 
                 <input
                     @keydown.enter.stop.prevent="submit"
@@ -37,7 +37,7 @@
                     type="button"
                     :title="__('Delete')"
                 >
-                    <Icon type="x" />
+                    <Icon name="x-mark" />
                 </button>
             </div>
         </div>
@@ -46,6 +46,7 @@
 
 <script setup>
 import {ref, computed, watch} from "vue"
+import {Icon} from 'laravel-nova-ui'
 import modal from "../modal"
 
 

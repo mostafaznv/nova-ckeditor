@@ -1,20 +1,22 @@
 <template>
     <div class="footer px-3 bg-white dark:bg-gray-800">
-        <default-button
+        <Button
             @click.stop="$emit('pick')"
             type="button"
             class="select-btn flex align-middle gap-2"
-            size="sm"
+            size="small"
+            icon="check"
             :class="{'opacity-50': !snippet}"
             :disabled="!snippet"
         >
-            <Icon type="check" width="20" height="20" />
             <span>{{ __('Choose') }}</span>
-        </default-button>
+        </Button>
     </div>
 </template>
 
 <script setup>
+import {Button} from 'laravel-nova-ui'
+
 defineEmits([
     'pick'
 ])

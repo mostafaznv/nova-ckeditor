@@ -57,16 +57,16 @@
         </div>
 
         <div class="browser-list__pick">
-            <default-button
+            <Button
                 @click.stop="pick"
                 type="button"
                 class="flex align-middle gap-2"
-                size="sm"
+                size="small"
                 :class="{'opacity-50': selectedItems.length === 0}"
                 :disabled="selectedItems.length === 0"
             >
-                <Icon type="check" width="20" height="20" />
-            </default-button>
+                <Icon name="check" type="mini" />
+            </Button>
         </div>
     </div>
 </template>
@@ -76,6 +76,7 @@ import {ref} from 'vue'
 import AudioIcon from "../icons/AudioIcon.vue"
 import FileIcon from "../icons/FileIcon.vue"
 import VideoIcon from "../icons/VideoIcon.vue"
+import {Button, Icon} from 'laravel-nova-ui'
 import {selectedItemsProp} from "../../utils/picker-props"
 
 
