@@ -54,6 +54,7 @@
         "@phudak/ckeditor5-emoji": "^1.1.1",
         "@vueuse/components": "^10.7.0",
         "@vueuse/core": "^10.7.0",
+        "laravel-nova-ui": "^0.4.12",
         "lodash": "^4.17.21",
         "postcss-scss": "^4.0.9",
         "regex-parser": "^2.2.11",

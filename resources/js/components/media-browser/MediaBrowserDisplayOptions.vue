@@ -2,7 +2,7 @@
     <div v-on-click-outside="close" class="options relative">
         <div>
             <button @click.stop="toggle" type="button" class="media-browser-btn" :title="__('Display Options')">
-                <Icon type="adjustments" />
+                <Icon name="adjustments-horizontal" />
             </button>
         </div>
 
@@ -61,6 +61,7 @@
 <script setup>
 import {ref, computed} from "vue"
 import {useLocalization} from 'laravel-nova'
+import { Icon } from 'laravel-nova-ui'
 import SwitchInput from "../SwitchInput.vue"
 import RadioInput from "../RadioInput.vue"
 import {orderByProp, keepAspectRatioProp, columnsProp, typeProp} from "../../utils/picker-props"
@@ -146,6 +147,10 @@ function close() {
 }
 
 function onOrderByChange(value) {
+    if (value?.target?.value) {
+        value = value.target.value
+    }
+
     emits('update:orderBy', value)
 }
 

@@ -7,7 +7,7 @@
                 class="media-browser-btn"
                 :disabled="!itemSelected"
             >
-                <Icon type="download" />
+                <Icon name="arrow-down-tray"/>
                 <span>{{ __('Download') }}</span>
             </button>
 
@@ -25,7 +25,7 @@
             />
 
             <button @click.stop="copyUrl" type="button" class="media-browser-btn" :disabled="!itemSelected">
-                <Icon type="clipboard" />
+                <Icon name="clipboard"/>
                 <span>{{ __('Copy URL') }}</span>
             </button>
         </div>
@@ -38,7 +38,7 @@
                 :title="__('Properties')"
                 :disabled="!itemSelected"
             >
-                <Icon type="information-circle" />
+                <Icon name="information-circle"/>
             </button>
 
             <media-browser-search-modal
@@ -70,6 +70,7 @@
 import {ref, computed, watch} from "vue"
 import MediaBrowserUpload from "./MediaBrowserUpload.vue"
 import {useClipboard} from "../../composables/useClipboard"
+import {Icon} from 'laravel-nova-ui'
 import MediaBrowserDisplayOptions from "./MediaBrowserDisplayOptions.vue"
 import MediaBrowserSearchModal from "./MediaBrowserSearchModal.vue"
 import MediaBrowserDelete from "./MediaBrowserDelete.vue"
@@ -164,7 +165,6 @@ watch(
         }
     },
 )
-
 
 
 // methods

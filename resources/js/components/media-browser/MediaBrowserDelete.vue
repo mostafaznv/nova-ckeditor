@@ -1,13 +1,13 @@
 <template>
     <button @click.stop="open" type="button" class="media-browser-btn" :disabled="disabled">
-        <Icon type="trash" />
+        <Icon name="trash" />
         <span>{{ __('Delete') }}</span>
     </button>
 
     <modal v-model="modalStatus" class="delete-modal" :content-no-overflow="true">
         <template #header>
             <div class="flex items-center gap-1">
-                <Icon type="trash" :solid="true" />
+                <Icon name="trash" type="mini" />
                 <span>{{ __('Remove assets') }}</span>
             </div>
         </template>
@@ -24,13 +24,13 @@
         </div>
 
         <template #footer>
-            <default-button @click.stop="submit" type="button" class="bg-red-500" size="sm">
+            <Button @click.stop="submit" type="button"  state="danger" size="small">
                 {{ __('Delete') }}
-            </default-button>
+            </Button>
 
-            <basic-button @click.stop="close" type="button" size="sm">
+            <Button @click.stop="close" type="button" class="mx-2" size="small">
                 {{ __('Cancel') }}
-            </basic-button>
+            </Button>
         </template>
     </modal>
 </template>
@@ -39,6 +39,7 @@
 import {ref, computed} from "vue"
 import modal from "../modal"
 import {useLocalization} from 'laravel-nova'
+import {Button, Icon} from 'laravel-nova-ui'
 import {selectedItemsProp, typeProp} from "../../utils/picker-props"
 import {guessResourceKey} from "../../utils/helpers"
 
