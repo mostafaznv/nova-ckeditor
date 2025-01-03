@@ -3,6 +3,13 @@
  */
 export default {
     image: {
+        insert: {
+            integrations: [
+                'upload',
+                'assetManager',
+                'url'
+            ]
+        },
         upload: {
             types: ['gif', 'png', 'jpg', 'jpeg', 'webp']
         },
