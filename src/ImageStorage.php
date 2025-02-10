@@ -5,16 +5,21 @@ namespace Mostafaznv\NovaCkEditor;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Interfaces\ImageInterface;
+use Mostafaznv\NovaCkEditor\Enums\ImageLibrary;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 
 class ImageStorage extends Storage
 {
+    protected ImageLibrary $library;
+
+
     public function __construct(string $disk = 'image')
     {
         parent::__construct($disk);
 
         $this->namingMethod = config('nova-ckeditor.image-naming-method');
+        $this->library = config('nova-ckeditor.image-processing-library', ImageLibrary::GD);
     }
 
     public static function make(string $disk = 'image'): self
@@ -72,7 +77,11 @@ class ImageStorage extends Storage
 
     protected function resizeImage(UploadedFile $file, int $maxWidth, int $maxHeight): ImageInterface
     {
-        $image = ImageManager::gd()->read($file->getRealPath());
+        $manager = $this->library == ImageLibrary::GD
+            ? ImageManager::gd()
+            : ImageManager::imagick();
+
+        $image = $manager->read($file->getRealPath());
 
         return $image->scaleDown($maxWidth, $maxHeight);
     }
