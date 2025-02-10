@@ -45,6 +45,7 @@
   * [Image Max Width](advanced-usage/configuration/image-max-width.md)
   * [Image Max Height](advanced-usage/configuration/image-max-height.md)
   * [Image Naming Method](advanced-usage/configuration/image-naming-method.md)
+  * [Image Processing Library](advanced-usage/configuration/image-processing-library.md)
   * [Audio Naming Method](advanced-usage/configuration/audio-naming-method.md)
   * [File Naming Method](advanced-usage/configuration/audio-naming-method-1.md)
   * [Toolbars](advanced-usage/configuration/toolbars/README.md)
