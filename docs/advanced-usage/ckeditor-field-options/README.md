@@ -4,4 +4,3 @@ This section will guide you through the various methods and options available fo
 
 Let's dive into the comprehensive set of features and functionalities offered by the CKEditor field in the following sections.
 
-\
