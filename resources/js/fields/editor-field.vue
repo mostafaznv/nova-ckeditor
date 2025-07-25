@@ -337,6 +337,16 @@ export default {
                 resizeObserver.observe(innerEditor[0])
             }
         },
+
+        emitOnSyncedFieldValueChange() {
+            const editor = this.$options[this.editorName]
+
+            if (editor) {
+                editor.setData(this.value)
+            }
+
+            this.emitFieldValueChange(this.field.attribute, this.currentField.value)
+        },
     },
     created() {
         this.$options[this.editorUUID] = this.uuid()
