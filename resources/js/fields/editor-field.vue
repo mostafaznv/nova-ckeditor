@@ -31,6 +31,7 @@ import SnippetBrowser from "../components/snippet-browser/SnippetBrowser.vue"
 import MediaBrowser from '../components/media-browser/MediaBrowser.vue'
 import HasUUID from "../components/mixins/hasUUID"
 import {DependentFormField, HandlesValidationErrors, FormEvents} from 'laravel-nova'
+import {uid} from 'uid/single'
 import debounce from 'lodash/debounce'
 import RegexParser from 'regex-parser'
 
@@ -49,7 +50,11 @@ export default {
         editorName() {
             const attribute = this.currentField.attribute.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
 
-            return attribute + 'Editor' + this.formUniqueId;
+            const formUniqueId = this.formUniqueId
+                ? this.formUniqueId
+                : uid()
+
+            return attribute + 'Editor' + formUniqueId;
         }
     },
     watch: {
@@ -336,6 +341,16 @@ export default {
             if (innerEditor?.length) {
                 resizeObserver.observe(innerEditor[0])
             }
+        },
+
+        emitOnSyncedFieldValueChange() {
+            const editor = this.$options[this.editorName]
+
+            if (editor) {
+                editor.setData(this.value)
+            }
+
+            this.emitFieldValueChange(this.field.attribute, this.currentField.value)
         },
     },
     created() {
