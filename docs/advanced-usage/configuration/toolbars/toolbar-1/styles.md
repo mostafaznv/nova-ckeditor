@@ -1,5 +1,5 @@
 ---
-description: toolbars.toolbar-1.text-part-language
+description: toolbars.toolbar-1.styles
 ---
 
 # Styles
