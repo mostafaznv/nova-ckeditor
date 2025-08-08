@@ -1,4 +1,4 @@
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
+import {ButtonView} from '@ckeditor/ckeditor5-ui/src/button/buttonview'
 
 export default class SnippetBrowser {
     constructor(editor) {

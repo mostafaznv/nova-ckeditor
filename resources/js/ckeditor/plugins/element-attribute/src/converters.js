@@ -1,4 +1,4 @@
-import first from '@ckeditor/ckeditor5-utils/src/first'
+import {first} from '@ckeditor/ckeditor5-utils/src/first'
 
 export function modelToViewStyleAttribute() {
     return (evt, data, conversionApi) => {

@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import {Plugin} from '@ckeditor/ckeditor5-core/src/plugin';
+import {ContextualBalloon} from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
+import {ButtonView} from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import ElementAddAttributesFormView from './ui/add-attribute-to-element-view';
-import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
-import BalloonPanelView from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
+import {clickOutsideHandler} from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
+import {BalloonPanelView} from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
 
 class ElementAddAttributesUI extends Plugin {
     static get requires() {
