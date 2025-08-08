@@ -89,6 +89,9 @@ export default {
                     content: this.currentField.contentLanguage,
                     textPartLanguage: this.currentField.textPartLanguage
                 },
+                style: {
+                    definitions: this.currentField.styles
+                },
                 heading: {
                     options: headings,
                 },

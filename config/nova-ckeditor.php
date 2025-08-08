@@ -143,6 +143,19 @@ return [
                 ['title' => 'English', 'languageCode' => 'en']
             ],
 
+            'styles' => [
+                [
+                    'name'    => 'Article Category',
+                    'element' => 'h3',
+                    'classes' => ['article-category']
+                ],
+                [
+                    'name'    => 'Info Box',
+                    'element' => 'p',
+                    'classes' => ['info-box']
+                ],
+            ],
+
             /*
              * General HTML Support
              *
