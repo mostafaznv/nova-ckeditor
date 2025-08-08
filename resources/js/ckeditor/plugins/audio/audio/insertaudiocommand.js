@@ -1,4 +1,4 @@
-import Command from '@ckeditor/ckeditor5-core/src/command'
+import {Command} from '@ckeditor/ckeditor5-core/src/command'
 import {logWarning, toArray} from 'ckeditor5/src/utils'
 
 

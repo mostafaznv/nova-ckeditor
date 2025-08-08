@@ -100,6 +100,13 @@ class CkEditor extends Field
     public string $uiLanguage = 'en';
 
     /**
+     * Styles
+     *
+     * @var array
+     */
+    public array $styles = [];
+
+    /**
      * Indicates whether the editor shows 3 dots in overflow mode
      *
      * @var bool
@@ -218,6 +225,19 @@ class CkEditor extends Field
     public function contentLanguage(string $lang): self
     {
         $this->contentLanguage = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Set Styles
+     *
+     * @param array $styles
+     * @return $this
+     */
+    public function styles(array $styles): self
+    {
+        $this->styles = $styles;
 
         return $this;
     }
@@ -376,6 +396,7 @@ class CkEditor extends Field
             'textPartLanguage'          => $this->textPartLanguage,
             'htmlSupport'               => $this->htmlSupport,
             'uiLanguage'                => $this->uiLanguage,
+            'styles'                    => $this->styles,
             'shouldNotGroupWhenFull'    => $this->shouldNotGroupWhenFull,
             'shouldShow'                => $this->shouldBeExpanded(),
             'videoHasLaruploadTrait'    => $this->videoHasLaruploadTrait(),
@@ -468,6 +489,7 @@ class CkEditor extends Field
         $this->textPartLanguage = $toolbar['text-part-language'] ?? $defaultTextPartLanguage;
         $this->htmlSupport = $toolbar['html-support'] ?? $defaultHtmlSupport;
         $this->uiLanguage = $toolbar['ui-language']['name'] ?? 'en';
+        $this->styles = $toolbar['styles'] ?? [];
         $this->shouldNotGroupWhenFull = $toolbar['should-not-group-when-full'];
     }
 }

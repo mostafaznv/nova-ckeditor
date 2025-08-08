@@ -1,4 +1,4 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import {Plugin} from '@ckeditor/ckeditor5-core/src/plugin';
 import ElementAddAttributesCommand from './add-attribute-to-element-command';
 import {viewToModelStyleAttribute, modelToViewStyleAttribute} from './converters';
 

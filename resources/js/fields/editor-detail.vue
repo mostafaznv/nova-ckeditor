@@ -14,9 +14,10 @@ export default {
 }
 </script>
 
-<style lang="sass">
-.ckeditor_content
-    @import "./../../sass/figures.sass"
-    @import "./../../sass/blocks.sass"
+<style lang="scss">
+.ckeditor_content {
+    @import "../../sass/figures";
+    @import "../../sass/blocks";
+}
 </style>
 

@@ -1,17 +1,17 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
+import {View} from '@ckeditor/ckeditor5-ui/src/view';
+import {ViewCollection} from '@ckeditor/ckeditor5-ui/src/viewcollection';
 
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import LabeledInputView from '@ckeditor/ckeditor5-ui/src/labeledinput/labeledinputview';
-import InputTextView from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
+import {ButtonView} from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import {LabeledInputView} from '@ckeditor/ckeditor5-ui/src/labeledinput/labeledinputview';
+import {InputTextView} from '@ckeditor/ckeditor5-ui/src/inputtext/inputtextview';
 
-import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
-import KeystrokeHandler from '@ckeditor/ckeditor5-utils/src/keystrokehandler';
-import FocusTracker from '@ckeditor/ckeditor5-utils/src/focustracker';
-import FocusCycler from '@ckeditor/ckeditor5-ui/src/focuscycler';
+import {submitHandler} from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
+import {KeystrokeHandler} from '@ckeditor/ckeditor5-utils/src/keystrokehandler';
+import {FocusTracker} from '@ckeditor/ckeditor5-utils/src/focustracker';
+import {FocusCycler} from '@ckeditor/ckeditor5-ui/src/focuscycler';
 
-import checkIcon from '@ckeditor/ckeditor5-core/theme/icons/check.svg';
-import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
+import checkIcon from '@ckeditor/ckeditor5-icons/theme/icons/check.svg';
+import cancelIcon from '@ckeditor/ckeditor5-icons/theme/icons/cancel.svg';
 
 class ElementAddAttributesFormView extends View {
     /**
