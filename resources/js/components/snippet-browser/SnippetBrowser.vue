@@ -116,9 +116,9 @@ init()
 }
 </style>
 
-<style lang="sass">
-.snippet-content
-    @import "./../../../sass/figures.sass"
-    @import "./../../../sass/blocks.sass"
-
+<style lang="scss">
+.snippet-content {
+    @import "../../../sass/figures";
+    @import "../../../sass/blocks";
+}
 </style>

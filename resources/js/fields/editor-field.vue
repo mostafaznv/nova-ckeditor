@@ -371,23 +371,28 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="scss">
 // .ck.ck-reset_all, .ck.ck-reset_all *
 // direction: ltr !important
 
-.ck-content.ck-editor__editable
-    resize: vertical
+.ck-content.ck-editor__editable {
+    resize: vertical;
+}
 
-.ck.ck-reset.ck-editor
-    .ck.ck-toolbar
-        border-radius: 10px 10px 0 0
+.ck.ck-reset.ck-editor {
+    .ck.ck-toolbar {
+        border-radius: 10px 10px 0 0;
+    }
 
-    .ck-editor__editable_inline
-        border-radius: 0 0 10px 10px
-        margin: 0
-        padding: 0 10px
-        @import "../../sass/field"
+    .ck-editor__editable_inline {
+        border-radius: 0 0 10px 10px;
+        margin: 0;
+        padding: 0 10px;
+        @import "../../sass/field";
+    }
 
-    .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused
-        box-shadow: none
+    .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+        box-shadow: none;
+    }
+}
 </style>
