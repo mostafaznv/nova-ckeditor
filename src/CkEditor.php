@@ -163,7 +163,7 @@ class CkEditor extends Field
     public string $imageModel = '';
 
 
-    public function __construct($name, $attribute = null, callable $resolveCallback = null)
+    public function __construct($name, $attribute = null, ?callable $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback);
 
@@ -183,7 +183,7 @@ class CkEditor extends Field
      * @param array|null $items
      * @return $this
      */
-    public function toolbar(string $name, array $items = null): self
+    public function toolbar(string $name, ?array $items = null): self
     {
         $this->prepareToolbar($name, $items);
 
@@ -459,7 +459,7 @@ class CkEditor extends Field
         return class_exists($class) and in_array(Larupload::class, class_uses($class));
     }
 
-    private function prepareToolbar(string $toolbar, array $items = null): void
+    private function prepareToolbar(string $toolbar, ?array $items = null): void
     {
         $this->toolbarName = $toolbar;
 
